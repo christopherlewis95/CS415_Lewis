@@ -25,14 +25,14 @@ MPI_Get_processor_name(hostname, &len);
       // Increment the ping pong count before you send it
       ping_pong_count++;
       MPI_Send(&ping_pong_count, 1, MPI_INT, partner_rank, 0, MPI_COMM_WORLD);
-      printf("%d sent and incremented ping_pong_count %d to %d\n",
+      printf("Proccesor %d sent and incremented ping_pong_count %d to processor %d\n",
              taskid, ping_pong_count, partner_rank);
     } 
     else 
     {
       MPI_Recv(&ping_pong_count, 1, MPI_INT, partner_rank, 0, MPI_COMM_WORLD,
                MPI_STATUS_IGNORE);
-      printf("%d received ping_pong_count %d from %d\n",
+      printf("processor %d received ping_pong_count %d from processor %d\n",
              taskid, ping_pong_count, partner_rank);
     }
   }
