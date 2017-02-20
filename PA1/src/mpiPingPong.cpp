@@ -21,7 +21,7 @@ MPI_Get_processor_name(hostname, &len);
   
   int ping_pong_count = 0;
   int partner_rank = (taskid + 1) % 2;
-  start = MPI_WTime();
+  start = MPI_Wtime();
   while (ping_pong_count < PING_PONG_LIMIT) 
   {
     if (taskid == ping_pong_count % 2) 
@@ -41,7 +41,7 @@ MPI_Get_processor_name(hostname, &len);
     }
   }
 
-  finish = MPI_WTime();
+  finish = MPI_Wtime();
   printf("The time is seconds is: %f\n", finish - start );
 MPI_Finalize();
 
