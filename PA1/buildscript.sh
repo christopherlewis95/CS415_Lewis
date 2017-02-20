@@ -1,24 +1,30 @@
-# set flags and compiler, as well as file var
-CC=mpicc
-CXXFLAGS=-Wall
-LIBS=-lmpi
-# feel free to either add files here (for more compilcated src's), or create more vars, or just manually type them in. Up to you.
-FILE=../src/mpiPingPong.cpp
-# uncomment below if/when you have a folder called include that holds potential header files
-#INCLUDES=-I../include
-OUTPUT=mpiPingPong
+#!/bin/bash
+BUILD_DIR="build/"
 
-all: $(OUTPUT)
+# building setup
+if [ ! -d "$BUILD_DIR" ]; then
+	mkdir build
+fi
+cd build
+cp ../makefile .
 
-$(OUTPUT): $(FILE)
-	$(CC) $(CXXFLAGS) -o $(OUTPUT) $(FILE) $(LIBS)
+# building
+make
 
-# use this to run
-runOne: $(OUTPUT)
-	srun -n2 $(OUTPUT)
+# running
+echo "Running on single Box"
+make runOne
+echo "Running on Different Boxes"
+make runTwo
+# be sure to add more commands from your makefile here
+# for example, you may create a target called run_single and run_double
+# (for running on a double box) that contains some special flags.
+# so you may include echo that says what you're doing, and then do it
+# Ex:)
+# echo "PA1 on single box" && make run_single
 
-runTwo: $(OUTPUT)
-	srun -N2 $(OUTPUT)
 
-clean:
-	-@if rm $(OUTPUT) 2>/dev/null || true; then echo "Cleaned"; else echo "Nothing to clean"; fi
+# cleaning (optional for build script)
+make clean
+
+cd ..
