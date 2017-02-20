@@ -19,11 +19,6 @@ echo "This is on two boxes, Box A and B"
 make runTwo
 
 # be sure to add more commands from your makefile here
-
-
-
-
-
 # for example, you may create a target called run_single and run_double
 # (for running on a double box) that contains some special flags.
 # so you may include echo that says what you're doing, and then do it
