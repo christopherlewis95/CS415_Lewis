@@ -12,10 +12,10 @@ cp ../makefile .
 make
 
 # running
-echo "Running on single Box, Processor A and B"
-make runTwo
-echo "Running on two Boxes, Box 1 and Box 2"
+echo "Running on single Box"
 make runOne
+echo "Running on Different Boxes"
+make runTwo
 # be sure to add more commands from your makefile here
 # for example, you may create a target called run_single and run_double
 # (for running on a double box) that contains some special flags.
