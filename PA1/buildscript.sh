@@ -12,7 +12,12 @@ cp ../makefile .
 make
 
 # running
-make run
+echo "This is on one box, Processor 1 and 2"
+make runOne
+
+echo "This is on two boxes, Box A and B"
+make runTwo
+
 # be sure to add more commands from your makefile here
 
 
@@ -26,4 +31,4 @@ make run
 # echo "PA1 on single box" && make run_single
 
 # cleaning (optional for build script)
-# make clean
+make clean

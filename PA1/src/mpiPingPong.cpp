@@ -16,7 +16,7 @@ MPI_Comm_rank(MPI_COMM_WORLD,&taskid);
 MPI_Get_processor_name(hostname, &len);
 
 
-printf("The number of tasks is %d\n", numtasks );
+//printf("The number of tasks is %d\n", numtasks );
 
   
   int ping_pong_count = 0;
