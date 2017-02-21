@@ -21,7 +21,13 @@ MPI_Get_processor_name(hostname, &len);
   
   int ping_pong_count = 0;
   int partner_rank = (taskid + 1) % 2;
-  start = MPI_Wtime();
+
+  if( taskid == 0)
+  start1 = MPI_Wtime();
+
+  if( taskid == 1 )
+  start2 = MPI_Wtime();
+
   while (ping_pong_count < PING_PONG_LIMIT) 
   {
     if (taskid == 0) 
@@ -45,8 +51,12 @@ MPI_Get_processor_name(hostname, &len);
         //     taskid, ping_pong_count, partner_rank);
     }
   }
+  if( taskid == 0)
+  finish1 = MPI_Wtime();
 
-  finish = MPI_Wtime();
+  if( taskid == 1 )
+  finish2 = MPI_Wtime();
+
 
   if( taskid == 0 )
   time1 = finish1 - start1;
