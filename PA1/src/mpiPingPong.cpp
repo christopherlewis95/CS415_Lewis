@@ -8,7 +8,7 @@ int main (int argc, char *argv[])
 {
 int   numtasks, taskid, len;
 char hostname[MPI_MAX_PROCESSOR_NAME];
-double start, finish;
+double start1, finish1, start2, finish2, time1, time2;
 
 MPI_Init(&argc, &argv);
 MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
@@ -47,8 +47,19 @@ MPI_Get_processor_name(hostname, &len);
   }
 
   finish = MPI_Wtime();
-  printf("The time is seconds is: %f\n", finish - start );
+
+  if( taskid == 0 )
+  time1 = finish1 - start1;
+  
+  else if( taskid == 1)
+
+  time2 = finish2 - start2;
+
 MPI_Finalize();
+
+	printf("Final time is %f\n", (time1 + time2)/2 );
+
+return 0;
 
 }
 
