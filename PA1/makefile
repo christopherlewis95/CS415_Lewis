@@ -15,10 +15,10 @@ $(OUTPUT): $(FILE)
 
 # use this to run
 runOne: $(OUTPUT)
-	srun -n16 $(OUTPUT) fileOne.txt
+	srun -n2 $(OUTPUT) fileOne.txt
 
 runTwo: $(OUTPUT)
-	srun -n16 $(OUTPUT) fileTwo.txt
+	srun -N2 $(OUTPUT) fileTwo.txt
 
 clean:
 	-@if rm $(OUTPUT) 2>/dev/null || true; then echo "Cleaned"; else echo "Nothing to clean"; fi
