@@ -14,7 +14,10 @@ $(OUTPUT): $(FILE)
 	$(CC) $(CXXFLAGS) -o $(OUTPUT) $(FILE) $(LIBS)
 
 # use this to run
-run: $(OUTPUT)
+runOne: $(OUTPUT)
+	srun -n16 $(OUTPUT)
+
+runTwo: $(OUTPUT)
 	srun -n16 $(OUTPUT)
 
 clean:
