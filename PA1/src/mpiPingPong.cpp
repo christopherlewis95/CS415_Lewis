@@ -8,7 +8,7 @@ int main (int argc, char *argv[])
 {
 int   numtasks, taskid, len;
 char hostname[MPI_MAX_PROCESSOR_NAME];
-double start1, finish1, start2, finish2, time1, time2;
+double start, finish;
 
 MPI_Init(&argc, &argv);
 MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
@@ -21,13 +21,7 @@ MPI_Get_processor_name(hostname, &len);
   
   int ping_pong_count = 0;
   int partner_rank = (taskid + 1) % 2;
-
-  if( taskid == 0)
-  start1 = MPI_Wtime();
-
-  if( taskid == 1 )
-  start2 = MPI_Wtime();
-
+  start = MPI_Wtime();
   while (ping_pong_count < PING_PONG_LIMIT) 
   {
     if (taskid == 0) 
@@ -51,25 +45,13 @@ MPI_Get_processor_name(hostname, &len);
         //     taskid, ping_pong_count, partner_rank);
     }
   }
-  if( taskid == 0)
-  finish1 = MPI_Wtime();
+
+  finish = MPI_Wtime();
+
 
   if( taskid == 1 )
-  finish2 = MPI_Wtime();
-
-
-  if( taskid == 0 )
-  time1 = finish1 - start1;
-  
-  else if( taskid == 1)
-
-  time2 = finish2 - start2;
-
+  printf("The time is seconds is: %f\n", finish - start );
 MPI_Finalize();
-
-	printf("Final time is %f\n", (time1 + time2)/2 );
-
-return 0;
 
 }
 
