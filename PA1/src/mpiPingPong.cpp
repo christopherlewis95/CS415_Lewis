@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define  MASTER		0
-#define  PING_PONG_LIMIT 100
+#define  PING_PONG_LIMIT 10
 
 int main (int argc, char *argv[])
 {
