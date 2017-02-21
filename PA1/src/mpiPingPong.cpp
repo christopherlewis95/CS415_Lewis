@@ -1,7 +1,7 @@
 #include "mpi.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <ifstream>
+
 #define  MASTER		0
 
 
@@ -11,7 +11,9 @@ int   numtasks, taskid, len;
 char hostname[MPI_MAX_PROCESSOR_NAME];
 double start, finish, writeout;
 int PING_PONG_LIMIT = 10;
-ofstream fout;
+//ofstream fout;
+
+FILE *fp;
 
 
 MPI_Init(&argc, &argv);
@@ -22,9 +24,8 @@ MPI_Get_processor_name(hostname, &len);
 
 //printf("The number of tasks is %d\n", numtasks );
 
-	fout.clear();
-	fout.open("times.txt")
-  
+fp=fopen("times.txt", "w");
+
   int ping_pong_count = 0;
   int partner_rank = (taskid + 1) % 2;
 
@@ -58,7 +59,9 @@ while( PING_PONG_LIMIT <= 10000)
 
   finish = MPI_Wtime();
   writeout = finish - start;
-  fout >> writeout >> "   " >> PING_PONG_LIMIT >> endl;
+
+  fprintf(fp, "%f\t%d\n", writeout, PING_PONG_LIMIT);
+ // fout >> writeout >> "   " >> PING_PONG_LIMIT >> endl;
 
 
 
@@ -69,7 +72,7 @@ while( PING_PONG_LIMIT <= 10000)
 
   if( taskid == 1 )
   printf("The time is seconds is: %f\n", finish - start );
-fout.close();
+fclose(fp);
 
 
 MPI_Finalize();
