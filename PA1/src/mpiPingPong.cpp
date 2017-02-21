@@ -26,12 +26,12 @@ MPI_Get_processor_name(hostname, &len);
 
 fp=fopen("times.txt", "w");
 
-  int ping_pong_count = 0;
+  int ping_pong_count;
   int partner_rank = (taskid + 1) % 2;
 
 while( PING_PONG_LIMIT <= 10000)
 {
-
+	ping_pong_count = 0;
   start = MPI_Wtime();
   while (ping_pong_count < PING_PONG_LIMIT) 
   {
