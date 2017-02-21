@@ -1,4 +1,4 @@
-#!/bin/bash
+  #!/bin/bash
 BUILD_DIR="build/"
 
 # building setup
