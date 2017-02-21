@@ -24,21 +24,25 @@ MPI_Get_processor_name(hostname, &len);
   start = MPI_Wtime();
   while (ping_pong_count < PING_PONG_LIMIT) 
   {
-    if (taskid == ping_pong_count % 2) 
+    if (taskid == 0) 
     {
       // Increment the ping pong count before you send it
       ping_pong_count++;
       MPI_Send(&ping_pong_count, 1, MPI_INT, partner_rank, 0, MPI_COMM_WORLD);
+            MPI_Recv(&ping_pong_count, 1, MPI_INT, partner_rank, 0, MPI_COMM_WORLD,
+               MPI_STATUS_IGNORE);
 
-      printf("Proccesor %d sent and incremented ping_pong_count %d to processor %d\n",
-            taskid, ping_pong_count, partner_rank);
+      //printf("Proccesor %d sent and incremented ping_pong_count %d to processor %d\n",
+         //   taskid, ping_pong_count, partner_rank);
     } 
-    else 
+    else if (taskid == 1)
     {
+      ping_pong_count++;
+      MPI_Send(&ping_pong_count, 1, MPI_INT, partner_rank, 0, MPI_COMM_WORLD);
       MPI_Recv(&ping_pong_count, 1, MPI_INT, partner_rank, 0, MPI_COMM_WORLD,
                MPI_STATUS_IGNORE);
-      printf("processor %d received ping_pong_count %d from processor %d\n",
-             taskid, ping_pong_count, partner_rank);
+      //printf("processor %d received ping_pong_count %d from processor %d\n",
+        //     taskid, ping_pong_count, partner_rank);
     }
   }
 
