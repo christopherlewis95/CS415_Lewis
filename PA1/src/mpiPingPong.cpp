@@ -58,7 +58,7 @@ while( PING_PONG_LIMIT <= 10000)
 
   finish = MPI_Wtime();
   writeout = finish - start;
-  fout >> writeout >> endl;
+  fout >> writeout >> "   " >> PING_PONG_LIMIT >> endl;
 
 
 
