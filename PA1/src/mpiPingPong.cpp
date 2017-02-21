@@ -26,7 +26,7 @@ MPI_Get_processor_name(hostname, &len);
 //printf("The number of tasks is %d\n", numtasks );
 
 //if( taskid == 0 )
-fp=fopen("timesBox.txt", "w");
+fp=fopen(argv[1], "w");
 
 //else if( taskid == 1 )
 //fp2=fopen("timesTwoBox.txt", "w");

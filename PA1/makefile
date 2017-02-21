@@ -6,7 +6,7 @@ LIBS=-lpmi
 FILE=../src/mpiPingPong.cpp
 # uncomment below if/when you have a folder called include that holds potential header files
 #INCLUDES=-I../include
-OUTPUT=mpiPingPong
+OUTPUT=mpiPingPong 
 
 all: $(OUTPUT)
 
@@ -15,10 +15,10 @@ $(OUTPUT): $(FILE)
 
 # use this to run
 runOne: $(OUTPUT)
-	srun -n16 $(OUTPUT)
+	srun -n16 $(OUTPUT) fileOne.txt
 
 runTwo: $(OUTPUT)
-	srun -n16 $(OUTPUT)
+	srun -n16 $(OUTPUT) fileTwo.txt
 
 clean:
 	-@if rm $(OUTPUT) 2>/dev/null || true; then echo "Cleaned"; else echo "Nothing to clean"; fi
