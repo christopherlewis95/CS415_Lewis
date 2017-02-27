@@ -15,13 +15,13 @@ $(OUTPUT): $(FILE)
 
 # use this to run
 runOne: $(OUTPUT)
-	srun -n2 --time=00:05:00 $(OUTPUT) fileOne.txt
+	srun -n2 --time=00:05:00 $(OUTPUT) oneTossOneMachine.txt
 
 runTwo: $(OUTPUT)
-	srun -N2 --time=00:05:00 $(OUTPUT) fileTwo.txt
+	srun -N2 --time=00:05:00 $(OUTPUT) oneTossTwoMachine.txt
 
 runTwoTimed: $(OUTPUT)
-	srun -N2 --time=00:05:00 $(OUTPUT) fileThree.txt
+	srun -N2 --time=00:05:00 $(OUTPUT) oneTossTwoMachineTimed.txt
 
 clean:
 	-@if rm $(OUTPUT) 2>/dev/null || true; then echo "Cleaned"; else echo "Nothing to clean"; fi
