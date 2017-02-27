@@ -6,7 +6,7 @@ if [ ! -d "$BUILD_DIR" ]; then
 	mkdir build
 fi
 cd build
-cp ../makefile .
+cp ../makefile
 cp ../One_box.sh
 
 # building
