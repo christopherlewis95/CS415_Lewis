@@ -82,7 +82,7 @@ while( PING_PONG_LIMIT <= 2)
 
   if( taskid == 1 )
   printf("The time is seconds is: %f\n", finish - start );
-fclose(fp);
+//fclose(fp);
 //fclose(fp2);
 
 MPI_Finalize();
