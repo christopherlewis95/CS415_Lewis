@@ -23,5 +23,14 @@ $(OUTPUT2): $(FILE)
 $(OUTPUT3): $(FILE)
 	$(CC) $(CXXFLAGS) -o $(OUTPUT3) $(FILE3) $(LIBS)
 
+runOne: &(OUTPUT1)
+	srun -n2 $(OUTPUT1) 
+
+runTwo: &(OUTPUT2)
+	srun -N2 $(OUTPUT2)
+
+timed: &(OUTPUT3)
+	srun -N2 $(OUTPUT3) Timed.txt
+
 clean:
 	rm $(OUTPUT1) $(OUTPUT2) $(OUTPUT3)
