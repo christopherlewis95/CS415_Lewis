@@ -7,5 +7,5 @@
 
 
 echo "runOne"
-srun ./One_box
+srun ./One_box oneBoxPing.txt 1
 
