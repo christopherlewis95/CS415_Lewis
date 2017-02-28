@@ -3,34 +3,35 @@ CC=mpicc
 CXXFLAGS=-Wall
 LIBS=-lpmi
 # feel free to either add files here (for more compilcated src's), or create more vars, or just manually type them in. Up to you.
-FILE= ../src/mpiPingPongOneBox.cpp
-FILE2= ../src/mpiPingPongTwoBox.cpp
-FILE3= ../src/mpiPingPongTimed.cpp
+FILE=../src/mpiPingPongOneBox.cpp
+FILE2=../src/mpiPingPongTwoBox.cpp
+FILE3=../src/mpiPingPongTimed.cpp
 # uncomment below if/when you have a folder called include that holds potential header files
 #INCLUDES=-I../include
-OUTPUT1 = One_box
-OUTPUT2 = Two_box
-OUTPUT3 = Timing
+OUTPUT=mpiPingPong1
+OUTPUT=mpiPingPong2
+OUTPUT=mpiPingPongT
 
-all: $(OUTPUT1) $(OUTPUT2) $(OUTPUT3)
+all: $(OUTPUT) $(OUTPUT2) $(OUTPUT3) 
 
 $(OUTPUT): $(FILE)
-	$(CC) $(CXXFLAGS) -o $(OUTPUT1) $(FILE) $(LIBS)
+	$(CC) $(CXXFLAGS) -o $(OUTPUT) $(FILE) $(LIBS)
 
-$(OUTPUT2): $(FILE)
-	$(CC) $(CXXFLAGS) -o $(OUTPUT2) $(FILE2) $(LIBS)
+$(OUTPUT2): $(FILE2)
+	$(CC) $(CXXFLAGS) -o $(OUTPUT) $(FILE2) $(LIBS)
 
-$(OUTPUT3): $(FILE)
-	$(CC) $(CXXFLAGS) -o $(OUTPUT3) $(FILE3) $(LIBS)
+$(OUTPUT3): $(FILE3)
+	$(CC) $(CXXFLAGS) -o $(OUTPUT) $(FILE3) $(LIBS)
 
-One_box: &(OUTPUT1)
-	srun -n2 $(OUTPUT1) 
+# use this to run
+runOne: $(OUTPUT)
+	srun -n2 $(OUTPUT1)
 
-Two_box: &(OUTPUT2)
+runTwo: $(OUTPUT)
 	srun -N2 $(OUTPUT2)
 
-Timing: &(OUTPUT3)
-	srun -N2 $(OUTPUT3) Timed.txt
+timed: $(OUTPUT)
+	srun -N2 $(OUTPUT3) times.txt
 
 clean:
-	rm $(OUTPUT1) $(OUTPUT2) $(OUTPUT3)
+	-@if rm $(OUTPUT) 2>/dev/null || true; then echo "Cleaned"; else echo "Nothing to clean"; fi
