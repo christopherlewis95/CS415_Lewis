@@ -3,25 +3,24 @@ CC=mpicc
 CXXFLAGS=-Wall
 LIBS=-lpmi
 # feel free to either add files here (for more compilcated src's), or create more vars, or just manually type them in. Up to you.
-FILE=../src/mpiPingPong.cpp
+FILE= src/mpiPingPong.cpp
 # uncomment below if/when you have a folder called include that holds potential header files
 #INCLUDES=-I../include
-OUTPUT=mpiPingPong 
+OUTPUT1 = One_box
+OUTPUT2 = Two_box
+OUTPUT3 = Timing
 
-all: $(OUTPUT)
+all: $(OUTPUT1) $(OUTPUT2) $(OUTPUT3)
 
 $(OUTPUT): $(FILE)
-	$(CC) $(CXXFLAGS) -o $(OUTPUT) $(FILE) $(LIBS)
+	$(CC) $(CXXFLAGS) -o $(OUTPUT1) $(FILE) $(LIBS)
 
-# use this to run
-runOne: $(OUTPUT)
-	srun -n2 --time=00:05:00 $(OUTPUT) oneTossOneMachine.txt 1
+$(OUTPUT2): $(FILE)
+	$(CC) $(CXXFLAGS) -o $(OUTPUT2) $(FILE) $(LIBS)
 
-runTwo: $(OUTPUT)
-	srun -N2 --time=00:05:00 $(OUTPUT) oneTossTwoMachine.txt 1
+$(OUTPUT3): $(FILE)
+	$(CC) $(CXXFLAGS) -o $(OUTPUT3) $(FILE) $(LIBS)
 
-runTwoTimed: $(OUTPUT)
-	srun -N2 --time=00:05:00 $(OUTPUT) oneTossTwoMachineTimed.txt 100000
 
 clean:
-	-@if rm $(OUTPUT) 2>/dev/null || true; then echo "Cleaned"; else echo "Nothing to clean"; fi
+	rm $(OUTPUT1) $(OUTPUT2) $(OUTPUT3)
