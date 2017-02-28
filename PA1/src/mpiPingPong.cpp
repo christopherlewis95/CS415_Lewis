@@ -66,6 +66,8 @@ while( PING_PONG_LIMIT <= MAX_LIMIT)
   finish = MPI_Wtime();
   writeout = finish - start;
 
+  printf("%f\t%d\n", writeout, PING_PONG_LIMIT);
+
   //if( taskid == 0 )
   fprintf(fp, "%f\t%d\n", writeout, PING_PONG_LIMIT);
  // fout >> writeout >> "   " >> PING_PONG_LIMIT >> endl;
