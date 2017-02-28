@@ -9,8 +9,8 @@ FILE3=../src/mpiPingPongTimed.cpp
 # uncomment below if/when you have a folder called include that holds potential header files
 #INCLUDES=-I../include
 OUTPUT=mpiPingPong1
-OUTPUT=mpiPingPong2
-OUTPUT=mpiPingPongT
+OUTPUT2=mpiPingPong2
+OUTPUT3=mpiPingPongT
 
 all: $(OUTPUT) $(OUTPUT2) $(OUTPUT3) 
 
@@ -18,19 +18,19 @@ $(OUTPUT): $(FILE)
 	$(CC) $(CXXFLAGS) -o $(OUTPUT) $(FILE) $(LIBS)
 
 $(OUTPUT2): $(FILE2)
-	$(CC) $(CXXFLAGS) -o $(OUTPUT) $(FILE2) $(LIBS)
+	$(CC) $(CXXFLAGS) -o $(OUTPUT2) $(FILE2) $(LIBS)
 
 $(OUTPUT3): $(FILE3)
-	$(CC) $(CXXFLAGS) -o $(OUTPUT) $(FILE3) $(LIBS)
+	$(CC) $(CXXFLAGS) -o $(OUTPUT3) $(FILE3) $(LIBS)
 
 # use this to run
 runOne: $(OUTPUT)
 	srun -n2 $(OUTPUT1)
 
-runTwo: $(OUTPUT)
+runTwo: $(OUTPUT2)
 	srun -N2 $(OUTPUT2)
 
-timed: $(OUTPUT)
+timed: $(OUTPUT3)
 	srun -N2 $(OUTPUT3) times.txt
 
 clean:
