@@ -23,13 +23,13 @@ $(OUTPUT2): $(FILE)
 $(OUTPUT3): $(FILE)
 	$(CC) $(CXXFLAGS) -o $(OUTPUT3) $(FILE3) $(LIBS)
 
-runOne: &(OUTPUT1)
+One_box: &(OUTPUT1)
 	srun -n2 $(OUTPUT1) 
 
-runTwo: &(OUTPUT2)
+Two_box: &(OUTPUT2)
 	srun -N2 $(OUTPUT2)
 
-timed: &(OUTPUT3)
+Timing: &(OUTPUT3)
 	srun -N2 $(OUTPUT3) Timed.txt
 
 clean:
