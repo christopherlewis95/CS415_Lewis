@@ -23,14 +23,5 @@ $(OUTPUT2): $(FILE)
 $(OUTPUT3): $(FILE)
 	$(CC) $(CXXFLAGS) -o $(OUTPUT3) $(FILE3) $(LIBS)
 
-singleBox: &(OUTPUT1)
-	srun -n2 $(OUTPUT1) One_box.txt 2
-
-TwoBox: &(OUTPUT2)
-	srun -N2 $(OUTPUT2) Two_box.txt 2
-
-Timed: &(OUTPUT3)
-	srun -N2 $(OUTPUT3) Timed.txt 10000
-
 clean:
 	rm $(OUTPUT1) $(OUTPUT2) $(OUTPUT3)
