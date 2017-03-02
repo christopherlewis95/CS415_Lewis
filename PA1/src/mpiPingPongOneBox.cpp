@@ -1,4 +1,4 @@
-//Chris decided to test the github manager
+//Chris decided to test the github manager lol
 #include "mpi.h"
 #include <stdio.h>
 #include <stdlib.h>
