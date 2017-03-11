@@ -1,5 +1,5 @@
 #include <math.h>
-#include <iostream>
+//#include <iostream>
 #include <cstdlib>
 #include <cstdio>
 #include "pimfunctions.h"
@@ -20,7 +20,7 @@ int main()
     {
     // Initialize complex number struct
     complex c;
-    unsigned char * pix; 
+    unsigned char * pix = 0; 
     bool good;
     const char * const fileName = "seqMandelBrot.jpg";
 
