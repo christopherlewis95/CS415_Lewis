@@ -18,19 +18,53 @@ int cal_pixel(complex c);
 
 int main()
     {
-    
+    // Initialize complex number struct
     complex c;
+    unsigned char * pix; 
+    bool good;
+    const char * const fileName = "seqMandelBrot.jpg";
 
-    c.real = real_min + x * (real_max - real_min)/disp_width;
-    c.imag = imag_min + y * (imag_max - imag_min)/disp_height;
+    int display_width = 680;
+    int display_height = 480;
+    int scale_real, scale_imag, real_max, real_min, imag_max, imag_min;
 
-    scale_real = (real_max - real_min)/disp_width;
-    scale_imag = (imag_max - imag_min)/disp_height;
+    real_min = -2;
+    real_max = 2;
+    
+    imag_min = 1;
+    imag_max = imag_min + (real_max-real_min)*display_height/display_width;
+    
+    // Set scale;
+    scale_real = (real_max - real_min)/display_width;
+    scale_imag = (imag_max - imag_min)/display_height;
+    
+
+
+
+    for( int y = 0; y < display_height; y++ )
+    {
+
+        for( int x = 0; x < display_width; x++ )
+            {
+            c.real = real_min + x * (real_max - real_min)/display_width;
+            c.imag = imag_min + y * (imag_max - imag_min)/display_height;
+
+            pim_write_black_and_white(fileName, display_width, display_height,pix);
+
+
+            }
+
+
+    }
+
+
 
 
     
     return 0;
     }
+
+//// FUNCTIONS
 
 int cal_pixel(complex c)
     {
@@ -51,3 +85,4 @@ int cal_pixel(complex c)
         } while((lengthsq < 4.0) && (count < max_iter));
     return count;
     }
+
