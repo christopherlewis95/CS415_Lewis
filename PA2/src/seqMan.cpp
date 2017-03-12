@@ -20,13 +20,22 @@ int main()
     {
     // Initialize complex number struct
     complex c;
-    unsigned char * pix = 0; 
+    
     bool good;
-    const char * const fileName = "seqMandelBrot.jpg";
+   const char * const fileName;
 
     int display_width = 680;
     int display_height = 480;
     int scale_real, scale_imag, real_max, real_min, imag_max, imag_min;
+    unsigned char ** pix = new unsigned char *[display_height];
+
+    for( int i = 0; i < display_height; i++ )
+    {
+        pix = new unsigned char [display_width];
+
+
+    }
+     
 
     real_min = -2;
     real_max = 2;
@@ -48,8 +57,9 @@ int main()
             {
             c.real = real_min + x * (real_max - real_min)/display_width;
             c.imag = imag_min + y * (imag_max - imag_min)/display_height;
+            static int n = cal_pixel(c);
 
-            pim_write_black_and_white(fileName, display_width, display_height,pix);
+            pim_write_black_and_white(fileName, display_width, display_height,(const unsigned char **)pix);
 
 
             }
