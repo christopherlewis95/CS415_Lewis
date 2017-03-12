@@ -2,7 +2,7 @@
 //#include <iostream>
 #include <cstdlib>
 #include <cstdio>
-#include "pimfunctions.h"
+#include "../include/pimfunctions.h"
 
 using namespace std;
 
