@@ -22,7 +22,7 @@ int main()
     complex c;
     
     bool good;
-   const char * const fileName = "newimage.ppm";
+   char fileName[] = "newimage.jpeg";
 
     int display_width = 680;
     int display_height = 480;
@@ -65,7 +65,7 @@ int main()
             {
             c.real = real_min + ((float)x * scale_real);
             c.imag = imag_min + ((float)y * scale_imag);
-            static int n = cal_pixel(c);
+            //static int n = cal_pixel(c);
             r[y][x] = cal_pixel(c);
             g[y][x] = 0;
             b[y][x] = 0;
