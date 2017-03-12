@@ -20,13 +20,15 @@ int main()
     {
     // Initialize complex number struct
     complex c;
-    
+    c.real = 0;
+    c.imag = 0;
+
     bool good;
-   char fileName[] = "newimage.jpeg";
+    char fileName[] = "image.ppm";
 
     int display_width = 680;
-    int display_height = 480;
-    int scale_real, scale_imag, real_max, real_min, imag_max, imag_min;
+    int display_height = 680;
+    double scale_real, scale_imag, real_max, real_min, imag_max, imag_min;
     //unsigned char ** pix = new unsigned char *[display_height];
     unsigned char **r;
     unsigned char **g;
@@ -46,9 +48,9 @@ int main()
      
 
     real_min = -2;
-    real_max = 2;
+    real_max = 1;
     
-    imag_min = -1;
+    imag_min = -1.2;
     imag_max = imag_min + (real_max-real_min)*display_height/display_width;
     
     // Set scale;
