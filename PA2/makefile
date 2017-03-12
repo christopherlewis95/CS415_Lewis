@@ -3,7 +3,7 @@ CC=mpic++
 CXXFLAGS=-Wall
 LIBS=-lpmi
 # feel free to either add files here (for more compilcated src's), or create more vars, or just manually type them in. Up to you.
-FILE=../src/seqMan.cpp
+FILE=../src/seqMan.cpp PIM.o
 # FILE2=../src/static.cpp
  #FILE3=../src/mpiPingPongTimed.cpp
 
@@ -20,6 +20,8 @@ all: $(OUTPUT) #$(OUTPUT2) $(OUTPUT3)
 $(OUTPUT): $(FILE)
 	$(CC) $(CXXFLAGS) $(FILE) -o $(OUTPUT) $(INCLUDE) $(LIBS)
 
+PIM.o: ../src/pimfunctions.cpp
+	$(CC) $(CXXFLAGS) -c ../src/pimfuctions.cpp -o PIM.o $(INCLUDE) $(LIBS)
 #$(OUTPUT2): $(FILE2)
 #	$(CC) $(CXXFLAGS) -o $(OUTPUT2) $(FILE2) $(LIBS)
 
