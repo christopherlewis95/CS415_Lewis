@@ -22,17 +22,25 @@ int main()
     complex c;
     
     bool good;
-   const char * const fileName = "image.ppm";
+   const char * const fileName = "newimage.ppm";
 
     int display_width = 680;
     int display_height = 480;
     int scale_real, scale_imag, real_max, real_min, imag_max, imag_min;
-    unsigned char ** pix = new unsigned char *[display_height];
+    //unsigned char ** pix = new unsigned char *[display_height];
+    unsigned char **r;
+    unsigned char **g;
+    unsigned char **b;
+
+    r = new unsigned char *[display_height];
+    g = new unsigned char *[display_height];
+    b = new unsigned char *[display_height];
 
     for( int i = 0; i < display_height; i++ )
     {
-        pix[i] = new unsigned char[display_width];
-
+        r[i] = new unsigned char[display_width];
+        g[i] = new unsigned char[display_width];
+        b[i] = new unsigned char[display_width];
 
     }
      
@@ -55,18 +63,25 @@ int main()
 
         for( int x = 0; x < display_width; x++ )
             {
-            c.real = real_min + x * (real_max - real_min)/display_width;
-            c.imag = imag_min + y * (imag_max - imag_min)/display_height;
+            c.real = real_min + ((float)x * scale_real);
+            c.imag = imag_min + ((float)y * scale_imag);
             static int n = cal_pixel(c);
-            pix[y][x] = n;
-           
+            r[y][x] = cal_pixel(c);
+            g[y][x] = 0;
+            b[y][x] = 0;
 
 
             }
 
 
     }
- pim_write_black_and_white(fileName, display_width, display_height,(const unsigned char **)pix);
+ pim_write_color(fileName, 
+                display_width, 
+                display_height,
+                (const unsigned char **)r,
+                (const unsigned char **)g, 
+                (const unsigned char **)b
+                );
 
 
 
