@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <cstdio>
 #include "../include/pimfunctions.h"
+#include <time.h> 
+
 
 using namespace std;
 
@@ -24,6 +26,12 @@ int main()
     c.imag = 0;
     double start, finish, writeout, delta;
     FILE *fp;
+    clock_t clockTicks;
+    clockTicks = clock();
+    clock_t t0;
+    clockTicks = clock() - clockTicks; // Time elapsed since I did the last initial clock
+
+
 
     bool good;
     char fileName[] = "image.ppm";
@@ -71,9 +79,9 @@ int main()
     scale_real = (real_max - real_min)/display_width;
     scale_imag = (imag_max - imag_min)/display_height;
     
-    fp = fopen("Data.txt",w);
+    fp = fopen("Data.txt","w");
 
-    start = MPI_Wtime();
+    t0 = clock();
     for( int y = 0; y < display_height; y++ )
     {
     
@@ -91,9 +99,9 @@ int main()
 
 
     }
-    delta = MPI_Wtime();
-    writeout = delta - start;
-    fprintf(fp, "%d\n" delta);
+    clockTicks = clock() - t0;
+    //writeout = delta - start;
+    fprintf(fp, "%f\n", (double) clockTicks);
 
     }
  pim_write_color(fileName, 
