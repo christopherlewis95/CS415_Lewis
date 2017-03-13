@@ -18,7 +18,7 @@ struct complex{
 int cal_pixel(complex c);
 
 
-int main()
+int main(int argc, char** argv)
     {
     // Initialize complex number struct
     complex c;
@@ -44,13 +44,16 @@ int main()
     unsigned char **b;
 
 
-    int display_width = 680;
-    int display_height = 680;
+    int display_width = atoi(argv[1]);
+    int display_height = atoi(argv[2];
+
+    fp = fopen("Data.txt","w");
+
 
     //for( display_width = 680, display_height = 680;
       //   display_width <= 10000, display_height <= 10000; 
-     //    display_width += 100, display_height+= 100)
-   // {
+        // display_width += 100, display_height+= 100)
+    //{
 
 
 
@@ -79,7 +82,7 @@ int main()
     scale_real = (real_max - real_min)/display_width;
     scale_imag = (imag_max - imag_min)/display_height;
     
-    fp = fopen("Data.txt","w");
+
 
     t0 = clock();
     for( int y = 0; y < display_height; y++ )
