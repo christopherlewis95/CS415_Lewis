@@ -115,7 +115,7 @@ if (taskid == MASTER)
 else if( taskid == i ){
     MPI_Recv(&row, 1, MPI_INT, MASTER, 0, MPI_COMM_WORLD);
 
-    for( x = 0; x < disp_width; x++)
+    for( x = 0; x < display_width; x++)
     {
         for( y = row; y < (row + 10); y++ )
         {
@@ -126,7 +126,7 @@ else if( taskid == i ){
             g[y][x] = 0;
             b[y][x] = 0;
 
-            MPI_Send(&r, 1, MPI_INT, MASTER, 0, MPI_COMM_WORLD )
+            MPI_Send(&r, 1, MPI_INT, MASTER, 0, MPI_COMM_WORLD );
 
         }
 
