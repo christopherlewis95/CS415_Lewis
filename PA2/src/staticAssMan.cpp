@@ -8,7 +8,22 @@
 #include "mpi.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "../include/pimfunctions.h"
+#include <time.h> 
 #define  MASTER		0
+
+
+using namespace std;
+
+struct complex{
+
+    float real;
+    float imag;
+
+};
+
+int cal_pixel(complex c);
+
 
 int main (int argc, char *argv[])
 {
@@ -127,5 +142,29 @@ else if( taskid == i ){
 
 MPI_Finalize();
 
+}
+
+//// FUNCTIONS
+
+int cal_pixel(complex c)
+{
+    int count, maxIter;
+    complex z;
+    float temp, lengthSq;
+
+
+    maxIter = 256;
+    z.real = 0;
+    z.imag = 0;
+    count = 0;
+    do{
+        temp = z.real * z.real - z.imag * z.imag + c.real;
+        z.imag = 2 * z.real * z.imag + c.imag;
+        z.real = temp;
+        lengthSq = z.real * z.real+z.imag*z.imag;
+        count++;
+    }while( (lengthSq < 4.0) && (count < maxIter) );
+
+    return count;
 }
 
