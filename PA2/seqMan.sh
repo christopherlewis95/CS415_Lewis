@@ -8,5 +8,5 @@ while [ $a -lt 3000 ]
 do
    echo $a
    srun seqMan $a $a
-   a=expr $a + 100`
+   a=expr $a + 100
 done
