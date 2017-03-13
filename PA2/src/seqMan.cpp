@@ -22,17 +22,31 @@ int main()
     complex c;
     c.real = 0;
     c.imag = 0;
+    double start, finish, writeout, delta;
+    FILE *fp;
 
     bool good;
     char fileName[] = "image.ppm";
 
-    int display_width = 680;
-    int display_height = 680;
+   
     double scale_real, scale_imag, real_max, real_min, imag_max, imag_min;
     //unsigned char ** pix = new unsigned char *[display_height];
     unsigned char **r;
     unsigned char **g;
     unsigned char **b;
+
+
+    int display_width = 680;
+    int display_height = 680;
+
+    for( display_width = 680, display_height = 680;
+         display_width <= 10000, display_height <= 10000; 
+         display_width += 100, display_height+= 100)
+    {
+
+
+
+    
 
     r = new unsigned char *[display_height];
     g = new unsigned char *[display_height];
@@ -57,12 +71,12 @@ int main()
     scale_real = (real_max - real_min)/display_width;
     scale_imag = (imag_max - imag_min)/display_height;
     
+    fp = fopen("Data.txt",w);
 
-
-
+    start = MPI_Wtime();
     for( int y = 0; y < display_height; y++ )
     {
-
+    
         for( int x = 0; x < display_width; x++ )
             {
             c.real = real_min + ((float)x * scale_real);
@@ -77,6 +91,11 @@ int main()
 
 
     }
+    delta = MPI_Wtime();
+    writeout = delta - start;
+    fprintf(fp, "%d\n" delta);
+
+    }
  pim_write_color(fileName, 
                 display_width, 
                 display_height,
@@ -85,7 +104,7 @@ int main()
                 (const unsigned char **)b
                 );
 
-
+    
 
     
     return 0;
