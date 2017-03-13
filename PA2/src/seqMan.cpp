@@ -47,7 +47,7 @@ int main(int argc, char** argv)
     int display_width = atoi(argv[1]);
     int display_height = atoi(argv[2]);
 
-    fp = fopen("Data.txt","a+");
+    fp = fopen("seqManData.txt","a+");
 
 
     //for( display_width = 680, display_height = 680;
