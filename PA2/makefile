@@ -4,7 +4,7 @@ CXXFLAGS=-Wall
 LIBS=-lpmi
 # feel free to either add files here (for more compilcated src's), or create more vars, or just manually type them in. Up to you.
 FILE=../src/seqMan.cpp PIM.o
-# FILE2=../src/static.cpp
+FILE2=../src/staticAssMan.cpp PIM.o
  #FILE3=../src/mpiPingPongTimed.cpp
 
 
@@ -12,18 +12,20 @@ FILE=../src/seqMan.cpp PIM.o
 # uncomment below if/when you have a folder called include that holds potential header files
 INCLUDE=-I../include
 OUTPUT=seqMan
-#OUTPUT2=mpiPingPong2
+OUTPUT2=staticMan
 #OUTPUT3=mpiPingPongT
 
-all: $(OUTPUT) #$(OUTPUT2) $(OUTPUT3) 
+all: $(OUTPUT) $(OUTPUT2) #$(OUTPUT3) 
 
 $(OUTPUT): $(FILE)
 	$(CC) $(CXXFLAGS) $(FILE) -o $(OUTPUT) $(INCLUDE) $(LIBS)
+	
+$(OUTPUT2): $(FILE2)
+	$(CC) $(CXXFLAGS) $(FILE2) -o $(OUTPUT2) $(INCLUDE) $(LIBS)
 
 PIM.o: ../src/pimfunctions.cpp
 	$(CC) $(CXXFLAGS) -c ../src/pimfunctions.cpp -o PIM.o $(INCLUDE) $(LIBS)
-#$(OUTPUT2): $(FILE2)
-#	$(CC) $(CXXFLAGS) -o $(OUTPUT2) $(FILE2) $(LIBS)
+
 
 #$(OUTPUT3): $(FILE3)
 #	$(CC) $(CXXFLAGS) -o $(OUTPUT3) $(FILE3) $(LIBS)
