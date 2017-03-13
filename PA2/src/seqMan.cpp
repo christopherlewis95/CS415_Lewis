@@ -101,7 +101,7 @@ int main()
     }
     clockTicks = clock() - t0;
     //writeout = delta - start;
-    fprintf(fp, "%f\n", (double) clockTicks);
+    fprintf(fp, "%f\n", (float)clockTicks/CLOCKS_PER_SEC);
 
     }
  pim_write_color(fileName, 
