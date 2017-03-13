@@ -21,7 +21,7 @@ $(OUTPUT): $(FILE)
 	$(CC) $(CXXFLAGS) $(FILE) -o $(OUTPUT) $(INCLUDE) $(LIBS)
 
 PIM.o: ../src/pimfunctions.cpp
-	$(CC) $(CXXFLAGS) -c ../src/pimfuctions.cpp -o PIM.o $(INCLUDE) $(LIBS)
+	$(CC) $(CXXFLAGS) -c ../src/pimfunctions.cpp -o PIM.o $(INCLUDE) $(LIBS)
 #$(OUTPUT2): $(FILE2)
 #	$(CC) $(CXXFLAGS) -o $(OUTPUT2) $(FILE2) $(LIBS)
 
