@@ -47,10 +47,10 @@ int main()
     int display_width = 680;
     int display_height = 680;
 
-    for( display_width = 680, display_height = 680;
-         display_width <= 10000, display_height <= 10000; 
-         display_width += 100, display_height+= 100)
-    {
+    //for( display_width = 680, display_height = 680;
+      //   display_width <= 10000, display_height <= 10000; 
+     //    display_width += 100, display_height+= 100)
+   // {
 
 
 
@@ -103,7 +103,7 @@ int main()
     //writeout = delta - start;
     fprintf(fp, "%f\n", (float)clockTicks/CLOCKS_PER_SEC);
 
-    }
+   // }
  pim_write_color(fileName, 
                 display_width, 
                 display_height,
