@@ -29,7 +29,13 @@ int main( int argc, char **argv ) {
 	int rank;
 	int display_width = atoi(argv[1]);
     int display_height = atoi(argv[2]);
-    int coords[display_width][display_height];	
+    int **coords = new int *[display_height];	
+    
+    for( int i = 0; i < display_height; i++ )
+    {
+        coords[i] = new int[display_width];
+    }
+    
     int real_min = -2;
     int real_max = 2;
     int imag_min = -2;
