@@ -26,6 +26,7 @@ int cal_pixel( complex );
 int main( int argc, char **argv ) {
 	int display_width = atoi(argv[1]);
     int display_height = atoi(argv[2]);
+    cout << display_height << " and " << display_width << endl;
     int coords[display_width][display_height];	
     int real_min = -2;
     int real_max = 2;
@@ -108,7 +109,7 @@ int main( int argc, char **argv ) {
 		finalTime = ( endTime.tv_sec - startTime.tv_sec ) * 1000.0;
 		finalTime += ( endTime.tv_usec - startTime.tv_usec ) / 1000.0;
 
-        fprintf(fp, "%d\n", finalTime);
+        fprintf(fp, "%f\n", finalTime);
 
 		// print mandelbrot to file
 		for( int x = 0; x < display_width; x++ ) 
