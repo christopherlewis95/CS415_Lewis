@@ -15,7 +15,7 @@ OUTPUT=seqMan
 #OUTPUT2=staticMan
 OUTPUT3=dynMan
 
-all: $(OUTPUT) $(OUTPUT2) #$(OUTPUT3) 
+all: $(OUTPUT) $(OUTPUT3) # $(OUTPUT3) 
 
 $(OUTPUT): $(FILE)
 	$(CC) $(CXXFLAGS) $(FILE) -o $(OUTPUT) $(INCLUDE) $(LIBS)
