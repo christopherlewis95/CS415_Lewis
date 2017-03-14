@@ -3,7 +3,7 @@ CC=mpic++
 CXXFLAGS=-Wall
 LIBS=-lpmi
 # feel free to either add files here (for more compilcated src's), or create more vars, or just manually type them in. Up to you.
-#FILE=../src/seqMan.cpp PIM.o
+FILE=../src/seqMan.cpp PIM.o
 #FILE2=../src/staticAssMan.cpp PIM.o
 FILE3=../src/dynAssMan.cpp PIM.o
 
@@ -15,13 +15,13 @@ OUTPUT=seqMan
 #OUTPUT2=staticMan
 OUTPUT3=dynMan
 
-all: $(OUTPUT3) #$(OUTPUT3) # $(OUTPUT3) 
+all: $(OUTPUT3) $(OUTPUT) # $(OUTPUT3) 
 
 $(OUTPUT3): $(FILE3)
 	$(CC) $(CXXFLAGS) $(FILE3) -o $(OUTPUT3) $(INCLUDE) $(LIBS)
 	
-#$(OUTPUT2): $(FILE2)
-#	$(CC) $(CXXFLAGS) $(FILE2) -o $(OUTPUT2) $(INCLUDE) $(LIBS)
+$(OUTPUT): $(FILE)
+	$(CC) $(CXXFLAGS) $(FILE) -o $(OUTPUT) $(INCLUDE) $(LIBS)
 	
 #$(OUTPUT3): $(FILE3)
 	#$(CC) $(CXXFLAGS) $(FILE3) -o $(OUTPUT3) $(INCLUDE) $(LIBS)
