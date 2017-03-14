@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH -N5
-#SBATCH -n5
+#SBATCH -N3
+#SBATCH -n12
 #SBATCH --time=00:05:00
 #SBATCH --mail-user=christopherlewis@nevada.unr.edu
 for (( a=400; a<=1800; a+=20 ))
