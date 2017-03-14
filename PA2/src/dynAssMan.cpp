@@ -8,18 +8,18 @@
 using namespace std;
 
 
-// tags for sends/receives
-#define DATA_TAG 1
+// tags and const that are important to the project 
 #define TERMINATE_TAG 0
+#define DATA_TAG 1
 #define RESULT_TAG 2
 
-// complex structure holds real/imag part of num
+// complex struct
 struct complex {
 	float real;
 	float imag;
 };
 
-// function prototype 
+// function prototype for calculation
 int cal_pixel( complex );
 
 
@@ -29,7 +29,6 @@ int main( int argc, char **argv ) {
 	int rank;
 	int display_width = atoi(argv[1]);
     int display_height = atoi(argv[2]);
-   // cout << display_height << " and " << display_width << endl;
     int coords[display_width][display_height];	
     int real_min = -2;
     int real_max = 2;
@@ -62,21 +61,15 @@ int main( int argc, char **argv ) {
     { 
 	    MPI_Status status;
 	    int row = 0;
-
-	    //image stuff
-        //	int coords[display_width][display_height];	
+	
 	    int row_colors[display_width + 1];	
-
-	    // timing stuff
-	    timeval startTime, endTime;
-	    double finalTime;	
 
 	    // output image is placed into this file
 	    ofstream fout;
 	    fout.open( "dynImage.PPM" );
 
         t0 = clock();
-	    // send row number to all available processors (don't include master!)
+	    // send row number to all available processors without sending to the master BAD
 	    for( int i = 1; i < numProcessors; i++ ) 
             {
 		    MPI_Send( &row, 1, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD );	
@@ -84,24 +77,22 @@ int main( int argc, char **argv ) {
 	        }
 	
 	    int rowsAnalyzed = 0;
-	    // while slaves idle, keep sending work
+
+        // Send work to keep things going
 	    while( rowsAnalyzed < display_height ) 
             {
 			MPI_Recv( &row_colors, display_width + 1, MPI_INT, MPI_ANY_SOURCE, RESULT_TAG, MPI_COMM_WORLD, &status );
             int pingPongSend = status.MPI_SOURCE;
 			int receivedRow = row_colors[0];
 				
-			// set the row which has finished computing
 			for( int col = 0; col < display_width; col++ ) 
                 {
 				coords[receivedRow][col] = row_colors[col+1];
 				}
 				
-				// increment row to send the next one
 			rowsAnalyzed++;
 			if( row < display_height ) 
                 {
-				// now we can send more data to whichever slave just finished
 				MPI_Send( &row, 1, MPI_INT, pingPongSend, DATA_TAG, MPI_COMM_WORLD );
 				row++;
 				}
@@ -112,11 +103,11 @@ int main( int argc, char **argv ) {
 			MPI_Send( 0, 0, MPI_INT, i, TERMINATE_TAG, MPI_COMM_WORLD );
 			}
 		
-		// get time stuff here
+		// get elapsed time and print to file
         clockTicks = clock() - t0;
         fprintf(fp, "%f\n", (float)clockTicks/CLOCKS_PER_SEC);
 
-		// print mandelbrot to file
+		// print mandelbrot set to the file using fout (Mainly cause its easier)
 		for( int x = 0; x < display_width; x++ ) 
             {
 			for( int y = 0; y < display_height; y++ ) 
@@ -125,22 +116,21 @@ int main( int argc, char **argv ) {
 			}
 			fout << endl;		
 		}
-		// always close your file after working with it
+
 		fout.close();
 	}
 
 	else { 	
-
+        MPI_Status status;
+        // Init more vars
 	    complex c;
 	    int colorD[display_width + 1];
 	    int row = 0; 
-	    MPI_Status status;
-	    int slave_rank;
 
-	// get slave_rank
-	    MPI_Comm_rank( MPI_COMM_WORLD, &slave_rank );
+	    int slaveNum;
 
-	// seed a receive 
+	    MPI_Comm_rank( MPI_COMM_WORLD, &slaveNum );
+
 	    MPI_Recv( &row, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
 
 	    while( status.MPI_TAG == DATA_TAG )	
@@ -152,12 +142,10 @@ int main( int argc, char **argv ) {
 		}	
 		
 		colorD[0] = row;
-
-		// do row calculation (only one calculation since it's a row)
 		c.imag = imag_min + ( (float) row * scale_imag );
 		for( int x = 0; x < display_width; x++ ) 
 			{
-				// do column calculation
+				// do column calculation using cal pixel
 				c.real = real_min + ( (float) x * scale_real );
 				colorD[x+1] = cal_pixel( c );		
 			}
@@ -169,7 +157,9 @@ int main( int argc, char **argv ) {
 	    }
 	}
     fclose(fp);
-	// finialize mpi stuff
+
+
+    // ALWAYS MPI FINALIZE
 	MPI_Finalize();
 	return 0;
 }

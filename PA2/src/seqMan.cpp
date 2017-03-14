@@ -1,5 +1,5 @@
 #include <math.h>
-//#include <iostream>
+#include <iostream>
 #include <cstdlib>
 #include <cstdio>
 #include "../include/pimfunctions.h"
@@ -95,9 +95,9 @@ int main(int argc, char** argv)
             c.real = real_min + ((float)x * scale_real);
             c.imag = imag_min + ((float)y * scale_imag);
             //static int n = cal_pixel(c);
-            r[y][x] = cal_pixel(c);
+            r[y][x] = 0;
             g[y][x] = 0;
-            b[y][x] = 0;
+            b[y][x] = cal_pixel(c);
 
 
             }

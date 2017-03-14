@@ -13,62 +13,111 @@ ssh username@ubuntu.cse.unr.edu
 ssh username@h1.cse.unr.edu
 ```
 
-# MPI_Send and Recv
-Below is what the code looks like during the MPI send and recieve process
+# Sequential Code 
+Below is what the code will look like for sequential
 ```bash
-    if (taskid == 0) 
+    for( int y = 0; y < display_height; y++ )
     {
-      // Increment the ping pong count before you send it
-      ping_pong_count++;
-      MPI_Send(&ping_pong_count, 1, MPI_INT, partner_rank, 0, MPI_COMM_WORLD);
-            MPI_Recv(&ping_pong_count, 1, MPI_INT, partner_rank, 0, MPI_COMM_WORLD,
-               MPI_STATUS_IGNORE);
-
-      //printf("Proccesor %d sent and incremented ping_pong_count %d to processor %d\n",
-         //   taskid, ping_pong_count, partner_rank);
-    } 
-    else if (taskid == 1)
-    {
-      ping_pong_count++;
-      MPI_Send(&ping_pong_count, 1, MPI_INT, partner_rank, 0, MPI_COMM_WORLD);
-      MPI_Recv(&ping_pong_count, 1, MPI_INT, partner_rank, 0, MPI_COMM_WORLD,
-               MPI_STATUS_IGNORE);
-      //printf("processor %d received ping_pong_count %d from processor %d\n",
-        //     taskid, ping_pong_count, partner_rank);
+        for( int x = 0; x < display_width; x++ )
+            {
+            c.real = real_min + ((float)x * scale_real);
+            c.imag = imag_min + ((float)y * scale_imag);
+            r[y][x] = 0;
+            g[y][x] = 0;
+            b[y][x] = cal_pixel(c);
+            }
     }
 ```
 
-# Times
-Times that are in recorded into a text file will look like they are below 
+# Dynamic Code 
+Below is what the code will look like for sequential
 ```bash
-0.00293		10
-0.001381	11
-0.001718	12
-0.0017		13
-0.002004	14
-0.00215		15
-0.002293	16
-.
-...
-.....
-...
-.
-0.794225	9994
-0.800384	9995
-0.792501	9996
-0.79594		9997
-0.792921	9998
-0.798525	9999
-0.796232	10000
+ while( rowsAnalyzed < display_height ) 
+            {
+			MPI_Recv( &row_colors, display_width + 1, MPI_INT, MPI_ANY_SOURCE, RESULT_TAG, MPI_COMM_WORLD, &status );
+            int pingPongSend = status.MPI_SOURCE;
+			int receivedRow = row_colors[0];
+				
+			// set the row which has finished computing
+			for( int col = 0; col < display_width; col++ ) 
+                {
+				coords[receivedRow][col] = row_colors[col+1];
+				}
+				
+				// increment row to send the next one
+			rowsAnalyzed++;
+			if( row < display_height ) 
+                {
+				// now we can send more data to whichever slave just finished
+				MPI_Send( &row, 1, MPI_INT, pingPongSend, DATA_TAG, MPI_COMM_WORLD );
+				row++;
+				}
+
+			}
+```
+
+# Times
+Times that are in recorded into a text file will look like they are below (Processor/box, Resolution x/y, time)
+```bash
+1	600	0.12511
+1	700	0.166914
+1	800	0.21516
+1	900	0.276056
+1	1000	0.339467
+1	1100	0.409625
+1	1200	0.486853
+1	1300	0.569081
+1	1400	0.660456
+1	1500	0.760387
+1	1600	0.859621
+1	1700	0.972867
+1	1800	1.091734
+1	1900	1.216932
+1	2000	1.344192
+1	2100	1.483962
+1	2200	1.625854
+1	2300	1.775402
+1	2400	1.935623
+1	2500	2.098118
+1	2600	2.270674
+1	2700	2.448498
+1	2800	2.632158
+1	2900	2.824471
+1	3000	3.022541
+1	3100	3.227762
+1	3200	3.439242
+1	3300	3.654089
+1	3400	3.882499
+1	3500	4.115172
+1	3600	4.353659
+1	3700	4.5933
+1	3800	4.849307
+1	3900	5.103939
+1	4000	5.373272
+1	4100	5.646673
+1	4200	5.925299
+1	4300	6.210893
+1	4400	6.503446
+1	4500	8.06877
+1	4600	8.394447
+1	4700	8.742386
+1	4800	9.089644
+1	4900	9.442841
+1	5000	9.803413
+1	5100	10.160819
+1	5200	10.544041
 ```
 
 ## Building and Running
-To build this project you must use a bashscript as to thhis is what I intended this project to be ran by. <br>
-You may simple run the build script with a few commands.
+You may simple run the build with a few commands.
 ```bash
-chmod +x buildscript.sh
-./buildscript
+(Make sure you are under CS415_Lewis/PA2)
+mkdir build
+cp makefile seqMan.sh dynAssMan.sh build/
+cd build
+make
+sbatch seqMan.sh
+sbatch dynAssMan.sh
+make clean
 ```
-<br>
-<b>Running the script will perform a make clean on its own.</b>
-
+# Your results will be in shortly ;)
