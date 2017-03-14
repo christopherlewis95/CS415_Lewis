@@ -19,16 +19,14 @@ struct complex {
 };
 
 // function prototype 
-void master(); 
-void slave();
-void display();
 int cal_pixel( complex );
-int coords[display_width][display_height];	
+
 
 // main function
 int main( int argc, char *argv[] ) {
 	int display_width = 1000;
     int display_height = 1000;
+    int coords[display_width][display_height];	
     int real_min = -2;
     int real_max = 2;
     int imag_min = -2;
@@ -107,7 +105,7 @@ int main( int argc, char *argv[] ) {
 		finalTime = ( endTime.tv_sec - startTime.tv_sec ) * 1000.0;
 		finalTime += ( endTime.tv_usec - startTime.tv_usec ) / 1000.0;
 
-		// print mandelbrot to file :)
+		// print mandelbrot to file
 		for( int x = 0; x < display_width; x++ ) 
             {
 			for( int y = 0; y < display_height; y++ ) 
@@ -154,7 +152,7 @@ int main( int argc, char *argv[] ) {
 			}
 	
 		// now that a row is computed, send the colors and the row back to master
-		MPI_Send( colorD, disp_width + 1, MPI_INT, 0, RESULT_TAG, MPI_COMM_WORLD );
+		MPI_Send( colorD, display_width + 1, MPI_INT, 0, RESULT_TAG, MPI_COMM_WORLD );
 		MPI_Recv( &row, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
 
 	    }
