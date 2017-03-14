@@ -21,10 +21,10 @@ $(OUTPUT): $(FILE)
 	$(CC) $(CXXFLAGS) $(FILE) -o $(OUTPUT) $(INCLUDE) $(LIBS)
 	
 #$(OUTPUT2): $(FILE2)
-	$(CC) $(CXXFLAGS) $(FILE2) -o $(OUTPUT2) $(INCLUDE) $(LIBS)
+#	$(CC) $(CXXFLAGS) $(FILE2) -o $(OUTPUT2) $(INCLUDE) $(LIBS)
 	
-#$(OUTPUT3): $(FILE3)
-#	$(CC) $(CXXFLAGS) $(FILE3) -o $(OUTPUT3) $(INCLUDE) $(LIBS)
+$(OUTPUT3): $(FILE3)
+	$(CC) $(CXXFLAGS) $(FILE3) -o $(OUTPUT3) $(INCLUDE) $(LIBS)
 
 PIM.o: ../src/pimfunctions.cpp
 	$(CC) $(CXXFLAGS) -c ../src/pimfunctions.cpp -o PIM.o $(INCLUDE) $(LIBS)
