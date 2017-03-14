@@ -29,7 +29,7 @@ int main( int argc, char **argv ) {
 	int rank;
 	int display_width = atoi(argv[1]);
     int display_height = atoi(argv[2]);
-    cout << display_height << " and " << display_width << endl;
+   // cout << display_height << " and " << display_width << endl;
     int coords[display_width][display_height];	
     int real_min = -2;
     int real_max = 2;

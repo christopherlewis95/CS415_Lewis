@@ -47,6 +47,8 @@ int main(int argc, char** argv)
     int display_width = atoi(argv[1]);
     int display_height = atoi(argv[2]);
 
+    cout << display_height << " and " << display_width << endl;
+
     fp = fopen("seqManData.txt","a+");
 
 
