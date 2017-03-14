@@ -23,9 +23,9 @@ int cal_pixel( complex );
 
 
 // main function
-int main( int argc, char *argv[] ) {
-	int display_width = 1000;
-    int display_height = 1000;
+int main( int argc, char **argv ) {
+	int display_width = atoi(argv[1]);
+    int display_height = atoi(argv[2]);
     int coords[display_width][display_height];	
     int real_min = -2;
     int real_max = 2;
@@ -37,6 +37,8 @@ int main( int argc, char *argv[] ) {
 	float scale_imag = (float) ( imag_max - imag_min ) / display_height;
 
     FILE *fp;
+
+    fp = fopen("TimesDynamic.txt", "a+");
 
 	// init variables
 	int rank;
@@ -105,6 +107,8 @@ int main( int argc, char *argv[] ) {
 		gettimeofday( &endTime, NULL );
 		finalTime = ( endTime.tv_sec - startTime.tv_sec ) * 1000.0;
 		finalTime += ( endTime.tv_usec - startTime.tv_usec ) / 1000.0;
+
+        fprintf(fp, "%d\n", finalTime);
 
 		// print mandelbrot to file
 		for( int x = 0; x < display_width; x++ ) 
