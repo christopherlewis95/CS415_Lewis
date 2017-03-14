@@ -163,7 +163,7 @@ int main( int argc, char **argv ) {
 
 	    }
 	}
-
+    fclose(fp);
 	// finialize mpi stuff
 	MPI_Finalize();
 	return 0;
