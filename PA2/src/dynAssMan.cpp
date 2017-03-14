@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sys/time.h>
 #include <stdlib.h>
+#include <time.h> 
 
 using namespace std;
 
@@ -24,6 +25,8 @@ int cal_pixel( complex );
 
 // main function
 int main( int argc, char **argv ) {
+    // initialize variables
+	int rank;
 	int display_width = atoi(argv[1]);
     int display_height = atoi(argv[2]);
     cout << display_height << " and " << display_width << endl;
@@ -36,13 +39,18 @@ int main( int argc, char **argv ) {
 	int numProcessors;
 	float scale_real = (float) ( real_max - real_min ) / display_width;
 	float scale_imag = (float) ( imag_max - imag_min ) / display_height;
+     clock_t clockTicks;
+    clockTicks = clock();
+    clock_t t0;
+    clockTicks = clock() - clockTicks; // Time elapsed since I did the last initial clock
+
+
 
     FILE *fp;
 
     fp = fopen("TimesDynamic.txt", "a+");
 
-	// init variables
-	int rank;
+
 
 	// get rank to distinguish processors 
 	MPI_Init( &argc, &argv );
@@ -66,8 +74,7 @@ int main( int argc, char **argv ) {
 	    ofstream fout;
 	    fout.open( "dynImage.PPM" );
 
-	    gettimeofday( &startTime, NULL );
-
+        t0 = clock();
 	    // send row number to all available processors (don't include master!)
 	    for( int i = 1; i < numProcessors; i++ ) 
             {
@@ -105,11 +112,8 @@ int main( int argc, char **argv ) {
 			}
 		
 		// get time stuff here
-		gettimeofday( &endTime, NULL );
-		finalTime = ( endTime.tv_sec - startTime.tv_sec ) * 1000.0;
-		finalTime += ( endTime.tv_usec - startTime.tv_usec ) / 1000.0;
-
-        fprintf(fp, "%f\n", finalTime);
+        clockTicks = clock() - t0;
+        fprintf(fp, "%f\n", (float)clockTicks/CLOCKS_PER_SEC);
 
 		// print mandelbrot to file
 		for( int x = 0; x < display_width; x++ ) 
