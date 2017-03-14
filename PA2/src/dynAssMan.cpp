@@ -77,6 +77,7 @@ int main( int argc, char *argv[] ) {
 	    while( rowsAnalyzed < display_height ) 
             {
 			MPI_Recv( &row_colors, display_width + 1, MPI_INT, MPI_ANY_SOURCE, RESULT_TAG, MPI_COMM_WORLD, &status );
+            int pingPongSend = status.MPI_SOURCE;
 			int receivedRow = row_colors[0];
 				
 			// set the row which has finished computing
@@ -90,7 +91,7 @@ int main( int argc, char *argv[] ) {
 			if( row < display_height ) 
                 {
 				// now we can send more data to whichever slave just finished
-				MPI_Send( &row, 1, MPI_INT, doneSlave, DATA_TAG, MPI_COMM_WORLD );
+				MPI_Send( &row, 1, MPI_INT, pingPongSend, DATA_TAG, MPI_COMM_WORLD );
 				row++;
 				}
 
