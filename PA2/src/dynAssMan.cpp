@@ -6,14 +6,6 @@
 
 using namespace std;
 
-// constants
-const int disp_width = 1000;
-const int disp_height = 1000;
-const int real_min = -2;
-const int real_max = 2;
-const int imag_min = -2;
-const int imag_max = 2;
-const int terminate_var = 0;
 
 // tags for sends/receives
 #define DATA_TAG 1
@@ -31,89 +23,82 @@ void master();
 void slave();
 void display();
 int cal_pixel( complex );
-int coords[disp_width][disp_height];	
+int coords[display_width][display_height];	
 
 // main function
 int main( int argc, char *argv[] ) {
-	
+	int display_width = 1000;
+    int display_height = 1000;
+    int real_min = -2;
+    int real_max = 2;
+    int imag_min = -2;
+    int imag_max = 2;
+    int terminate_var = 0;
+	int numProcessors;
+	float scale_real = (float) ( real_max - real_min ) / display_width;
+	float scale_imag = (float) ( imag_max - imag_min ) / display_height;
+
+    FILE *fp;
+
 	// init variables
 	int rank;
 
 	// get rank to distinguish processors 
 	MPI_Init( &argc, &argv );
 	MPI_Comm_rank( MPI_COMM_WORLD, &rank );
+	MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
-	if( rank == 0 ) { // Master
-		master();
-	}
+	if( rank == 0 ) // Master
+    { 
+	    MPI_Status status;
+	    int row = 0;
 
-	else { 				// Slave
-		slave();
-	}
+	    //image stuff
+        //	int coords[display_width][display_height];	
+	    int row_colors[display_width + 1];	
 
-	// finialize mpi stuff
-	MPI_Finalize();
-	return 0;
-}
+	    // timing stuff
+	    timeval startTime, endTime;
+	    double finalTime;	
 
-void master() {
+	    // output image is placed into this file
+	    ofstream fout;
+	    fout.open( "dynImage.PPM" );
 
-	// init variables for master 
-	int num_processors;
-	MPI_Status status;
-	int row = 0;
+	    gettimeofday( &startTime, NULL );
 
-	//image stuff
-//	int coords[disp_width][disp_height];	
-	int row_colors[disp_width + 1];	
-
-	// timing stuff
-	timeval startTime, endTime;
-	double finalTime;	
-
-	// output image is placed into this file
-	ofstream fout;
-	fout.open( "dynImage.PPM" );
-	fout << "P2\n";
-	fout << disp_width << " " << disp_height << "\n";
-	fout << "256\n";
-
-	gettimeofday( &startTime, NULL );
-
-	// figure out how many processors we have
-	MPI_Comm_size( MPI_COMM_WORLD, &num_processors );
-
-	// send row number to all available processors (don't include master!)
-	for( int i = 1; i < num_processors; i++ ) {
-		MPI_Send( &row, 1, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD );	
-		row++;
-	}
+	    // send row number to all available processors (don't include master!)
+	    for( int i = 1; i < numProcessors; i++ ) 
+            {
+		    MPI_Send( &row, 1, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD );	
+		    row++;
+	        }
 	
-	int doneRows = 0;
-	// while slaves idle, keep sending work
-	while( doneRows < disp_height ) {
-			MPI_Recv( &row_colors, disp_width + 1, MPI_INT, MPI_ANY_SOURCE, RESULT_TAG, MPI_COMM_WORLD, &status );
-			
-				int doneSlave = status.MPI_SOURCE;
-				int receivedRow = row_colors[0];
+	    int rowsAnalyzed = 0;
+	    // while slaves idle, keep sending work
+	    while( rowsAnalyzed < display_height ) 
+            {
+			MPI_Recv( &row_colors, display_width + 1, MPI_INT, MPI_ANY_SOURCE, RESULT_TAG, MPI_COMM_WORLD, &status );
+			int receivedRow = row_colors[0];
 				
-				// set the row which has finished computing
-				for( int col = 0; col < disp_width; col++ ) {
-					coords[receivedRow][col] = row_colors[col+1];
+			// set the row which has finished computing
+			for( int col = 0; col < display_width; col++ ) 
+                {
+				coords[receivedRow][col] = row_colors[col+1];
 				}
 				
 				// increment row to send the next one
-				doneRows++;
-				if( row < disp_height ) {
-
-					// now we can send more data to whichever slave just finished
-					MPI_Send( &row, 1, MPI_INT, doneSlave, DATA_TAG, MPI_COMM_WORLD );
-					row++;
+			rowsAnalyzed++;
+			if( row < display_height ) 
+                {
+				// now we can send more data to whichever slave just finished
+				MPI_Send( &row, 1, MPI_INT, doneSlave, DATA_TAG, MPI_COMM_WORLD );
+				row++;
 				}
 
 			}
  
-		for( int i = 1; i < num_processors; i++ ) {
+		for( int i = 1; i < numProcessors; i++ ) {
 			MPI_Send( 0, 0, MPI_INT, i, TERMINATE_TAG, MPI_COMM_WORLD );
 			}
 		
@@ -121,66 +106,66 @@ void master() {
 		gettimeofday( &endTime, NULL );
 		finalTime = ( endTime.tv_sec - startTime.tv_sec ) * 1000.0;
 		finalTime += ( endTime.tv_usec - startTime.tv_usec ) / 1000.0;
-		cout << disp_height << "x" << disp_width << " with " << num_processors << " processors took..." << endl;
-		cout << finalTime/1000.0 << " sec" << endl;
 
 		// print mandelbrot to file :)
-		for( int x = 0; x < disp_width; x++ ) {
-		
-			for( int y = 0; y < disp_height; y++ ) {
-
+		for( int x = 0; x < display_width; x++ ) 
+            {
+			for( int y = 0; y < display_height; y++ ) 
+            {
 				fout << coords[x][y] << " ";
 			}
 			fout << endl;		
 		}
-
 		// always close your file after working with it
 		fout.close();
-}
+	}
 
-void slave() {
+	else { 	
 
-	// init slave variables
-	float scale_real = (float) ( real_max - real_min ) / disp_width;
-	float scale_imag = (float) ( imag_max - imag_min ) / disp_height;
-
-	// temporary coordinate and colors array
-	complex c;
-	int slave_colors[disp_width + 1];
-	int row = 0; 
-	MPI_Status status;
-	int slave_rank;
+	    complex c;
+	    int colorD[display_width + 1];
+	    int row = 0; 
+	    MPI_Status status;
+	    int slave_rank;
 
 	// get slave_rank
-	MPI_Comm_rank( MPI_COMM_WORLD, &slave_rank );
+	    MPI_Comm_rank( MPI_COMM_WORLD, &slave_rank );
 
 	// seed a receive 
-	MPI_Recv( &row, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
+	    MPI_Recv( &row, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
 
-	while( status.MPI_TAG == DATA_TAG )	{
+	    while( status.MPI_TAG == DATA_TAG )	
+        {
 
 		// check for terminate tag to exit process
 		if( status.MPI_TAG == TERMINATE_TAG ) {
 			exit(0);				
 		}	
 		
-		slave_colors[0] = row;
+		colorD[0] = row;
 
 		// do row calculation (only one calculation since it's a row)
 		c.imag = imag_min + ( (float) row * scale_imag );
-		for( int x = 0; x < disp_width; x++ ) 
+		for( int x = 0; x < display_width; x++ ) 
 			{
 				// do column calculation
 				c.real = real_min + ( (float) x * scale_real );
-				slave_colors[x+1] = cal_pixel( c );		
+				colorD[x+1] = cal_pixel( c );		
 			}
 	
 		// now that a row is computed, send the colors and the row back to master
-		MPI_Send( slave_colors, disp_width + 1, MPI_INT, 0, RESULT_TAG, MPI_COMM_WORLD );
+		MPI_Send( colorD, disp_width + 1, MPI_INT, 0, RESULT_TAG, MPI_COMM_WORLD );
 		MPI_Recv( &row, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
 
+	    }
 	}
+
+	// finialize mpi stuff
+	MPI_Finalize();
+	return 0;
 }
+
+/////////////// THIS IS FOR THE INCLUDED FUNCTION ////////////
 
 int cal_pixel( complex c) {
 
@@ -191,8 +176,6 @@ int cal_pixel( complex c) {
 	z.real = 0.0;
 	z.imag = 0.0;
  	count = 0;
-
-	// don't stop until length == 4 (radius == 2 ) or max iterations
 	do {
 			temp = z.real * z.real - z.imag * z.imag + c.real;
       	z.imag = 2 * z.real * z.imag + c.imag;
