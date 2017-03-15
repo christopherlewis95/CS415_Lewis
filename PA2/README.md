@@ -1,6 +1,6 @@
-# PA1 PING PONG 
+# PA2 Mandelbrot
 
-# REPORT IS UNDER PA1/PA1Report.pdf
+# REPORT IS UNDER PA2/PA2Report.pdf
 # Dependencies, Building, and Running
 
 ## Dependency Instructions
