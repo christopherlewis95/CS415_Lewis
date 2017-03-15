@@ -163,7 +163,8 @@ int main( int argc, char **argv ) {
 	    }
 	}
     fclose(fp);
-
+    delete coords;
+    coords = NULL;
 
     // ALWAYS MPI FINALIZE
 	MPI_Finalize();
@@ -189,8 +190,7 @@ int cal_pixel( complex c) {
 			count++;
 	} while( ( lengthsq < 4.0 ) && ( count < max_iter ) );
 
-    delete coords;
-    coords = NULL;
+
 
 	return count;
 }
