@@ -189,5 +189,8 @@ int cal_pixel( complex c) {
 			count++;
 	} while( ( lengthsq < 4.0 ) && ( count < max_iter ) );
 
+    delete coords;
+    coords = NULL;
+
 	return count;
 }
