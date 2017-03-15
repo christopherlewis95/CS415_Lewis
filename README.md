@@ -14,6 +14,11 @@ Any students in that class follow the instructions at [**Github Setup**](https:/
 ```
 # PA2:Mandelbrot
 ```bash
-	Report is under PA1/
+	Report is under PA2/
 	Report is named: PA2Report.pdf
+```
+# PA3:Bucket Sort
+```bash
+	Report is under PA3/
+	Report is named: PA3Report.pdf
 ```
