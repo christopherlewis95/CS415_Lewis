@@ -163,6 +163,8 @@ int main( int argc, char **argv ) {
 	    }
 	}
     fclose(fp);
+
+    // Delete pointers and set to NULL
     delete coords;
     coords = NULL;
 
@@ -189,7 +191,6 @@ int cal_pixel( complex c) {
 			lengthsq = z.real * z.real + z.imag * z.imag;
 			count++;
 	} while( ( lengthsq < 4.0 ) && ( count < max_iter ) );
-
 
 
 	return count;

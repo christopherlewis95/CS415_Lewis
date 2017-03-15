@@ -118,7 +118,15 @@ int main(int argc, char** argv)
                 );
 
     
+    // Delete pointers and set to null
+     delete r;
+     r = NULL;
 
+     delete g;
+     g = NULL;
+
+     delete b;
+     b = NULL;
     
     return 0;
     }
