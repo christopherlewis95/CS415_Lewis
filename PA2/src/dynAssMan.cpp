@@ -72,7 +72,7 @@ int main( int argc, char **argv ) {
 
 	    // output image is placed into this file
 	    ofstream fout;
-	    fout.open( "dynImage.PPM" );
+	    fout.open( "dynImage.ppm" );
 
         t0 = clock();
 	    // send row number to all available processors without sending to the master BAD
