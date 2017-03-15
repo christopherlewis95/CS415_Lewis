@@ -5,6 +5,7 @@
 * AUTHOR: Blaise Barney
 * LAST REVISED: 03/05/10
 ******************************************************************************/
+/// THIS IS A USELESS COMMENT
 #include "mpi.h"
 #include <stdio.h>
 #include <stdlib.h>
