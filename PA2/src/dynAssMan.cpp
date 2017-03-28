@@ -53,7 +53,7 @@ int main( int argc, char **argv ) {
 
     FILE *fp;
 
-    fp = fopen("TimesDynamic2Cores.txt", "a+");
+    fp = fopen("8Cores.txt", "a+");
 
 
 
