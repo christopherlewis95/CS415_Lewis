@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "slist": "cpp",
+        "initializer_list": "cpp",
+        "algorithm": "cpp",
+        "ratio": "cpp",
+        "string": "cpp"
+    }
+}
