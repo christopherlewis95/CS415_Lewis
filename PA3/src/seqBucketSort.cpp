@@ -24,7 +24,7 @@ using namespace std;
 //Driver function to test above function
 int main(int argc, char** argv)
 {	
-   // MPI_Init( &argc, &argv );
+   MPI_Init( &argc, &argv );
 
     int i;  
     vector<int> vec;
@@ -87,7 +87,7 @@ int main(int argc, char** argv)
  
   //  cout << endl << endl;
 
-	  //  MPI_Finalize();
+	 MPI_Finalize();
   return 0;
 }
 
