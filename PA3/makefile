@@ -1,45 +1,31 @@
 # set flags and compiler, as well as file var
-CC=mpicc
+CC=mpic++
 CXXFLAGS=-Wall
 LIBS=-lpmi
-# feel free to either add files here (for more compilcated src's), or create more vars, or just manually type them in. Up to you.
+INDLUDES=-I../includes
+
 FILE=../src/seqBucketSort.cpp
-#FILE2=../src/staticAssMan.cpp PIM.o
-#FILE3=../src/dynAssMan.cpp PIM.o
+#FILE2=
+#FILE3=
 
-
-
-# uncomment below if/when you have a folder called include that holds potential header files
-INCLUDE=-I../include
 OUTPUT=seqBucket
-#OUTPUT2=staticMan
-#OUTPUT3=dynMan
+#OUTPUT2=
+#OUTPUT3=
 
-all: $(OUTPUT) # $(OUTPUT) # $(OUTPUT3) 
 
-#$(OUTPUT3): $(FILE3)
-#	$(CC) $(CXXFLAGS) $(FILE3) -o $(OUTPUT3) $(INCLUDE) $(LIBS)
-	
+all: $(OUTPUT)
+
 $(OUTPUT): $(FILE)
-	$(CC) $(CXXFLAGS) $(FILE) -o $(OUTPUT)
-	
-#$(OUTPUT3): $(FILE3)
-	#$(CC) $(CXXFLAGS) $(FILE3) -o $(OUTPUT3) $(INCLUDE) $(LIBS)
+	$(CC) $(CXXFLAGS) -o $(OUTPUT) $(FILE) $(LIBS)
 
-
+#$(OUTPUT2): $(FILE2)
+#	$(CC) $(CXXFLAGS) -o $(OUTPUT2) $(FILE2) $(LIBS)
 
 #$(OUTPUT3): $(FILE3)
 #	$(CC) $(CXXFLAGS) -o $(OUTPUT3) $(FILE3) $(LIBS)
 
-# use this to run
-#runOne: $(OUTPUT)
-#	srun -n2 $(OUTPUT1)
-
-#runTwo: $(OUTPUT2)
-#	srun -N2 $(OUTPUT2)
-
-#timed: $(OUTPUT3)
-#	srun -N2 $(OUTPUT3) times.txt
 
 clean:
 	-@if rm $(OUTPUT) 2>/dev/null || true; then echo "Cleaned"; else echo "Nothing to clean"; fi
+#	-@if rm $(OUTPUT2) 2>/dev/null || true; then echo "Cleaned"; else echo "Nothing to clean"; fi
+#	-@if rm $(OUTPUT3) 2>/dev/null || true; then echo "Cleaned"; else echo "Nothing to clean"; fi
