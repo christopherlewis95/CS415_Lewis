@@ -3,31 +3,29 @@ CC=mpic++
 CXXFLAGS=-Wall
 LIBS=-lpmi
 # feel free to either add files here (for more compilcated src's), or create more vars, or just manually type them in. Up to you.
-FILE=../src/seqMan.cpp PIM.o
+FILE=../src/seqBucketSort.cpp
 #FILE2=../src/staticAssMan.cpp PIM.o
-FILE3=../src/dynAssMan.cpp PIM.o
+#FILE3=../src/dynAssMan.cpp PIM.o
 
 
 
 # uncomment below if/when you have a folder called include that holds potential header files
 INCLUDE=-I../include
-OUTPUT=seqMan
+OUTPUT=seqBucket
 #OUTPUT2=staticMan
-OUTPUT3=dynMan
+#OUTPUT3=dynMan
 
-all: $(OUTPUT3) $(OUTPUT) # $(OUTPUT3) 
+all: $(OUTPUT) # $(OUTPUT) # $(OUTPUT3) 
 
-$(OUTPUT3): $(FILE3)
-	$(CC) $(CXXFLAGS) $(FILE3) -o $(OUTPUT3) $(INCLUDE) $(LIBS)
+#$(OUTPUT3): $(FILE3)
+#	$(CC) $(CXXFLAGS) $(FILE3) -o $(OUTPUT3) $(INCLUDE) $(LIBS)
 	
 $(OUTPUT): $(FILE)
-	$(CC) $(CXXFLAGS) $(FILE) -o $(OUTPUT) $(INCLUDE) $(LIBS)
+	$(CC) $(CXXFLAGS) $(FILE) -o $(OUTPUT)
 	
 #$(OUTPUT3): $(FILE3)
 	#$(CC) $(CXXFLAGS) $(FILE3) -o $(OUTPUT3) $(INCLUDE) $(LIBS)
 
-PIM.o: ../src/pimfunctions.cpp
-	$(CC) $(CXXFLAGS) -c ../src/pimfunctions.cpp -o PIM.o $(INCLUDE) $(LIBS)
 
 
 #$(OUTPUT3): $(FILE3)
