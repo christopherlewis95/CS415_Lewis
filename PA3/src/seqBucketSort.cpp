@@ -36,7 +36,7 @@ int main(int argc, char** argv)
     int index = 0;
     double start, finished, dt;
 
-    fin.open( fileName );
+    fin.open( fileName.c_str() );
 
     fin >> size; 
     cout << size << endl;
