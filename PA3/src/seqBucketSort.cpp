@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include <mpi.h>
+//#include <mpi.h>
 #include <time.h> 
 
 using namespace std;
@@ -35,7 +35,7 @@ int main(int argc, char** argv)
     vector<int> vec;
     //////////////////////////////////////////////////////////////
     int *arr;
-    string fileName = "nums.txt";
+    string fileName = "data.txt";
     ifstream fin;
     int size, num;
     int index = 0;
