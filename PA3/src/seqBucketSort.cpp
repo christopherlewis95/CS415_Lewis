@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <mpi.h>
+#include <time.h> 
 
 using namespace std;
  
@@ -24,7 +25,11 @@ using namespace std;
 //Driver function to test above function
 int main(int argc, char** argv)
 {	
-   MPI_Init( &argc, &argv );
+    clock_t clockTicks;
+    clock_t t0;
+
+    
+
 
     int i;  
     vector<int> vec;
@@ -56,14 +61,14 @@ int main(int argc, char** argv)
 
   int n = sizeof (input_ar) / sizeof (input_ar[0]);
 
-  start = MPI_Wtime();
+  t0 = clock();
   //cout << "ENTERING" << endl;
   bucket_sort (input_ar, n);
 
-  finished = MPI_Wtime();
+  clockTicks = clock() - t0;
  //cout << "EXITING" << endl;
 
-  dt = (finished - start);
+  //dt = (finished - start);
 
   
   ///////////////////////////////////////////////////////////////////////////////////////
@@ -72,7 +77,7 @@ int main(int argc, char** argv)
   FILE *fp;
 
   fp = fopen("bucketSrtData.txt","a+");
-  fprintf(fp, "%f\n", dt);
+  fprintf(fp, "%f\n", (float)clockTicks/CLOCKS_PER_SEC);
 
   fclose(fp);
 
@@ -87,7 +92,7 @@ int main(int argc, char** argv)
  
   //  cout << endl << endl;
 
-	 MPI_Finalize();
+	// MPI_Finalize();
   return 0;
 }
 
