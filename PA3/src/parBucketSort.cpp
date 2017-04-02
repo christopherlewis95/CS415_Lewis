@@ -21,6 +21,8 @@ void master();
 
 // main function
 int main( int argc, char **argv ) {
+    int rank;
+    int numProcessors;
     MPI_Init( &argc, &argv );
 	MPI_Comm_rank( MPI_COMM_WORLD, &rank );
 	MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
@@ -85,8 +87,8 @@ int main( int argc, char **argv ) {
  
 	else { 
         MPI_Status status;	
-        MPI_Recv( &row, size/numProcessors, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
-        cout << row[0] << endl;
+        MPI_Recv( &arr, size/numProcessors, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
+        cout << arr[0] << endl;
 
     }
 
