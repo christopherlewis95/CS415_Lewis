@@ -31,14 +31,14 @@ int main( int argc, char **argv ) {
     int i, j; 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     string fileName = "data.txt";
-    int size, num;
     int index = 0;
     double start, finished, dt;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if( rank == 0 ) // Master
     { 
+    int size, num;
     ifstream fin;
-    fin.open( fileName );
+    fin.open( fileName.c_str() );
     cout << "This is it: \n";
     fin >> size; 
     cout << size << endl;
