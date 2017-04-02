@@ -38,7 +38,7 @@ int main( int argc, char **argv ) {
 	if( rank == 0 ) // Master
     { 
     ifstream fin;
-    fin.open( fileName.c_str() );
+    fin.open( fileName );
     cout << "This is it: \n";
     fin >> size; 
     cout << size << endl;
