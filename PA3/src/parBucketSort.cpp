@@ -37,6 +37,7 @@ int main( int argc, char **argv ) {
     double start, finished, dt;
 
     fin.open( fileName.c_str() );
+    cout << "This is it: \n";
     fin >> size; 
     cout << size << endl;
     arr = new int [size/numProcessors];
