@@ -32,11 +32,12 @@ int main( int argc, char **argv ) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     string fileName = "data.txt";
     int index = 0;
+    int size, num;
     double start, finished, dt;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if( rank == 0 ) // Master
     { 
-    int size, num;
+
     ifstream fin;
     fin.open( fileName.c_str() );
     cout << "This is it: \n";
@@ -51,7 +52,7 @@ int main( int argc, char **argv ) {
             {
             fin >> num;
             arr[j] = num;
-
+            cout << arr[j] << endl;
             }
         MPI_Send(&arr, 1, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD);
         }
@@ -61,7 +62,7 @@ int main( int argc, char **argv ) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	else { 
         MPI_Status status;	
-        MPI_Recv( &arr, 10000/numProcessors, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
+        MPI_Recv( &arr, size/numProcessors, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
         cout << arr[0] << endl;
 
     }
