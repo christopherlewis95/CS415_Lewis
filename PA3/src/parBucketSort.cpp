@@ -61,7 +61,7 @@ int main( int argc, char **argv ) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	else { 
         MPI_Status status;	
-        MPI_Recv( &arr, size/numProcessors, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
+        MPI_Recv( &arr, 10000/numProcessors, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
         cout << arr[0] << endl;
 
     }
