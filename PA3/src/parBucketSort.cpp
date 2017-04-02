@@ -31,46 +31,18 @@ int main( int argc, char **argv ) {
     int i, j; 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     string fileName = "data.txt";
-    ifstream fin;
     int size, num;
     int index = 0;
     double start, finished, dt;
-
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	if( rank == 0 ) // Master
+    { 
+    ifstream fin;
     fin.open( fileName.c_str() );
     cout << "This is it: \n";
     fin >> size; 
     cout << size << endl;
     arr = new int [size/numProcessors];
-   // int input_ar[size];
-
-    // Get slaves work... GOOTA work
-    /*
-
-
-    */
-    /*
-    while( !fin.eof() )
-        {
-           // for( i = 0; i < size/numProcessors; i++)
-            fin >> num;
-            input_ar[index] = num;
-            // cout << input_ar[index] << endl;
-            index++;
-        }
-   // cout << *arr << endl;
-   */
-
-
-  //int n = sizeof (input_ar) / sizeof (input_ar[0]);
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // initialize variables
-	// get rank to distinguish processors 
-
-
-	if( rank == 0 ) // Master
-    { 
     MPI_Status status;
     for( i = 1; i < numProcessors; i++)
         {
@@ -85,7 +57,8 @@ int main( int argc, char **argv ) {
         }
 
 	}
- 
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	else { 
         MPI_Status status;	
         MPI_Recv( &arr, size/numProcessors, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status );
@@ -93,6 +66,7 @@ int main( int argc, char **argv ) {
 
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     fin.close();
 	MPI_Finalize();
 	return 0;
