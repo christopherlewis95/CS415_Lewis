@@ -4,11 +4,11 @@ CXXFLAGS=-Wall
 LIBS=-lpmi
 INDLUDES=-I../includes
 
-FILE=../src/seqBucketSort.cpp
+FILE=../src/parBucketSort.cpp
 #FILE2=
 #FILE3=
 
-OUTPUT=seqBucket
+OUTPUT=parBucket
 #OUTPUT2=
 #OUTPUT3=
 
