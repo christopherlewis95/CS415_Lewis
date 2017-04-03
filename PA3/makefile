@@ -10,11 +10,11 @@ INDLUDES=-I../includes
 
 FILE=../src/parBucketSort.cpp
 FILE2=../src/seqBucketSort.cpp
-FILE3=../src/randNumGen.cpp
+#FILE3=../src/randNumGen.cpp
 
 OUTPUT=parBucket
 OUTPUT2=seqBucket
-OUTPUT3=randGen
+#OUTPUT3=randGen
 
 
 all: $(OUTPUT)
