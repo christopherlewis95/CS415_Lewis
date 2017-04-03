@@ -17,7 +17,7 @@ OUTPUT2=seqBucket
 #OUTPUT3=randGen
 
 
-all: $(OUTPUT)
+all: $(OUTPUT) $(OUTPUT2)
 
 $(OUTPUT): $(FILE)
 	$(CC) $(CXXFLAGS) -o $(OUTPUT) $(FILE) $(LIBS)
