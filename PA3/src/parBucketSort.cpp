@@ -55,7 +55,7 @@ int main( int argc, char **argv ) {
             arr[j] = num;
             //cout << arr[j] << endl;
             }
-        MPI_Send(&arr, size/numProcessors, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
+        MPI_Send(arr, size/numProcessors, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
         }
     fin.close();
 	}
@@ -63,7 +63,7 @@ int main( int argc, char **argv ) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	else { 
         MPI_Status status;	
-        MPI_Recv( &arr, size/numProcessors, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status ); // '0' needs to be master variable
+        MPI_Recv( arr, size/numProcessors, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status ); // '0' needs to be master variable
         cout << arr[0] << endl;
 
     }
