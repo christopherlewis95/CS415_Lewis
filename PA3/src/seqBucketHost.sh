@@ -5,7 +5,7 @@
 #SBATCH --mail-user=christopherlewis@nevada.unr.edu
 for (( a=10000; a<=10000000; a+=10000 ))
 do  
-    srun seqBuck $a seqBucketSort.txt   
+    srun seqBucket $a seqBucketSort.txt   
 done
 
 
