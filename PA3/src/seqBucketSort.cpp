@@ -33,8 +33,9 @@ int main(int argc, char** argv)
     clock_t clockTicks;
     clock_t t0;
 
+    cout << "Before the gen" << endl;
     genNumbers( atoi(argv[1]) );
-    
+    cout << "After the Gen" << endl;
     int i;  
     vector<int> vec;
     //////////////////////////////////////////////////////////////
