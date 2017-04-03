@@ -1,12 +1,11 @@
 #!/bin/bash
-for (( a=100; a<=10000; a+=100 ))
+#SBATCH -N1
+#SBATCH -n1
+#SBATCH --time=00:05:00
+#SBATCH --mail-user=christopherlewis@nevada.unr.edu
+for (( a=100; a<=10000000; a+=10000 ))
 do  
-    g++ randNumGen.cpp -o randGen
-    g++ seqBucketSort.cpp -o seqBuck
-    ./randGen $a
-    ./seqBuck
-    rm randGen
-    rm seqBuck   
+    srun seqBuck $a seqBucketSort.txt   
 done
 
 

@@ -11,7 +11,7 @@ using namespace std;
  
 void bucket_sort (int arr[], int n);
 void readIn( string fileName, int *arr );
-
+void genNumbers( int numbers );
 
 /* Driver program to test above funtion */
 //This is a C++ Program to Sort an Array using Bucket Sort
@@ -28,14 +28,13 @@ int main(int argc, char** argv)
     clock_t clockTicks;
     clock_t t0;
 
+    genNumbers( atoi(argv[1]) );
     
-
-
     int i;  
     vector<int> vec;
     //////////////////////////////////////////////////////////////
     int *arr;
-    string fileName = "data.txt";
+    string fileName = "../src/data.txt";
     ifstream fin;
     int size, num;
     int index = 0;
@@ -76,8 +75,8 @@ int main(int argc, char** argv)
 
   FILE *fp;
 
-  fp = fopen("bucketSrtData.txt","a+");
-  fprintf(fp, "%f\n", (float)clockTicks/CLOCKS_PER_SEC);
+  fp = fopen(atoi(argv[2],"a+");
+  fprintf(fp, "%d, %f\n", atoi(argv[1]), (float)clockTicks/CLOCKS_PER_SEC);
 
   fclose(fp);
 
@@ -95,6 +94,23 @@ int main(int argc, char** argv)
 	// MPI_Finalize();
   return 0;
 }
+
+void genNumbers( int numbers )
+{
+    FILE *fp;
+    int num = 0;
+    int size = numbers;
+
+    fp = fopen("../src/data.txt", "w");
+
+    fprintf(fp, "%d\n", size );
+    for(int i = 0; i < size; i++)
+    {
+        num = rand() % 501;
+        fprintf(fp, "%d\n", num );
+    }
+}
+
 
 void bucket_sort (int arr[], int n)
 {
