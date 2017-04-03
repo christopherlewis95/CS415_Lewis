@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
-//#include <mpi.h>
+#include <mpi.h>
 #include <time.h> 
 
 using namespace std;
@@ -25,6 +25,11 @@ using namespace std;
 //Driver function to test above function
 int main(int argc, char** argv)
 {	
+      int rank;
+    int numProcessors;
+    MPI_Init( &argc, &argv );
+	MPI_Comm_rank( MPI_COMM_WORLD, &rank );
+	MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     clock_t clockTicks;
     clock_t t0;
 
