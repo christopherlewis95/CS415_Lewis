@@ -75,7 +75,7 @@ int main(int argc, char** argv)
 
   FILE *fp;
 
-  fp = fopen(atoi(argv[2],"a+");
+  fp = fopen(atoi(argv[2]),"a+");
   fprintf(fp, "%d, %f\n", atoi(argv[1]), (float)clockTicks/CLOCKS_PER_SEC);
 
   fclose(fp);
