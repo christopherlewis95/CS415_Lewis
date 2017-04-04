@@ -9,7 +9,7 @@
 
 using namespace std;
  
-void bucketSort(int *arr, int n);
+void bucketSort(int arr[], int n);
 void readIn( string fileName, int *arr );
 void genNumbers( int numbers );
 
@@ -119,7 +119,7 @@ void genNumbers( int numbers )
 }
 
 // Function to sort arr[] of size n using bucket sort
-void bucketSort(int *arr, int n)
+void bucketSort(int arr[], int n)
 {
     // 1) Create n empty buckets
     vector<float> b[n];
