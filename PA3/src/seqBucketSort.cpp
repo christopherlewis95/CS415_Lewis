@@ -72,7 +72,8 @@ int main(int argc, char** argv)
 
   clockTicks = clock() - t0;
  //cout << "EXITING" << endl;
-
+ for( i = 0; i < size; i++)
+ printf("Sorted: %d\n", input_ar[i]);
   //dt = (finished - start);
 
   
@@ -122,7 +123,7 @@ void genNumbers( int numbers )
 void bucketSort(int *arr, int n)
 {
     // 1) Create n empty buckets
-    vector<float> b[n];
+    vector<int> b[n];
     
     // 2) Put array elements in different buckets
     for (int i=0; i<n; i++)
