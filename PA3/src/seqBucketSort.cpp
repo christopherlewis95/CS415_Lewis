@@ -132,7 +132,7 @@ void bucketSort(int *arr, int n)
       //cout << "n*arr[i] is: " << n%arr[i] << endl;//
       if( arr[i] < 100 )
       {
-        bi = arr[i]/10;
+        bi = 0;
        b[bi].push_back(arr[i]); 
       }
       else{
@@ -147,6 +147,10 @@ void bucketSort(int *arr, int n)
     for (int i=0; i<n; i++)
        sort(b[i].begin(), b[i].end());
  
+        for (int i=0; i<n; i++)
+          for( int j = 0; j< b[i].size(); j++ )
+        printf("Sorted: %d\n", b[i][j]);
+       /*
     // 4) Concatenate all buckets into arr[]
     int index = 0;
     for (int i = 0; i < n; i++)
@@ -156,5 +160,5 @@ void bucketSort(int *arr, int n)
            printf("Sorted: %d\n", arr[i]);
            index++;
           }
-          
+       */   
 }
