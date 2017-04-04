@@ -134,7 +134,6 @@ void bucketSort(int *arr, int n)
       {
         bi = arr[i]/10;
        b[bi].push_back(arr[i]); 
-
       }
       else{
         bi = arr[i]/100;
@@ -143,7 +142,7 @@ void bucketSort(int *arr, int n)
       }
        
     }
-    
+    cout << "SWIIMIN" << endl;
     // 3) Sort individual buckets
     for (int i=0; i<n; i++)
        sort(b[i].begin(), b[i].end());
