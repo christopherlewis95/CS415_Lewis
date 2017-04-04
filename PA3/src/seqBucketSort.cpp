@@ -120,7 +120,7 @@ void genNumbers( int numbers )
 
 // Function to sort arr[] of size n using bucket sort
 //Bucket Sort
-void bucketSort(int arr[], int n);
+void bucketSort(int arr[], int n)
 {
   //Here range is [1,100]
   int m = 101;
