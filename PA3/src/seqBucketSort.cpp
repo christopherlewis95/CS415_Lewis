@@ -145,7 +145,7 @@ void bucketSort(int *arr, int n)
         for (int j = 0; j < b[i].size(); j++)
           {
           arr[index] = b[i][j];
-           printf("Sorted: %d\n", *arr[i]);
+           printf("Sorted: %d\n", arr[i]);
            index++;
           }
           
