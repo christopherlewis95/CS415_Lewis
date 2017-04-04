@@ -68,7 +68,7 @@ int main(int argc, char** argv)
 
   t0 = clock();
   //cout << "ENTERING" << endl;
-  bucketSort (input_ar, 10);
+  bucketSort (input_ar, n);
 
   clockTicks = clock() - t0;
  //cout << "EXITING" << endl;
