@@ -9,7 +9,7 @@
 
 using namespace std;
  
-void bucket_sort (int arr[], int n);
+void bucket_sort (int *arr, int n);
 void readIn( string fileName, int *arr );
 void genNumbers( int numbers );
 
@@ -51,7 +51,7 @@ int main(int argc, char** argv)
     fin >> size; 
     cout << size << endl;
 //    arr = new int [size];
-      int input_ar[size];
+      int *input_ar = new int[size];
 
 
     while( !fin.eof() )
@@ -119,7 +119,7 @@ void genNumbers( int numbers )
 }
 
 
-void bucket_sort (int arr[], int n)
+void bucket_sort (int *arr, int n)
 {
   //Here range is [1,500]
   int m = 501;
