@@ -9,7 +9,7 @@
 
 using namespace std;
  
-void bucketSort (int *arr, int n);
+void bucketSort(int *arr, int n);
 void readIn( string fileName, int *arr );
 void genNumbers( int numbers );
 
@@ -67,7 +67,7 @@ int main(int argc, char** argv)
   int n = sizeof (input_ar) / sizeof (input_ar[0]);
   t0 = clock();
   //cout << "ENTERING" << endl;
-  bucketSort (input_ar, n);
+  bucketSort (input_ar, 10);
 
   clockTicks = clock() - t0;
  //cout << "EXITING" << endl;
@@ -118,47 +118,27 @@ void genNumbers( int numbers )
     fclose(fp);
 }
 
-
+// Function to sort arr[] of size n using bucket sort
 void bucketSort(int *arr, int n)
 {
-   cout << "Sorting\n" << endl;
-  
     // 1) Create n empty buckets
-    vector<int> b[n];
-    int bi;
+    vector<float> b[n];
+    
     // 2) Put array elements in different buckets
     for (int i=0; i<n; i++)
     {
-      //cout << "n*arr[i] is: " << n%arr[i] << endl;//
-      if( arr[i] < 100 )
-      {
-        bi = 0;
-       b[bi].push_back(arr[i]); 
-      }
-      else{
-        bi = arr[i]/100;
-       b[bi].push_back(arr[i]); 
-        
-      }
-       
+       int bi = n*arr[i]; // Index in bucket
+       b[bi].push_back(arr[i]);
     }
-    cout << "SWIIMIN" << endl;
+ 
     // 3) Sort individual buckets
     for (int i=0; i<n; i++)
        sort(b[i].begin(), b[i].end());
  
-        for (int i=0; i<n; i++)
-          for( int j = 0; j< b[i].size(); j++ )
-        printf("Sorted: %d\n", b[i][j]);
-       /*
     // 4) Concatenate all buckets into arr[]
     int index = 0;
     for (int i = 0; i < n; i++)
         for (int j = 0; j < b[i].size(); j++)
-          {
-          arr[index] = b[i][j];
-           printf("Sorted: %d\n", arr[i]);
-           index++;
-          }
-       */   
+          arr[index++] = b[i][j];
+}
 }
