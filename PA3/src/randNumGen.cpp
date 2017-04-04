@@ -14,7 +14,7 @@ int main(int argc, char **argv)
     fprintf(fp, "%d\n", size );
     for(int i = 0; i < size; i++)
     {
-        num = rand() % 10000;
+        num = rand() % 1000;
         fprintf(fp, "%d\n", num );
     }
 }

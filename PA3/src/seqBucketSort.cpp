@@ -40,7 +40,7 @@ int main(int argc, char** argv)
     vector<int> vec;
     //////////////////////////////////////////////////////////////
     int *arr;
-    string fileName = "../src/data.txt";
+    string fileName = "data.txt";
     ifstream fin;
     int size, num;
     int index = 0;
@@ -58,7 +58,7 @@ int main(int argc, char** argv)
         {
             fin >> num;
             input_ar[index] = num;
-           // cout << input_ar[index] << endl;
+           cout << input_ar[index] << endl;
             index++;
         }
    // cout << *arr << endl;
@@ -107,12 +107,12 @@ void genNumbers( int numbers )
     int num = 0;
     int size = numbers;
 
-    fp = fopen("../src/data.txt", "w");
+    fp = fopen("data.txt", "w");
 
     fprintf(fp, "%d\n", size );
     for(int i = 0; i < size; i++)
     {
-        num = rand() % 501;
+        num = rand() % 1000;
         fprintf(fp, "%d\n", num );
     }
     fclose(fp);
@@ -121,8 +121,8 @@ void genNumbers( int numbers )
 
 void bucket_sort (int *arr, int n)
 {
-  //Here range is [1,500]
-  int m = 501;
+  //Here range is [1,1000]
+  int m = 1001;
  
   //Create m empty buckets
   int buckets[m];
@@ -136,7 +136,7 @@ void bucket_sort (int *arr, int n)
   for (int i = 0; i < n; ++i)
     ++buckets[arr[i]];
  
-  //Sort using insertion sort and concatenate 
+  /b
   for (int i = 0, j = 0; j < m; ++j)
     for (int k = buckets[j]; k > 0; --k)
       arr[i++] = j;
