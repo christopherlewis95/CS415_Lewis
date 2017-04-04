@@ -136,7 +136,6 @@ void bucket_sort (int *arr, int n)
   for (int i = 0; i < n; ++i)
     ++buckets[arr[i]];
  
-  /b
   for (int i = 0, j = 0; j < m; ++j)
     for (int k = buckets[j]; k > 0; --k)
       arr[i++] = j;
