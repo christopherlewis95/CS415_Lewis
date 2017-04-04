@@ -122,6 +122,8 @@ void genNumbers( int numbers )
 
 void bucketSort(int *arr, int n)
 {
+    cout << "Sort: "<< arr[0] << endl;
+  /*
     // 1) Create n empty buckets
     vector<int> b[n];
     
@@ -144,5 +146,5 @@ void bucketSort(int *arr, int n)
           arr[index++] = b[i][j];
            printf("Sorted: %d\n", *arr[i]);
           }
-
+          */
 }
