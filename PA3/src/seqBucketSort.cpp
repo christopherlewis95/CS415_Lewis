@@ -125,7 +125,7 @@ void bucketSort(int *arr, int n)
   
     // 1) Create n empty buckets
     vector<int> b[n];
-    
+    int bi;
     // 2) Put array elements in different buckets
     for (int i=0; i<n; i++)
     {
