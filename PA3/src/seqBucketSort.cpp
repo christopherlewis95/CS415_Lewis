@@ -65,7 +65,6 @@ int main(int argc, char** argv)
     fin.close();
 
   int n = sizeof (input_ar) / sizeof (input_ar[0]);
-
   t0 = clock();
   //cout << "ENTERING" << endl;
   bucketSort (input_ar, n);
@@ -130,7 +129,7 @@ void bucketSort(int *arr, int n)
     // 2) Put array elements in different buckets
     for (int i=0; i<n; i++)
     {
-      cout << "n*arr[i] is: " << arr[i]/n << endl;//
+      cout << "n*arr[i] is: " << n%arr[i] << endl;//
        int bi = n*arr[i]; // Index in bucket
        b[bi].push_back(arr[i]);
     }
