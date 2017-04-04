@@ -115,6 +115,7 @@ void genNumbers( int numbers )
         num = rand() % 501;
         fprintf(fp, "%d\n", num );
     }
+    fclose(fp);
 }
 
 
