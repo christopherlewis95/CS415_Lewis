@@ -67,7 +67,7 @@ int main(int argc, char** argv)
   int n = sizeof (input_ar) / sizeof (input_ar[0]);
   t0 = clock();
   //cout << "ENTERING" << endl;
-  bucketSort (input_ar, 10);
+  bucketSort (input_ar, n);
 
   clockTicks = clock() - t0;
  //cout << "EXITING" << endl;
@@ -119,25 +119,26 @@ void genNumbers( int numbers )
 }
 
 // Function to sort arr[] of size n using bucket sort
-void bucketSort(int arr[], int n)
+//Bucket Sort
+void bucketSort(int arr[], int n);
 {
-    // 1) Create n empty buckets
-    vector<float> b[n];
-    
-    // 2) Put array elements in different buckets
-    for (int i=0; i<n; i++)
-    {
-       int bi = n*arr[i]; // Index in bucket
-       b[bi].push_back(arr[i]);
-    }
+  //Here range is [1,100]
+  int m = 101;
  
-    // 3) Sort individual buckets
-    for (int i=0; i<n; i++)
-       sort(b[i].begin(), b[i].end());
+  //Create m empty buckets
+  int buckets[m];
  
-    // 4) Concatenate all buckets into arr[]
-    int index = 0;
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < b[i].size(); j++)
-          arr[index++] = b[i][j];
+  //Intialize all buckets to 0
+  for (int i = 0; i < m; ++i)
+    buckets[i] = 0;
+ 
+  //Increment the number of times each element is present in the input
+  //array. Insert them in the buckets
+  for (int i = 0; i < n; ++i)
+    ++buckets[arr[i]];
+ 
+  //Sort using insertion sort and concatenate 
+  for (int i = 0, j = 0; j < m; ++j)
+    for (int k = buckets[j]; k > 0; --k)
+      arr[i++] = j;
 }
