@@ -123,7 +123,7 @@ void genNumbers( int numbers )
 void bucketSort(int arr[], int n)
 {
   //Here range is [1,100]
-  int m = 101;
+  int m = 1001;
  
   //Create m empty buckets
   int buckets[m];
