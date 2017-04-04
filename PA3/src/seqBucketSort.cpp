@@ -73,7 +73,7 @@ int main(int argc, char** argv)
   clockTicks = clock() - t0;
  //cout << "EXITING" << endl;
  for( i = 0; i < size; i++)
- printf("Sorted: %d\n", input_ar[i]);
+ 
   //dt = (finished - start);
 
   
@@ -140,5 +140,9 @@ void bucketSort(int *arr, int n)
     int index = 0;
     for (int i = 0; i < n; i++)
         for (int j = 0; j < b[i].size(); j++)
+          {
           arr[index++] = b[i][j];
+          printf("Sorted: %d\n", arr[i]);
+          }
+
 }
