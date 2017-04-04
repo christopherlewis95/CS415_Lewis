@@ -123,17 +123,18 @@ void genNumbers( int numbers )
 void bucketSort(int *arr, int n)
 {
     cout << "Sort: "<< arr[0] << endl;
-  /*
+  
     // 1) Create n empty buckets
     vector<int> b[n];
     
     // 2) Put array elements in different buckets
     for (int i=0; i<n; i++)
     {
+      cout << "n*arr[i] is: " << n*arr[i] << endl;
        int bi = n*arr[i]; // Index in bucket
        b[bi].push_back(arr[i]);
     }
- 
+    
     // 3) Sort individual buckets
     for (int i=0; i<n; i++)
        sort(b[i].begin(), b[i].end());
@@ -143,8 +144,9 @@ void bucketSort(int *arr, int n)
     for (int i = 0; i < n; i++)
         for (int j = 0; j < b[i].size(); j++)
           {
-          arr[index++] = b[i][j];
+          arr[index] = b[i][j];
            printf("Sorted: %d\n", *arr[i]);
+           index++;
           }
-          */
+          
 }
