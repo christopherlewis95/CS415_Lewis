@@ -9,7 +9,7 @@
 
 using namespace std;
  
-void bucket_sort (int *arr, int n);
+void bucketSort (int *arr, int n);
 void readIn( string fileName, int *arr );
 void genNumbers( int numbers );
 
@@ -68,7 +68,7 @@ int main(int argc, char** argv)
 
   t0 = clock();
   //cout << "ENTERING" << endl;
-  bucket_sort (input_ar, n);
+  bucket_sort (input_ar, 10);
 
   clockTicks = clock() - t0;
  //cout << "EXITING" << endl;
@@ -119,24 +119,25 @@ void genNumbers( int numbers )
 }
 
 
-void bucket_sort (int *arr, int n)
+void bucketSort(int *arr, int n)
 {
-  //Here range is [1,1000]
-  int m = 1001;
+    // 1) Create n empty buckets
+    vector<float> b[n];
+    
+    // 2) Put array elements in different buckets
+    for (int i=0; i<n; i++)
+    {
+       int bi = n*arr[i]; // Index in bucket
+       b[bi].push_back(arr[i]);
+    }
  
-  //Create m empty buckets
-  int buckets[m];
+    // 3) Sort individual buckets
+    for (int i=0; i<n; i++)
+       sort(b[i].begin(), b[i].end());
  
-  //Intialize all buckets to 0
-  for (int i = 0; i < m; ++i)
-    buckets[i] = 0;
- 
-  //Increment the number of times each element is present in the input
-  //array. Insert them in the buckets
-  for (int i = 0; i < n; ++i)
-    ++buckets[arr[i]];
- 
-  for (int i = 0, j = 0; j < m; ++j)
-    for (int k = buckets[j]; k > 0; --k)
-      arr[i++] = j;
+    // 4) Concatenate all buckets into arr[]
+    int index = 0;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < b[i].size(); j++)
+          arr[index++] = b[i][j];
 }
