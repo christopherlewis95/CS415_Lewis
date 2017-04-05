@@ -10,6 +10,7 @@
 using namespace std;
  
 void bucketSort(int arr[], int n);
+void bucketSort(int *array, int size,int a, int b, char **argv);
 void readIn( string fileName, int *arr );
 void genNumbers( int numbers );
 
@@ -65,11 +66,11 @@ int main(int argc, char** argv)
     fin.close();
 
   int n = sizeof (input_ar) / sizeof (input_ar[0]);
-  t0 = clock();
-  //cout << "ENTERING" << endl;
-  bucketSort (input_ar, n);
 
-  clockTicks = clock() - t0;
+  //cout << "ENTERING" << endl;
+  bucketSort(input_ar, size, 0, 1000);
+
+  //clockTicks = clock() - t0;
  //cout << "EXITING" << endl;
  //for( i = 0; i < size; i++)
 
@@ -79,12 +80,6 @@ int main(int argc, char** argv)
   ///////////////////////////////////////////////////////////////////////////////////////
 
 
-  FILE *fp;
-
-  fp = fopen(argv[2],"a+");
-  fprintf(fp, "%d, %f\n", atoi(argv[1]), (float)clockTicks/CLOCKS_PER_SEC);
-
-  fclose(fp);
 
 
   ///////////////////////////////////////////////////////////////////////////////////////
@@ -141,4 +136,48 @@ void bucketSort(int arr[], int n)
   for (int i = 0, j = 0; j < m; ++j)
     for (int k = buckets[j]; k > 0; --k)
       arr[i++] = j;
+}
+
+void bucketSort(int *array, int size,int a, int b, char **argv){
+    clock_t clockTicks;
+    clock_t t0;
+	//--Declare variables
+	vector<int> buckets[NOBUCKETS];
+	int bi;
+	double generationTime, sortTime;
+	  t0 = clock();
+//	generateArray(array, size, a, b);
+	generationTime = clock() - t0;
+
+	//printArray(array, size);
+
+	t0 = clock();
+	int range = (b - a) / NOBUCKETS;
+
+	//--Put array elements in different buckets
+	for (int i = 0; i < size; i++){
+		bi = (array[i] - a) / (range + 1); // Index in bucket
+		buckets[bi].push_back(array[i]);
+	}
+
+	//--Sort individual buckets
+	for (int i = 0; i < NOBUCKETS; i++)
+	   sort(buckets[i].begin(), buckets[i].end());
+
+	//--Concatenate all buckets into arr[]
+	int index = 0;
+	for (int i = 0; i < NOBUCKETS; i++)
+		for (int j = 0; j < buckets[i].size(); j++)
+		  array[index++] = buckets[i][j];
+	sortTime = clock() - t0;
+	//printArray(array, size);
+
+
+  FILE *fp;
+
+  fp = fopen(argv[2],"a+");
+  fprintf(fp, "%d, %f\n", atoi(argv[1]), (float)sortTime/CLOCKS_PER_SEC);
+
+  fclose(fp);
+
 }

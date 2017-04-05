@@ -1,6 +1,7 @@
 #include <iostream>
 #include <mpi.h>
 #include <fstream>
+#include <vector>
 #include <sys/time.h>
 #include <stdlib.h>
 #include <time.h> 
@@ -48,12 +49,12 @@ int main( int argc, char **argv ) {
     MPI_Status status;
     for( i = 1; i < numProcessors; i++) // 'I' is processor
         {
-
+            
         for( j = 0; j < size/numProcessors; j++ )
             {
             fin >> num;
             arr[j] = num;
-            //cout << arr[j] << endl;
+            // cout << arr[j] << endl;
             }
         MPI_Send(arr, size/numProcessors, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
         }
@@ -62,10 +63,9 @@ int main( int argc, char **argv ) {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	else { 
-        MPI_Status status;	
+        MPI_Status status;
         MPI_Recv( arr, size/numProcessors, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status ); // '0' needs to be master variable
         cout << arr[0] << endl;
-
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
