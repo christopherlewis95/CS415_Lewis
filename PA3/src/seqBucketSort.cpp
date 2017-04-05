@@ -9,7 +9,7 @@
 
 using namespace std;
  
-void bucketSort(int arr[], int n);
+//void bucketSort(int arr[], int n);
 void bucketSort(int *array, int size,int a, int b, char **argv);
 void readIn( string fileName, int *arr );
 void genNumbers( int numbers );
@@ -20,7 +20,7 @@ void genNumbers( int numbers );
 using namespace std;
  
 //Bucket Sort
-
+#define NOBUCKETS 10
  
  
 //Driver function to test above function
@@ -113,6 +113,7 @@ void genNumbers( int numbers )
     fclose(fp);
 }
 
+/*
 // Function to sort arr[] of size n using bucket sort
 //Bucket Sort
 void bucketSort(int arr[], int n)
@@ -137,7 +138,7 @@ void bucketSort(int arr[], int n)
     for (int k = buckets[j]; k > 0; --k)
       arr[i++] = j;
 }
-
+*/
 void bucketSort(int *array, int size,int a, int b, char **argv){
     clock_t clockTicks;
     clock_t t0;
