@@ -68,7 +68,7 @@ int main(int argc, char** argv)
   int n = sizeof (input_ar) / sizeof (input_ar[0]);
 
   //cout << "ENTERING" << endl;
-  bucketSort(input_ar, size, 0, 1000);
+  bucketSort(input_ar, size, 0, 1000, argv);
 
   //clockTicks = clock() - t0;
  //cout << "EXITING" << endl;
