@@ -44,7 +44,7 @@ int main( int argc, char **argv ) {
     fin.open( fileName.c_str() );
     fin >> size;
 
-    MPI_Bcast( size, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Bcast( &size, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     cout << size << endl;
     arr = new int [size/numProcessors];
@@ -65,7 +65,7 @@ int main( int argc, char **argv ) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	else { 
         int size;
-        MPI_Bcast( size, 1, MPI_INT, 0, MPI_COMM_WORLD);
+        MPI_Bcast( (&size, 1, MPI_INT, 0, MPI_COMM_WORLD);
         MPI_Status status;
         MPI_Recv( arr, size/numProcessors, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status ); // '0' needs to be master variable
         cout << arr[0] << endl;
