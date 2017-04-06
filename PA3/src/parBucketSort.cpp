@@ -44,7 +44,7 @@ int main( int argc, char **argv ) {
     fin.open( fileName.c_str() );
     fin >> size;
 
-    MPI_Bcast( size, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Bcast( &size, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     cout << size << endl;
     arr = new int [size/numProcessors];
