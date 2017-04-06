@@ -5,6 +5,7 @@
         "algorithm": "cpp",
         "ratio": "cpp",
         "string": "cpp",
-        "*.ipp": "cpp"
+        "*.ipp": "cpp",
+        "iosfwd": "cpp"
     }
 }

@@ -42,14 +42,15 @@ int main( int argc, char **argv ) {
 
     ifstream fin;
     fin.open( fileName.c_str() );
-    cout << "This is it: \n";
-    fin >> size; 
+    fin >> size;
+
+    MPI_Bcast( size, 1, MPI_INT, 0, MPI_COMM_WORLD);
+
     cout << size << endl;
     arr = new int [size/numProcessors];
     MPI_Status status;
     for( i = 1; i < numProcessors; i++) // 'I' is processor
         {
-            
         for( j = 0; j < size/numProcessors; j++ )
             {
             fin >> num;
@@ -63,6 +64,8 @@ int main( int argc, char **argv ) {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	else { 
+        int size;
+        MPI_Bcast( size, 1, MPI_INT, 0, MPI_COMM_WORLD);
         MPI_Status status;
         MPI_Recv( arr, size/numProcessors, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status ); // '0' needs to be master variable
         cout << arr[0] << endl;
