@@ -75,10 +75,14 @@ void master(char **argv )
     int *arr = new int [capacity];
     genNumbers( arr, capacity );
 
+    cout << "Entering the send" << endl;
     for( i = 1; i < numProcessors; i++) // 'I' is processor
         {
+        cout << "Sending to processor: " << i << " " << endl;
         MPI_Send((void*)arr[counter], split, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
         counter += split;
+        cout << "Sent message to processor: " << i << " " << endl;
+        cout << "counter is: " << counter << " " << endl;
         }
         
         MPI_Barrier(MPI_COMM_WORLD ); //// STOPPPED AT MPI_Barrier
@@ -100,12 +104,18 @@ void master(char **argv )
 
 void slave( int taskId )
     {
+    cout << "Entering the send" << endl;
     int capacity;
     MPI_Request req;
     MPI_Status status;
 
+    cout << "Probing " << endl;
     MPI_Probe(MASTER, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status );
+    cout << "Done Probing " << endl;
+
     MPI_Get_count( &status, MPI_INT, &capacity );
+    cout << "Got Capacity of: " << capacity << endl;
+
     int *arr = new int [capacity];
 
     cout << capacity << endl;
