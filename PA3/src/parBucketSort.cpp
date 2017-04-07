@@ -77,7 +77,7 @@ void master(char **argv )
 
     for( i = 1; i < numProcessors; i++) // 'I' is processor
         {
-        MPI_Send(arr[counter], split, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
+        MPI_Send((void*)arr[counter], split, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
         counter += split;
         }
         
