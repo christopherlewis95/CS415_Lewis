@@ -98,7 +98,6 @@ void master(char **argv )
     //fin.close();
     }
 
-
 void slave( int taskId )
     {
     int capacity;
@@ -109,9 +108,6 @@ void slave( int taskId )
     MPI_Get_count( &req, MPI_INT, &capacity );
     int *arr = new int [capacity];
 
-
-    //int size;
-    //MPI_Bcast( &size, 1, MPI_INT, 0, MPI_COMM_WORLD);
     cout << capacity << endl;
 
     MPI_Recv( arr, capacity, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status ); // '0' needs to be master variable
