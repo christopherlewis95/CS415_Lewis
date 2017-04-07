@@ -91,7 +91,7 @@ void master(char **argv )
         }
     
     // Free Memory
-    delete *arr;
+    delete arr;
     arr = NULL;
 
 
