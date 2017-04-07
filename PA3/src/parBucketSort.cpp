@@ -62,7 +62,7 @@ void master(char **argv )
     int numProcessors;
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     MPI_Status status;
-    int capacity = atoi(argv[3]);
+    int capacity = atoi(argv[1]);
     int counter = 0;
     int split = capacity/numProcessors;
     int *masterArray = new int[split];
