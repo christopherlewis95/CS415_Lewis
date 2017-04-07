@@ -105,8 +105,8 @@ void slave( int taskId )
     MPI_Request req;
     MPI_Status status;
 
-    MPI_Probe(MASTER, MY_MPI_DATA_TAG, MPI_COMM_WORLD, req );
-    MPI_Get_count( &req, MPI_INT, &capacity);
+    MPI_Probe(MASTER, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &req );
+    MPI_Get_count( (const MPI_Request) &req, MPI_INT, &capacity);
     int *arr = new int [capacity];
 
 
