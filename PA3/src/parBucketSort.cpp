@@ -72,7 +72,7 @@ void master(char **argv )
         MPI_Send(size, 1, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); 
     */
    // cout << size << endl;
-    //int arr = new int [capacity];
+    int *arr = new int [capacity];
     genNumbers( arr, capacity );
 
     for( i = 1; i < numProcessors; i++) // 'I' is processor
