@@ -104,13 +104,13 @@ void slave( int taskId )
     MPI_Request req;
     MPI_Status status;
 
-    MPI_Probe(MASTER, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &req );
-    MPI_Get_count( &req, MPI_INT, &capacity );
+    MPI_Probe(MASTER, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status );
+    MPI_Get_count( &status, MPI_INT, &capacity );
     int *arr = new int [capacity];
 
     cout << capacity << endl;
 
-    MPI_Recv( arr, capacity, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status ); // '0' needs to be master variable
+    MPI_Recv( arr, capacity, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
     MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
     cout << arr[0] << endl;
     }
