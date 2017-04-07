@@ -7,6 +7,9 @@
 #include <mpi.h>
 #include <time.h> 
 
+
+#include <iostream>
+
 using namespace std;
  
 //void bucketSort(int arr[], int n);
@@ -16,8 +19,6 @@ void genNumbers( int numbers );
 
 /* Driver program to test above funtion */
 //This is a C++ Program to Sort an Array using Bucket Sort
-#include <iostream>
-using namespace std;
  
 //Bucket Sort
 #define NOBUCKETS 10

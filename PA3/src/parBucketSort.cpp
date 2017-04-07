@@ -14,12 +14,14 @@ using namespace std;
 #define DATA_TAG 1
 #define RESULT_TAG 2
 #define MY_MPI_DATA_TAG 3
+#define MASTER 0
 
 // complex struct
 
 // function prototype for calculation
-void slave();
-void master();
+void master(char **argv);
+void slave( int taskId );
+void genNumbers( int *genArray, int size );
 
 // main function
 int main( int argc, char **argv ) {
@@ -27,7 +29,7 @@ int main( int argc, char **argv ) {
     int numProcessors;
     MPI_Init( &argc, &argv );
 	MPI_Comm_rank( MPI_COMM_WORLD, &rank );
-	MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
+
     //int numProcessors;
     int *arr;
     int i, j; 
@@ -39,37 +41,12 @@ int main( int argc, char **argv ) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if( rank == 0 ) // Master
     { 
-
-    ifstream fin;
-    fin.open( fileName.c_str() );
-    fin >> size;
-
-    MPI_Bcast( &size, 1, MPI_INT, 0, MPI_COMM_WORLD);
-
-    cout << size << endl;
-    arr = new int [size/numProcessors];
-    MPI_Status status;
-    for( i = 1; i < numProcessors; i++) // 'I' is processor
-        {
-        for( j = 0; j < size/numProcessors; j++ )
-            {
-            fin >> num;
-            arr[j] = num;
-            // cout << arr[j] << endl;
-            }
-        MPI_Send(arr, size/numProcessors, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
-        }
-    fin.close();
+        master(argv);
 	}
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	else { 
-        //int size;
-        //MPI_Bcast( &size, 1, MPI_INT, 0, MPI_COMM_WORLD);
-        cout << size;
-        MPI_Status status;
-        MPI_Recv( arr, size/numProcessors, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status ); // '0' needs to be master variable
-        cout << arr[0] << endl;
+	else { // Slave
+        slave(rank);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,3 +56,76 @@ int main( int argc, char **argv ) {
 
 /////////////// THIS IS FOR THE INCLUDED FUNCTION ////////////
 
+void master(char **argv )
+    {
+    int numProcessors;
+    MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
+    MPI_Status status;
+    int capacity = atoi(argv[3]);
+    int counter = 0;
+    int split = capacity/numProcessors;
+    int *masterArray = new int[split];
+    int index = 0;
+    /*
+    for( i = 1; i < numProcessors; i++ )
+        MPI_Send(size, 1, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); 
+    */
+   // cout << size << endl;
+    arr = new int [capacity];
+    genNumbers( arr, capacity );
+
+    for( i = 1; i < numProcessors; i++) // 'I' is processor
+        {
+        MPI_Send(arr[counter], split, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
+        counter += split;
+        }
+        
+        MPI_Barrier(MPI_COMM_WORLD ); //// STOPPPED AT MPI_Barrier
+
+    while( counter < size )
+        {  
+        masterArray[index] = arr[counter];
+        counter++;
+        index++;
+        }
+    
+    // Free Memory
+    delete *arr;
+    arr = NULL;
+
+
+    fin.close();
+    }
+
+
+void slave( int taskId )
+    {
+    int capacity;
+    MPI_Request req;
+    MPI_Status status;
+
+    MPI_Probe(MASTER, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &req );
+    MPI_Get_count( &req, MPI_INT, &capacity);
+    int *arr = new int [capacity];
+
+
+    //int size;
+    //MPI_Bcast( &size, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    cout << capcity;
+
+    MPI_Recv( arr, capacity, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status ); // '0' needs to be master variable
+    MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
+    cout << arr[0] << endl;
+    }
+
+void genNumbers( int *genArray, int size )
+    {
+    int generatedNum;
+
+    for( int i = 0; i < size; i++ )
+        {
+            srand(1000); // Use a seed value
+            genArray[i] = rand()%100000;
+        }
+
+    }
