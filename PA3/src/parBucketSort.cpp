@@ -58,6 +58,7 @@ int main( int argc, char **argv ) {
 
 void master(char **argv )
     {
+    int i;
     int numProcessors;
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     MPI_Status status;
@@ -71,7 +72,7 @@ void master(char **argv )
         MPI_Send(size, 1, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); 
     */
    // cout << size << endl;
-    arr = new int [capacity];
+    //int arr = new int [capacity];
     genNumbers( arr, capacity );
 
     for( i = 1; i < numProcessors; i++) // 'I' is processor
@@ -82,7 +83,7 @@ void master(char **argv )
         
         MPI_Barrier(MPI_COMM_WORLD ); //// STOPPPED AT MPI_Barrier
 
-    while( counter < size )
+    while( counter < capacity )
         {  
         masterArray[index] = arr[counter];
         counter++;
@@ -94,7 +95,7 @@ void master(char **argv )
     arr = NULL;
 
 
-    fin.close();
+    //fin.close();
     }
 
 
@@ -104,14 +105,14 @@ void slave( int taskId )
     MPI_Request req;
     MPI_Status status;
 
-    MPI_Probe(MASTER, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &req );
+    MPI_Probe(MASTER, MY_MPI_DATA_TAG, MPI_COMM_WORLD, req );
     MPI_Get_count( &req, MPI_INT, &capacity);
     int *arr = new int [capacity];
 
 
     //int size;
     //MPI_Bcast( &size, 1, MPI_INT, 0, MPI_COMM_WORLD);
-    cout << capcity;
+    cout << capacity << endl;
 
     MPI_Recv( arr, capacity, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status ); // '0' needs to be master variable
     MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
