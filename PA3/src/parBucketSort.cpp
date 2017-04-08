@@ -80,7 +80,7 @@ void master(char **argv )
     for( i = 1; i < numProcessors; i++) // 'I' is processor
         {
         cout << "Sending to processor: " << i << " " << endl;
-        MPI_Send(arr[counter], split, MPI_INT, i, MY_MPI_DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
+        MPI_Send(&arr[counter], split, MPI_INT, i, MY_MPI_DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
         counter += split;
         cout << "Sent message to processor: " << i << " " << endl;
         cout << "counter is: " << counter << " " << endl;
@@ -133,8 +133,9 @@ void genNumbers( int *genArray, int size )
 
     for( int i = 0; i < size; i++ )
         {
-            srand(1000); // Use a seed value
+            srand(time(NULL)); // Use a seed value
             genArray[i] = rand()%100000;
+            cout << "generatedNum is: " << genArray[i] << endl;
         }
 
     }
