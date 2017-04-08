@@ -79,7 +79,7 @@ void master(char **argv )
     for( i = 1; i < numProcessors; i++) // 'I' is processor
         {
         cout << "Sending to processor: " << i << " " << endl;
-        MPI_Send((void*)arr[counter], split, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
+        MPI_Send(&arr[counter], split, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
         counter += split;
         cout << "Sent message to processor: " << i << " " << endl;
         cout << "counter is: " << counter << " " << endl;
