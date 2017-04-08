@@ -61,6 +61,7 @@ void master(char **argv )
     int i;
     int numProcessors;
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
+    cout << "Number of processors is: " << numProcessors << endl;
     MPI_Status status;
     int capacity = atoi(argv[1]);
     int counter = 0;
