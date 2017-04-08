@@ -88,9 +88,13 @@ void master(char **argv )
         
         MPI_Barrier(MPI_COMM_WORLD ); //// STOPPPED AT MPI_Barrier
 
+
+    cout << "Masters numbers is: " << endl;
     while( counter < capacity )
         {  
         masterArray[index] = arr[counter];
+cout << masterArray[index] << endl;
+        cout 
         counter++;
         index++;
         }
