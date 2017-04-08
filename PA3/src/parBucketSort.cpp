@@ -133,7 +133,7 @@ void genNumbers( int *genArray, int size )
 
     for( int i = 0; i < size; i++ )
         {
-            srand(1000); // Use a seed value
+            //srand(1000); // Use a seed value
             genArray[i] = rand()%100000;
             cout << "Genrated num is: " << genArray[i] << endl;
         }
