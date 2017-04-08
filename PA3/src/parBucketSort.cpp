@@ -79,7 +79,7 @@ void master(char **argv )
     for( i = 1; i < numProcessors; i++) // 'I' is processor
         {
         cout << "Sending to processor: " << i << " " << endl;
-        MPI_Send(&arr[counter], split, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
+        MPI_Send(&arr[counter], split, MPI_INT, i, MY_MPI_DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
         counter += split;
         cout << "Sent message to processor: " << i << " " << endl;
         cout << "counter is: " << counter << " " << endl;
@@ -121,6 +121,7 @@ void slave( int taskId )
     cout << capacity << endl;
 
     MPI_Recv( arr, capacity, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
+
     MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
     cout << arr[0] << endl;
     }
