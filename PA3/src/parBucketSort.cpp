@@ -124,7 +124,10 @@ void slave( int taskId )
     MPI_Recv( arr, capacity, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
 
     MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
-    cout << arr[0] << endl;
+
+    cout << "Displaying numbers of slave: " << taskId << endl;
+    for( int i = 0; i < capacity; i++ )
+        cout << arr[i] << endl;
     }
 
 void genNumbers( int *genArray, int size )
