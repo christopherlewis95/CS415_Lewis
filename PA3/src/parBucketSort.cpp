@@ -104,7 +104,7 @@ void master(char **argv )
 
 void slave( int taskId )
     {
-    cout << "Entering the send" << endl;
+    cout << "Entering the recieve" << endl;
     int capacity;
     MPI_Request req;
     MPI_Status status;
