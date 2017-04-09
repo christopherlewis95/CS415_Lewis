@@ -292,6 +292,7 @@ void slave( int taskId )
 
         }
 
+        
 
 
         fclose(fpSlave);
