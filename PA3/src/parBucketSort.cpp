@@ -111,7 +111,7 @@ void master(char **argv )
 
     for( index = 0; index < delta; index++ )
         {
-        fprintf( fpSlave,  "Master Placement is:  %d \n", masterArray[index]/partition );
+        fprintf( fpMaster,  "Master Placement is:  %d \n", masterArray[index]/partition );
         cout << "Master placement is: " << masterArray[index]/partition << endl;
         bucketPlacement = masterArray[index]/partition;
         myInts[bucketPlacement].push_back(masterArray[index]);
