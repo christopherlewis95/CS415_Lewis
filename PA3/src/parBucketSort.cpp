@@ -184,8 +184,9 @@ void master(char **argv )
         }
         */
 
+        sort(myBigBucket.begin(), myBigBucket.end());
 
-
+        MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
     // Free Memory
     delete arr;
     arr = NULL;
@@ -290,9 +291,11 @@ void slave( int taskId )
             }
 
 
-        }
 
-        
+        }
+        sort(myBigBucket.begin(), myBigBucket.end());
+        MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
+
 
 
         fclose(fpSlave);
