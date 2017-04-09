@@ -134,7 +134,7 @@ void master(char **argv )
 
                                     MPI_Get_count( &status, MPI_INT, &capacity );
 
-                                    MPI_Recv( myRecievedBucket[0], capacity, MPI_INT, index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
+                                    MPI_Recv( &myRecievedBucket[0], capacity, MPI_INT, index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
 
                                         for( index3 = 0; index3 < capacity; index++ )
                                             {
@@ -238,7 +238,7 @@ void slave( int taskId )
 
                                     MPI_Get_count( &status, MPI_INT, &capacity );
 
-                                    MPI_Recv( myRecievedBucket, capacity, MPI_INT, index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
+                                    MPI_Recv( &myRecievedBucket[0], capacity, MPI_INT, index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
 
                                         for( index3 = 0; index3 < capacity; index++ )
                                             {
