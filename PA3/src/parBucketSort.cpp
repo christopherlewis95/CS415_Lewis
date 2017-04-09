@@ -169,7 +169,7 @@ void master(char **argv )
 
             else{
 
-                MPI_Send(&myInts[index], myInts[index].size(), MPI_INT, index, MY_MPI_DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
+                MPI_Send(&myInts[index][0], myInts[index].size(), MPI_INT, index, MY_MPI_DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
 
             }
 
@@ -283,7 +283,7 @@ void slave( int taskId )
 
             else{
 
-                MPI_Send(&myInts[index], myInts[index].size(), MPI_INT, index, MY_MPI_DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
+                MPI_Send(&myInts[index][0], myInts[index].size(), MPI_INT, index, MY_MPI_DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
 
             }
 
