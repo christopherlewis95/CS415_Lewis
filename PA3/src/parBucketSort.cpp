@@ -68,6 +68,7 @@ void master(char **argv )
     int capacity = atoi(argv[1]);
     int counter = 0;
     int split = capacity/numProcessors;
+    int partition = MAX_NUM / numProcessors;
     int *masterArray = new int[split];
     int index = 0;
     int delta;
