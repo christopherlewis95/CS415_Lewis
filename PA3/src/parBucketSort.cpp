@@ -145,7 +145,7 @@ void master(char **argv )
                                                 myBigBucket.push_back(myRecievedBucket[index3]);
                                             }
 
-
+                                    MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
                                 }
 
 
@@ -250,7 +250,7 @@ void slave( int taskId )
                                                 if( !myRecievedBucket.empty())
                                                 myBigBucket.push_back( myRecievedBucket[index3] );
                                             }
-
+                                    MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
 
                                 }
 
