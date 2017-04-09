@@ -139,12 +139,13 @@ void master(char **argv )
                             if( index2 != MASTER )
                                 {
                                     myRecievedBucket.clear();
-                                    myRecievedBucket.resize(0);
+                                    //myRecievedBucket.resize(0);
                                     fprintf( fpMaster,  "Probe \n" );
                                     MPI_Probe(index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status );
 
                                     MPI_Get_count( &status, MPI_INT, &capacity );
 
+                                    myRecievedBucket.resize(capacity);
                                     fprintf( fpMaster,  "MASTER RECV\n" );
                                     cout << "Master Recv" << endl;
                                     MPI_Recv( &myRecievedBucket[0], capacity, MPI_INT, index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
@@ -263,6 +264,7 @@ void slave( int taskId )
 
                                     MPI_Get_count( &status, MPI_INT, &capacity );
 
+                                    myRecievedBucket.resize(capacity);
                                     cout << "Slaved Recv" << endl;
                                     MPI_Recv( &myRecievedBucket[0], capacity, MPI_INT, index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
 
