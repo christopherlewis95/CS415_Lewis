@@ -107,6 +107,7 @@ void master(char **argv )
 
     for( index = 0; index < delta; index++ )
         {
+        cout << "Placement is: " << masterArray[index]/partition;
         bucketPlacement = masterArray[index]/partition;
         myInts[bucketPlacement].push_back(masterArray[index]);
         }
@@ -215,6 +216,7 @@ void slave( int taskId )
 
     for( index = 0; index < capacity; index++ )
         {
+            cout << "Placement is: " << arr[index]/partition;
             bucketPlacement = arr[index]/partition;
             myInts[bucketPlacement].push_back(arr[index]);
         }
