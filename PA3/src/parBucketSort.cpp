@@ -62,6 +62,8 @@ void master(char **argv )
     {
     int i;
     int numProcessors;
+    int index = 0;
+    int index2, index3;
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     cout << "Number of processors is: " << numProcessors << endl;
     MPI_Status status;
@@ -70,10 +72,11 @@ void master(char **argv )
     int split = capacity/numProcessors;
     int partition = MAX_NUM / numProcessors;
     int *masterArray = new int[split];
-    int index = 0;
     int delta;
     int bucketPlacement;
     vector <int> myInts[numProcessors];
+    vector <int> myBigBucket;
+    vector <int> myRecievedBucket;
     /*
     for( i = 1; i < numProcessors; i++ )
         MPI_Send(size, 1, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); 
@@ -108,7 +111,65 @@ void master(char **argv )
         myInts[bucketPlacement].push_back(masterArray[index]);
         }
 
-    
+        /* PLACE MY NUMBERS INSIDE BIG BUCKET */
+        
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+                    /* SENDING AND RECIEVING SMALL BUCKETS */
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+
+    for( index = 0; index < numProcessors; index++ )
+        {
+            if( index = MASTER )
+                {
+                   for( index2 = 0; index2 < numProcessors; index2++ )
+                        {
+                            if( index2 != MASTER )
+                                {
+
+                                    MPI_Probe(index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status );
+
+                                    MPI_Get_count( &status, MPI_INT, &capacity );
+
+                                    MPI_Recv( myRecievedBucket, capacity, MPI_INT, index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
+
+                                        for( index3 = 0; index3 < capacity; index++ )
+                                            {
+                                                if( !my.myRecievedBucket.empty())
+                                                myBigBucket.push_back(myRecievedBucket.pop_back());
+                                            }
+
+
+                                }
+
+
+                        }
+
+
+
+                }
+
+            else{
+
+                MPI_Send(&myInts[index], myInts[index].size(), MPI_INT, i, MY_MPI_DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
+
+            }
+
+
+        }
+
+        /*
+    for( index = 0; index < myInts[0].size(); index++ )
+        {
+        myBigBucket.push_back(myInts[0].size())
+        }
+        */
+
+
+
     // Free Memory
     delete arr;
     arr = NULL;
@@ -121,7 +182,7 @@ void master(char **argv )
 void slave( int taskId )
     {
     int numProcessors;
-    int index;
+    int index, index2, index3;
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     cout << "Entering the recieve with rank: " << taskId << " " << endl;
     int capacity;
@@ -131,6 +192,9 @@ void slave( int taskId )
     int partition = MAX_NUM / numProcessors;
     int small_bucket_index;
     int bucketPlacement;
+    vector <int> myBigBucket;
+    vector <int> myRecievedBucket;
+
 
     cout << "Probing " << endl;
     MPI_Probe(MASTER, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status );
@@ -150,6 +214,59 @@ void slave( int taskId )
             bucketPlacement = arr[index]/partition;
             myInts[bucketPlacement].push_back(arr[index]);
         }
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+                    /* SENDING AND RECIEVING SMALL BUCKETS */
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+
+    // Better variable names will suffice
+
+    for( index = 0; index < numProcessors; index++ )
+        {
+            if( index == taskId )
+                {
+                    for( index2 = 0; index2 < numProcessors; index2++ )
+                        {
+                            if( index2 != taskId )
+                                {
+
+                                    MPI_Probe(index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status );
+
+                                    MPI_Get_count( &status, MPI_INT, &capacity );
+
+                                    MPI_Recv( myRecievedBucket, capacity, MPI_INT, index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
+
+                                        for( index3 = 0; index3 < capacity; index++ )
+                                            {
+                                                if( !my.myRecievedBucket.empty())
+                                                myBigBucket.push_back(myRecievedBucket.pop_back());
+                                            }
+
+
+                                }
+
+
+                        }
+
+
+                }
+
+            else{
+
+                MPI_Send(&myInts[index], myInts[index].size(), MPI_INT, index, MY_MPI_DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
+
+            }
+
+
+        }
+
+
+
+
 
     }
 
