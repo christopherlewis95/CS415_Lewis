@@ -71,6 +71,7 @@ void master(char **argv )
     int *masterArray = new int[split];
     int index = 0;
     int delta;
+    vector <int> myInts[numProcessors];
     /*
     for( i = 1; i < numProcessors; i++ )
         MPI_Send(size, 1, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); 
@@ -116,6 +117,8 @@ void master(char **argv )
 
 void slave( int taskId )
     {
+    int numProcessors;
+    int index;
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     cout << "Entering the recieve with rank: " << taskId << " " << endl;
     int capacity;
