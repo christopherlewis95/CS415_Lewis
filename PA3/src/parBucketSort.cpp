@@ -94,7 +94,7 @@ void master(char **argv )
         
         MPI_Barrier(MPI_COMM_WORLD ); // STOPPED AT MPI_Barrier
 
-
+        /*
     cout << "Masters numbers is: " << endl;
     delta = capacity - counter;
     while( counter < capacity )
@@ -103,14 +103,14 @@ void master(char **argv )
         counter++;
         index++;
         }
-
+        */
 
     for( index = 0; index < delta; index++ )
         {
         bucketPlacement = masterArray[index]/partition;
         myInts[bucketPlacement].push_back(masterArray[index]);
         }
-
+        
         /* PLACE MY NUMBERS INSIDE BIG BUCKET */
         
 
