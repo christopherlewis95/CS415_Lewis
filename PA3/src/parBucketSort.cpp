@@ -71,6 +71,7 @@ void master(char **argv )
     int *masterArray = new int[split];
     int index = 0;
     int delta;
+    int bucketPlacement;
     vector <int> myInts[numProcessors];
     /*
     for( i = 1; i < numProcessors; i++ )
@@ -103,7 +104,7 @@ void master(char **argv )
     for( index = 0; index < delta; index++ )
         {
         bucketPlacement = masterArray[index]/partition;
-        myInts[bucketPlacement].push(masterArray[index]);
+        myInts[bucketPlacement].push_back(masterArray[index]);
         }
 
     
@@ -145,7 +146,7 @@ void slave( int taskId )
     for( index = 0; index < capacity; index++ )
         {
             bucketPlacement = arr[index]/partition;
-            myInts[bucketPlacement].push(arr[index]);
+            myInts[bucketPlacement].push_back(arr[index]);
         }
 
     }
