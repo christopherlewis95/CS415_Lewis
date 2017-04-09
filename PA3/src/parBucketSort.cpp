@@ -148,7 +148,7 @@ void master(char **argv )
                                     MPI_Recv( &myRecievedBucket[0], capacity, MPI_INT, index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
 
                                     fprintf( fpMaster,  "MASTER RECVIED\n" );
-                                        for( index3 = 0; index3 < capacity; index++ )
+                                        for( index3 = 0; index3 < capacity; index3++ )
                                             {
                                                 if( !myRecievedBucket.empty())
                                                 myBigBucket.push_back(myRecievedBucket[index3]);
@@ -264,7 +264,7 @@ void slave( int taskId )
                                     cout << "Slaved Recv" << endl;
                                     MPI_Recv( &myRecievedBucket[0], capacity, MPI_INT, index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
 
-                                        for( index3 = 0; index3 < capacity; index++ )
+                                        for( index3 = 0; index3 < capacity; index3++ )
                                             {
                                                 if( !myRecievedBucket.empty())
                                                 myBigBucket.push_back( myRecievedBucket[index3] );
