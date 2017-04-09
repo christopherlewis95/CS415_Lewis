@@ -60,6 +60,10 @@ int main( int argc, char **argv ) {
 
 void master(char **argv )
     {
+    FILE *fpMaster;
+    fpMaster = fopen( "masterStuff.txt", "w" );
+
+
     int i;
     int numProcessors;
     int index = 0;
@@ -107,7 +111,8 @@ void master(char **argv )
 
     for( index = 0; index < delta; index++ )
         {
-        cout << "Master placement is: " << arr[index]/partition << endl;
+        fprintf( fpSlave,  "Master Placement is:  %d \n", masterArray[index]/partition );
+        cout << "Master placement is: " << masterArray[index]/partition << endl;
         bucketPlacement = masterArray[index]/partition;
         myInts[bucketPlacement].push_back(masterArray[index]);
         }
@@ -186,9 +191,15 @@ void master(char **argv )
 
 void slave( int taskId )
     {
+    FILE *fpSlave;
+    fpSlave = fopen( "slaveStuff.txt", "w" );
+
     int numProcessors;
     int index, index2, index3;
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
+
+
+    fprintf( fpSlave, "Entering the recieve with rank: %d \n", taskId );
     cout << "Entering the recieve with rank: " << taskId << " " << endl;
     int capacity;
     MPI_Request req;
@@ -209,13 +220,13 @@ void slave( int taskId )
     int *arr = new int [capacity];
 
     //cout << capacity << endl;
-
     MPI_Recv( arr, capacity, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
 
     MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
 
     for( index = 0; index < capacity; index++ )
         {
+            fprintf( fpSlave,  "Placement is:  %d \n", arr[index]/partition );
             cout << "Placement is: " << arr[index]/partition << endl;
             bucketPlacement = arr[index]/partition;
             myInts[bucketPlacement].push_back(arr[index]);
