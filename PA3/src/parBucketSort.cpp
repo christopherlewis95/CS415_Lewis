@@ -5,6 +5,7 @@
 #include <sys/time.h>
 #include <stdlib.h>
 #include <time.h> 
+#include <vector>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ using namespace std;
 #define RESULT_TAG 2
 #define MY_MPI_DATA_TAG 3
 #define MASTER 0
+#define MAX_NUM 100000
 
 // complex struct
 
@@ -68,6 +70,7 @@ void master(char **argv )
     int split = capacity/numProcessors;
     int *masterArray = new int[split];
     int index = 0;
+    int delta;
     /*
     for( i = 1; i < numProcessors; i++ )
         MPI_Send(size, 1, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); 
@@ -79,25 +82,29 @@ void master(char **argv )
     cout << "Entering the send" << endl;
     for( i = 1; i < numProcessors; i++) // 'I' is processor
         {
-        cout << "Sending to processor: " << i << " " << endl;
         MPI_Send(&arr[counter], split, MPI_INT, i, MY_MPI_DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
         counter += split;
-        cout << "Sent message to processor: " << i << " " << endl;
-        cout << "counter is: " << counter << " " << endl;
         }
         
-        MPI_Barrier(MPI_COMM_WORLD ); //// STOPPPED AT MPI_Barrier
+        MPI_Barrier(MPI_COMM_WORLD ); // STOPPED AT MPI_Barrier
 
 
     cout << "Masters numbers is: " << endl;
+    delta = capacity - counter;
     while( counter < capacity )
         {  
         masterArray[index] = arr[counter];
-cout << masterArray[index] << endl;
-        cout 
         counter++;
         index++;
         }
+
+
+    for( index = 0; index < delta; index++ )
+        {
+        bucketPlacement = masterArray[index]/partition;
+        myInts[bucketPlacement].push(masterArray[index]);
+        }
+
     
     // Free Memory
     delete arr;
@@ -109,29 +116,35 @@ cout << masterArray[index] << endl;
 
 void slave( int taskId )
     {
+    MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     cout << "Entering the recieve with rank: " << taskId << " " << endl;
     int capacity;
     MPI_Request req;
     MPI_Status status;
+    vector <int> myInts[numProcessors];
+    int partition = MAX_NUM / numProcessors;
+    int small_bucket_index;
+    int bucketPlacement;
 
     cout << "Probing " << endl;
     MPI_Probe(MASTER, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status );
-    cout << "Done Probing " << endl;
 
     MPI_Get_count( &status, MPI_INT, &capacity );
-    cout << "Got Capacity of: " << capacity << endl;
 
     int *arr = new int [capacity];
 
-    cout << capacity << endl;
+    //cout << capacity << endl;
 
     MPI_Recv( arr, capacity, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
 
     MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
 
-    cout << "Displaying numbers of slave: " << taskId << endl;
-    for( int i = 0; i < capacity; i++ )
-        cout << arr[i] << endl;
+    for( index = 0; index < capacity; index++ )
+        {
+            bucketPlacement = arr[index]/partition;
+            myInts[bucketPlacement].push(arr[index]);
+        }
+
     }
 
 void genNumbers( int *genArray, int size )
@@ -141,8 +154,7 @@ void genNumbers( int *genArray, int size )
     for( int i = 0; i < size; i++ )
         {
             //srand(1000); // Use a seed value
-            genArray[i] = rand()%100;
-            cout << "Genrated num is: " << genArray[i] << endl;
+            genArray[i] = rand()%100001;
         }
 
     }
