@@ -63,7 +63,7 @@ int main( int argc, char **argv ) {
 void master(char **argv )
     {
     FILE *fpMaster;
-    fpMaster = fopen( argv[2], "a+" );
+    fpMaster = fopen( "time2Cores", "a+" );
 
     double t0, deltaTime, end;
 
@@ -92,7 +92,7 @@ void master(char **argv )
     int *arr = new int [capacity];
     genNumbers( arr, capacity );
 
-    cout << "Entering the send" << endl;
+    //cout << "Entering the send" << endl;
     for( i = 1; i < numProcessors; i++) // 'I' is processor
         {
         MPI_Send(&arr[counter], split, MPI_INT, i, MY_MPI_DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
@@ -100,9 +100,10 @@ void master(char **argv )
         }
         
         MPI_Barrier(MPI_COMM_WORLD ); // STOPPED AT MPI_Barrier
+
       t0 = MPI_Wtime();
         
-    cout << "Masters numbers is: " << endl;
+   // cout << "Masters numbers is: " << endl;
     delta = capacity - counter;
     while( counter < capacity )
         {  
