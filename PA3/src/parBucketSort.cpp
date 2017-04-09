@@ -139,7 +139,7 @@ void master(char **argv )
                                         for( index3 = 0; index3 < capacity; index++ )
                                             {
                                                 if( !myRecievedBucket.empty())
-                                                myBigBucket.push_back(myRecievedBucket.pop_back());
+                                                myBigBucket.push_back(myRecievedBucket[index3]);
                                             }
 
 
@@ -243,7 +243,7 @@ void slave( int taskId )
                                         for( index3 = 0; index3 < capacity; index++ )
                                             {
                                                 if( !myRecievedBucket.empty())
-                                                myBigBucket.push_back(myRecievedBucket.pop_back());
+                                                myBigBucket.push_back( myRecievedBucket[index3] );
                                             }
 
 
