@@ -94,7 +94,7 @@ void master(char **argv )
         
         MPI_Barrier(MPI_COMM_WORLD ); // STOPPED AT MPI_Barrier
 
-        /*
+        
     cout << "Masters numbers is: " << endl;
     delta = capacity - counter;
     while( counter < capacity )
@@ -103,7 +103,7 @@ void master(char **argv )
         counter++;
         index++;
         }
-        */
+        
 
     for( index = 0; index < delta; index++ )
         {
@@ -120,6 +120,9 @@ void master(char **argv )
                     /* SENDING AND RECIEVING SMALL BUCKETS */
 
     /////////////////////////////////////////////////////////////////////////////////////////
+
+
+    cout << "Masters small buckets: " << endl;
 
     for( index = 0; index < numProcessors; index++ )
         {
@@ -224,6 +227,8 @@ void slave( int taskId )
     /////////////////////////////////////////////////////////////////////////////////////////
 
     // Better variable names will suffice
+
+    cout << "Slaved small buckets: " << endl;
 
     for( index = 0; index < numProcessors; index++ )
         {
