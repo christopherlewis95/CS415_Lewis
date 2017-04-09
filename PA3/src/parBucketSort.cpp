@@ -138,6 +138,8 @@ void master(char **argv )
                         {
                             if( index2 != MASTER )
                                 {
+                                    myRecievedBucket.clear();
+                                    myRecievedBucket.resize(0);
                                     fprintf( fpMaster,  "Probe \n" );
                                     MPI_Probe(index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status );
 
