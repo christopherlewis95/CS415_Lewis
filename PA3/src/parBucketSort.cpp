@@ -187,6 +187,9 @@ void master(char **argv )
 
         sort(myBigBucket.begin(), myBigBucket.end());
 
+        for( int test = 0; test < myBigBucket.size(); test++)
+            fprintf( fpMaster, "Master sorted bucket: %d \n", myBigBucket[test]);
+
         MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
     // Free Memory
     delete arr;
