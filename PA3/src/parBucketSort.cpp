@@ -187,6 +187,7 @@ void master(char **argv )
    // delete masterArray;
    // masterArray = NULL;
     //fin.close();
+    fclose(fpMaster);
     }
 
 void slave( int taskId )
@@ -286,7 +287,7 @@ void slave( int taskId )
 
 
 
-
+        fclose(fpSlave);
 
     }
 
