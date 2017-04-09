@@ -123,7 +123,7 @@ void master(char **argv )
 
     for( index = 0; index < numProcessors; index++ )
         {
-            if( index = MASTER )
+            if( index == MASTER )
                 {
                    for( index2 = 0; index2 < numProcessors; index2++ )
                         {
@@ -134,11 +134,11 @@ void master(char **argv )
 
                                     MPI_Get_count( &status, MPI_INT, &capacity );
 
-                                    MPI_Recv( myRecievedBucket, capacity, MPI_INT, index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
+                                    MPI_Recv( myRecievedBucket[0], capacity, MPI_INT, index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
 
                                         for( index3 = 0; index3 < capacity; index++ )
                                             {
-                                                if( !my.myRecievedBucket.empty())
+                                                if( !myRecievedBucket.empty())
                                                 myBigBucket.push_back(myRecievedBucket.pop_back());
                                             }
 
@@ -242,7 +242,7 @@ void slave( int taskId )
 
                                         for( index3 = 0; index3 < capacity; index++ )
                                             {
-                                                if( !my.myRecievedBucket.empty())
+                                                if( !myRecievedBucket.empty())
                                                 myBigBucket.push_back(myRecievedBucket.pop_back());
                                             }
 
