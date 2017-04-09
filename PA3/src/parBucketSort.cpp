@@ -94,7 +94,7 @@ void master(char **argv )
 
     cout << "Masters numbers is: " << endl;
     delta = capacity - counter;
-    while( counter < capacity - 1 )
+    while( counter < capacity )
         {  
         masterArray[index] = arr[counter];
         counter++;
