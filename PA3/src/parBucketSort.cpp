@@ -28,6 +28,7 @@ void genNumbers( int *genArray, int size );
 
 // main function
 int main( int argc, char **argv ) {
+
     int rank;
     int numProcessors;
     MPI_Init( &argc, &argv );
@@ -62,15 +63,16 @@ int main( int argc, char **argv ) {
 void master(char **argv )
     {
     FILE *fpMaster;
-    fpMaster = fopen( "masterStuff.txt", "w" );
+    fpMaster = fopen( argv[2], "a+" );
 
+    double t0, deltaTime, end;
 
     int i;
     int numProcessors;
     int index = 0;
     int index2, index3;
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
-    cout << "Number of processors is: " << numProcessors << endl;
+  // cout << "Number of processors is: " << numProcessors << endl;
     MPI_Status status;
     int capacity = atoi(argv[1]);
     int counter = 0;
@@ -98,7 +100,7 @@ void master(char **argv )
         }
         
         MPI_Barrier(MPI_COMM_WORLD ); // STOPPED AT MPI_Barrier
-
+      t0 = MPI_Wtime();
         
     cout << "Masters numbers is: " << endl;
     delta = capacity - counter;
@@ -112,8 +114,8 @@ void master(char **argv )
 
     for( index = 0; index < delta; index++ )
         {
-        fprintf( fpMaster,  "Master Placement is:  %d \n", masterArray[index]/partition );
-        cout << "Master placement is: " << masterArray[index]/partition << endl;
+        //fprintf( fpMaster,  "Master Placement is:  %d \n", masterArray[index]/partition );
+       // cout << "Master placement is: " << masterArray[index]/partition << endl;
         bucketPlacement = masterArray[index]/partition;
         myInts[bucketPlacement].push_back(masterArray[index]);
         }
@@ -129,7 +131,7 @@ void master(char **argv )
     /////////////////////////////////////////////////////////////////////////////////////////
 
 
-    cout << "Masters small buckets: " << endl;
+   // cout << "Masters small buckets: " << endl;
 
     for( index = 0; index < numProcessors; index++ )
         {
@@ -141,23 +143,23 @@ void master(char **argv )
                                 {
                                     myRecievedBucket.clear();
                                     //myRecievedBucket.resize(0);
-                                    fprintf( fpMaster,  "Probe \n" );
+                                 //   fprintf( fpMaster,  "Probe \n" );
                                     MPI_Probe(index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status );
 
                                     MPI_Get_count( &status, MPI_INT, &capacity );
 
                                     myRecievedBucket.resize(capacity);
-                                    fprintf( fpMaster,  "MASTER RECV\n" );
-                                    cout << "Master Recv" << endl;
+                                 //   fprintf( fpMaster,  "MASTER RECV\n" );
+                                  //  cout << "Master Recv" << endl;
                                     MPI_Recv( &myRecievedBucket[0], capacity, MPI_INT, index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
 
-                                    fprintf( fpMaster,  "MASTER RECVIED\n" );
+                                  //  fprintf( fpMaster,  "MASTER RECVIED\n" );
                                         for( index3 = 0; index3 < capacity; index3++ )
                                             {
                                                 if( !myRecievedBucket.empty())
                                                 myBigBucket.push_back(myRecievedBucket[index3]);
                                             }
-                                    fprintf( fpMaster,  "MASTER DONATED TO BUCKET\n" );
+                                  //  fprintf( fpMaster,  "MASTER DONATED TO BUCKET\n" );
                                         
                                    // MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
                                 }
@@ -187,10 +189,16 @@ void master(char **argv )
 
         sort(myBigBucket.begin(), myBigBucket.end());
 
-        for( int test = 0; test < myBigBucket.size(); test++)
-            fprintf( fpMaster, "Master sorted bucket: %d \n", myBigBucket[test]);
+       // for( int test = 0; test < myBigBucket.size(); test++)
+          //  fprintf( fpMaster, "Master sorted bucket: %d \n", myBigBucket[test]);
 
         MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
+
+        end = MPI_Wtime();
+
+
+        fprintf(fpMaster, "%d, %f\n", atoi(argv[1]), end - t0 );
+
     // Free Memory
     delete arr;
     arr = NULL;
@@ -198,21 +206,21 @@ void master(char **argv )
    // delete masterArray;
    // masterArray = NULL;
     //fin.close();
-    fclose(fpMaster);
+  //  fclose(fpMaster);
     }
 
 void slave( int taskId )
     {
-    FILE *fpSlave;
-    fpSlave = fopen( "slaveStuff.txt", "w" );
+   // FILE *fpSlave;
+   // fpSlave = fopen( "slaveStuff.txt", "w" );
 
     int numProcessors;
     int index, index2, index3;
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
 
-    fprintf( fpSlave, "Entering the recieve with rank: %d \n", taskId );
-    cout << "Entering the recieve with rank: " << taskId << " " << endl;
+  //  fprintf( fpSlave, "Entering the recieve with rank: %d \n", taskId );
+  //  cout << "Entering the recieve with rank: " << taskId << " " << endl;
     int capacity;
     MPI_Request req;
     MPI_Status status;
@@ -224,7 +232,7 @@ void slave( int taskId )
     vector <int> myRecievedBucket;
 
 
-    cout << "Probing " << endl;
+  //  cout << "Probing " << endl;
     MPI_Probe(MASTER, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status );
 
     MPI_Get_count( &status, MPI_INT, &capacity );
@@ -238,8 +246,8 @@ void slave( int taskId )
 
     for( index = 0; index < capacity; index++ )
         {
-            fprintf( fpSlave,  "Placement is:  %d \n", arr[index]/partition );
-            cout << "Placement is: " << arr[index]/partition << endl;
+          //  fprintf( fpSlave,  "Placement is:  %d \n", arr[index]/partition );
+          //  cout << "Placement is: " << arr[index]/partition << endl;
             bucketPlacement = arr[index]/partition;
             myInts[bucketPlacement].push_back(arr[index]);
         }
@@ -254,7 +262,7 @@ void slave( int taskId )
 
     // Better variable names will suffice
 
-    cout << "Slaved small buckets: " << endl;
+  //  cout << "Slaved small buckets: " << endl;
 
     for( index = 0; index < numProcessors; index++ )
         {
@@ -270,7 +278,7 @@ void slave( int taskId )
                                     MPI_Get_count( &status, MPI_INT, &capacity );
 
                                     myRecievedBucket.resize(capacity);
-                                    cout << "Slaved Recv" << endl;
+                                 //   cout << "Slaved Recv" << endl;
                                     MPI_Recv( &myRecievedBucket[0], capacity, MPI_INT, index2, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
 
                                         for( index3 = 0; index3 < capacity; index3++ )
@@ -302,7 +310,7 @@ void slave( int taskId )
 
 
 
-        fclose(fpSlave);
+     //   fclose(fpSlave);
 
     }
 

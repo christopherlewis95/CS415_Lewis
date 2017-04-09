@@ -5,6 +5,6 @@
 #SBATCH --mail-user=christopherlewis@nevada.unr.edu
 for (( a=10; a<=100; a+=10 ))
 do  
-    srun parBucket $a
+    srun parBucket $a time10Cores.txt
 done
 
