@@ -118,6 +118,9 @@ void master(char **argv )
         //fprintf( fpMaster,  "Master Placement is:  %d \n", masterArray[index]/partition );
        // cout << "Master placement is: " << masterArray[index]/partition << endl;
         bucketPlacement = masterArray[index]/partition;
+        if( bucketPlacement >= numProcessors )
+        bucketPlacement--;
+
         myInts[bucketPlacement].push_back(masterArray[index]);
         }
         
