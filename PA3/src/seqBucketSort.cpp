@@ -15,13 +15,15 @@ using namespace std;
 //void bucketSort(int arr[], int n);
 void bucketSort(int *array, int size,int a, int b, char **argv);
 void readIn( string fileName, int *arr );
-void genNumbers( int numbers );
+void genNumbers( int *genArray, int size );
 
 /* Driver program to test above funtion */
 //This is a C++ Program to Sort an Array using Bucket Sort
  
 //Bucket Sort
 #define NOBUCKETS 10
+#define BIGGEST 100000
+
  
  
 //Driver function to test above function
@@ -36,7 +38,6 @@ int main(int argc, char** argv)
     clock_t t0;
 
     cout << "Before the gen" << endl;
-    genNumbers( atoi(argv[1]) );
     cout << "After the Gen" << endl;
     int i;  
     vector<int> vec;
@@ -47,29 +48,19 @@ int main(int argc, char** argv)
     int size, num;
     int index = 0;
     double start, finished, dt;
+    int amount = atoi(argv[1]);
 
-    fin.open( fileName.c_str() );
-
-    fin >> size; 
-    cout << size << endl;
 //    arr = new int [size];
-      int *input_ar = new int[size];
 
+      int *input_ar = new int[amount];
+      genNumbers( input_ar, amount );
 
-    while( !fin.eof() )
-        {
-            fin >> num;
-            input_ar[index] = num;
-           cout << input_ar[index] << endl;
-            index++;
-        }
    // cout << *arr << endl;
-    fin.close();
 
   int n = sizeof (input_ar) / sizeof (input_ar[0]);
 
   //cout << "ENTERING" << endl;
-  bucketSort(input_ar, size, 0, 1000, argv);
+  bucketSort(input_ar, size, 0, BIGGEST, argv);
 
   //clockTicks = clock() - t0;
  //cout << "EXITING" << endl;
@@ -97,22 +88,17 @@ int main(int argc, char** argv)
   return 0;
 }
 
-void genNumbers( int numbers )
-{
-    FILE *fp;
-    int num = 0;
-    int size = numbers;
-
-    fp = fopen("data.txt", "w");
-
-    fprintf(fp, "%d\n", size );
-    for(int i = 0; i < size; i++)
+void genNumbers( int *genArray, int size )
     {
-        num = rand() % 1000;
-        fprintf(fp, "%d\n", num );
+    int generatedNum;
+
+    for( int i = 0; i < size; i++ )
+        {
+            //srand(1000); // Use a seed value
+            genArray[i] = rand()%100001;
+        }
+
     }
-    fclose(fp);
-}
 
 /*
 // Function to sort arr[] of size n using bucket sort
