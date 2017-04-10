@@ -204,6 +204,9 @@ void master(char **argv )
     delete arr;
     arr = NULL;
 
+    delete masterArray;
+    masterArray = NULL;
+
         myBigBucket.clear();
         myRecievedBucket.clear();
 
