@@ -5,6 +5,6 @@
 #SBATCH --mail-user=christopherlewis@nevada.unr.edu
 for (( a=100; a<=1500; a+=100 ))
 do  
-    srun parBucket $a "twoCores.txt"
+    srun parBucket $a twoCores.txt
 done
 
