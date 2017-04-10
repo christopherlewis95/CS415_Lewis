@@ -204,6 +204,10 @@ void master(char **argv )
     delete arr;
     arr = NULL;
 
+        myBigBucket.clear();
+        myRecievedBucket.clear();
+        myInts.clear();
+
    // delete masterArray;
    // masterArray = NULL;
     //fin.close();
@@ -309,8 +313,9 @@ void slave( int taskId )
         sort(myBigBucket.begin(), myBigBucket.end());
         MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
 
-
-
+        myBigBucket.clear();
+        myRecievedBucket.clear();
+        myInts.clear();
      //   fclose(fpSlave);
 
     }
