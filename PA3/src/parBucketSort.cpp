@@ -262,6 +262,8 @@ void slave( int taskId )
           //  fprintf( fpSlave,  "Placement is:  %d \n", arr[index]/partition );
           //  cout << "Placement is: " << arr[index]/partition << endl;
             bucketPlacement = arr[index]/partition;
+        if( bucketPlacement >= numProcessors )
+        bucketPlacement--;
             myInts[bucketPlacement].push_back(arr[index]);
         }
 
