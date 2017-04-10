@@ -62,6 +62,7 @@ int main( int argc, char **argv ) {
 
 void master(char **argv )
     {
+    // Init Variables
     FILE *fpMaster;
     fpMaster = fopen( argv[2], "a+" );
 
@@ -72,7 +73,6 @@ void master(char **argv )
     int index = 0;
     int index2, index3;
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
-  // cout << "Number of processors is: " << numProcessors << endl;
     MPI_Status status;
     int capacity = atoi(argv[1]);
     int counter = 0;
@@ -84,15 +84,10 @@ void master(char **argv )
     vector <int> myInts[numProcessors];
     vector <int> myBigBucket;
     vector <int> myRecievedBucket;
-    /*
-    for( i = 1; i < numProcessors; i++ )
-        MPI_Send(size, 1, MPI_INT, i, DATA_TAG, MPI_COMM_WORLD); 
-    */
-   // cout << size << endl;
     int *arr = new int [capacity];
     genNumbers( arr, capacity );
 
-    //cout << "Entering the send" << endl;
+    
     for( i = 1; i < numProcessors; i++) // 'I' is processor
         {
         MPI_Send(&arr[counter], split, MPI_INT, i, MY_MPI_DATA_TAG, MPI_COMM_WORLD); // Make size/numProcessors a better variable
@@ -115,8 +110,6 @@ void master(char **argv )
 
     for( index = 0; index < delta; index++ )
         {
-        //fprintf( fpMaster,  "Master Placement is:  %d \n", masterArray[index]/partition );
-       // cout << "Master placement is: " << masterArray[index]/partition << endl;
         bucketPlacement = masterArray[index]/partition;
         if( bucketPlacement >= numProcessors )
         bucketPlacement--;
@@ -184,17 +177,8 @@ void master(char **argv )
 
         }
 
-        /*
-    for( index = 0; index < myInts[0].size(); index++ )
-        {
-        myBigBucket.push_back(myInts[0].size())
-        }
-        */
 
         sort(myBigBucket.begin(), myBigBucket.end());
-
-       // for( int test = 0; test < myBigBucket.size(); test++)
-          //  fprintf( fpMaster, "Master sorted bucket: %d \n", myBigBucket[test]);
 
         MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
 
@@ -216,24 +200,16 @@ void master(char **argv )
         for( int kill = 0; kill < numProcessors; kill++ )
         myInts[kill].clear();
 
-   // delete masterArray;
-   // masterArray = NULL;
-    //fin.close();
-  //  fclose(fpMaster);
     }
 
 void slave( int taskId )
     {
-   // FILE *fpSlave;
-   // fpSlave = fopen( "slaveStuff.txt", "w" );
 
+    // Init Variables
     int numProcessors;
     int index, index2, index3;
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
-
-  //  fprintf( fpSlave, "Entering the recieve with rank: %d \n", taskId );
-  //  cout << "Entering the recieve with rank: " << taskId << " " << endl;
     int capacity;
     MPI_Request req;
     MPI_Status status;
