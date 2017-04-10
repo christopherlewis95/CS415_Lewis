@@ -3,7 +3,7 @@
 #SBATCH -n2
 #SBATCH --time=00:30:00
 #SBATCH --mail-user=christopherlewis@nevada.unr.edu
-for (( a=100; a<=1500; a+=100 ))
+for (( a=1000000; a<=15000000; a+=1000000 ))
 do  
     srun parBucket $a 2Cores.txt
 done
