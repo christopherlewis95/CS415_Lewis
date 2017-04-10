@@ -206,7 +206,9 @@ void master(char **argv )
 
         myBigBucket.clear();
         myRecievedBucket.clear();
-        myInts.clear();
+
+        for( int kill = 0; kill < numProcessors; kill++ )
+        myInts[kill].clear();
 
    // delete masterArray;
    // masterArray = NULL;
