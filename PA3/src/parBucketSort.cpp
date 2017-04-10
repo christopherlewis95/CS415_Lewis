@@ -63,7 +63,7 @@ int main( int argc, char **argv ) {
 void master(char **argv )
     {
     FILE *fpMaster;
-    fpMaster = fopen( &argv[2], "a+" );
+    fpMaster = fopen( argv[2], "a+" );
 
     double t0, deltaTime, end;
 
