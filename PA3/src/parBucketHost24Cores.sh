@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -N3
+#SBATCH -N4
 #SBATCH -n24
 #SBATCH --time=00:30:00
 #SBATCH --mail-user=christopherlewis@nevada.unr.edu
