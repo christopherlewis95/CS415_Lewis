@@ -20,6 +20,7 @@ You may simple run the build with a few commands.
 mkdir build
 cp makefile src/*.sh build/
 cd build
+
 make
 sbatch <scriptName>.sh
 make clean
