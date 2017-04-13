@@ -67,8 +67,6 @@ int main(int argc, char** argv)
 
 void genNumbers( int **arrayA, int **arrayB, int size )
     {
-    int generatedNum;
-
     for( int i = 0; i < size; i++ )
         {
             //srand(time(NULL));
