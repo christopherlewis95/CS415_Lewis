@@ -1,4 +1,4 @@
-# PA0: "Hello World"
+# PA4: Matrix Multiplication
 
 # Dependencies, Building, and Running
 
@@ -19,8 +19,7 @@ The second option is to use the provided Makefile, which is easier to look at an
 # Quick running
 You may simple run the build script with a few commands.
 ```bash
-chmod +x buildscript.sh
-./buildscript
+
 ```
 
 Running the make in a separate directory will allow easy cleanup of the build data, and an easy way to prevent unnecessary data to be added to the git repository.  
@@ -32,16 +31,5 @@ TBD
 The makefile works as expected and must be updated with new files added in.
 
 ```bash
-mkdir build
-cd build
-cp ../makefile .
-make
-srun -n16 ../bin/mpi_hello
-```
-To clean the files you've created, there is an extra target, `clean`.
-Also, there is a running target that may be changed as per assignment requirements, `run`.
-These are for convienience only, you may add/remove them as necessary.
-```bash
-make clean
-make run
+
 ```
