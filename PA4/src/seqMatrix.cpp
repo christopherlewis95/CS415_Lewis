@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 
     genNumbers( arrayA, arrayB, sizeN );
 
-    int x, y, i, j, m, n;
+    int i, j;
 
     // x denotes number rows in matrix A
     // y denotes number columns in matrix A
@@ -51,7 +51,7 @@ int main(int argc, char** argv)
             }
         }
         endProgram = clock();
-        fprintf(fp, "%d \t %f", sizeN, ((float)(endProgram-startProgram)/CLOCKS_PER_SEC));
+        fprintf(fp, "%d \t %f\n", sizeN, ((float)(endProgram-startProgram)/CLOCKS_PER_SEC));
         delete[] arrayA;
         delete[] arrayB;
         delete[] arrayC;
