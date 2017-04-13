@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <time.h>
 
+
 using namespace std;
 
 void genNumbers( int **arrayA, int **arrayB, int size );
@@ -12,7 +13,10 @@ void genNumbers( int **arrayA, int **arrayB, int size );
 
 int main(int argc, char** argv)
     {
+    clock_t startProgram, endProgram;
+    FILE *fp;
         int sizeN = atoi(argv[1]);
+        fp = fopen(argv[2], "a+");
         int **arrayA = new int *[sizeN];
         int **arrayB = new int *[sizeN];
         int **arrayC = new int *[sizeN];  
@@ -30,30 +34,11 @@ int main(int argc, char** argv)
 
     // x denotes number rows in matrix A
     // y denotes number columns in matrix A
-    cout << "\n\nMatrix A :\n\n";
-    for (i = 0; i < sizeN; i++)
-    {
-        for (j = 0; j < sizeN; j++)
-        {
-            cout << "\t" << arrayA[i][j];
-        }
-        cout << "\n\n";
-    }
-    cout << "\n-----------------------------------------------------------\n";
     // m denotes number rows in matrix B
     // n denotes number columns in matrix B
  
-    cout << "\n\nMatrix B :\n\n";
-    for (i = 0; i < sizeN; i++)
-    {
-        for (j = 0; j < sizeN; j++)
-        {
-            cout << "\t" << arrayB[i][j];
-        }
-        cout << "\n\n";
-    }
 
-
+        startProgram = clock();
         for (i = 0; i < sizeN; i++)
         {
             for (j = 0; j < sizeN; j++)
@@ -65,17 +50,8 @@ int main(int argc, char** argv)
                 }
             }
         }
-        cout
-                << "\n-----------------------------------------------------------\n";
-        cout << "\n\nMultiplication of Matrix A and Matrix B :\n\n";
-        for (i = 0; i < sizeN; i++)
-        {
-            for (j = 0; j < sizeN; j++)
-            {
-                cout << "\t" << arrayC[i][j];
-            }
-            cout << "\n\n";
-        }
+        endProgram = clock();
+        fprintf(fp, "%d \t %f", sizeN, ((float)(endProgram-startProgram)/CLOCKS_PER_SEC));
         delete[] arrayA;
         delete[] arrayB;
         delete[] arrayC;
@@ -106,4 +82,3 @@ void genNumbers( int **arrayA, int **arrayB, int size )
                 }
         }
 
-    }
