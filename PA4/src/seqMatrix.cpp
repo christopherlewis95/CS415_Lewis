@@ -17,6 +17,7 @@ int main(int argc, char** argv)
     FILE *fp;
         int sizeN = atoi(argv[1]);
         fp = fopen(argv[2], "a+");
+        
         int **arrayA = new int *[sizeN];
         int **arrayB = new int *[sizeN];
         int **arrayC = new int *[sizeN];  
