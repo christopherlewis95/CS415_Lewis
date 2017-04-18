@@ -9,15 +9,14 @@ using namespace std;
 
 void genNumbers( int **arrayA, int **arrayB, int **arrayC, int size );
 
- 
-
 int main(int argc, char** argv)
     {
     clock_t startProgram, endProgram;
     FILE *fp;
+
         int sizeN = atoi(argv[1]);
         fp = fopen(argv[2], "a+");
-        
+
         int **arrayA = new int *[sizeN];
         int **arrayB = new int *[sizeN];
         int **arrayC = new int *[sizeN];  
@@ -44,6 +43,7 @@ int main(int argc, char** argv)
         {
             for (j = 0; j < sizeN; j++)
             {
+                arrayC[i][j] = 0;
                 for (int k = 0; k < sizeN; k++)
                 {
                     arrayC[i][j] = arrayC[i][j] + arrayA[i][k] * arrayB[k][j];
@@ -52,6 +52,7 @@ int main(int argc, char** argv)
         }
         endProgram = clock();
         fprintf(fp, "%d \t %f\n", sizeN, ((float)(endProgram-startProgram)/CLOCKS_PER_SEC));
+        
         delete[] arrayA;
         delete[] arrayB;
         delete[] arrayC;
@@ -79,7 +80,7 @@ void genNumbers( int **arrayA, int **arrayB, int **arrayC, int size )
                  arrayB[i][j] = rand()%100;
                  
                  // Set array C to 0 (For proper calculations)
-                 arrayC[i][j] = 0;
+              //   arrayC[i][j] = 0;
                 }
         }
     }
