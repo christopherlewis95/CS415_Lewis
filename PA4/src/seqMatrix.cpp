@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void genNumbers( int **arrayA, int **arrayB, int size );
+void genNumbers( int **arrayA, int **arrayB, int **arrayC, int size );
 
  
 
@@ -28,7 +28,7 @@ int main(int argc, char** argv)
         arrayC[i] = new int[sizeN];      
         }
 
-    genNumbers( arrayA, arrayB, sizeN );
+    genNumbers( arrayA, arrayB, arrayC, sizeN );
 
     int i, j;
 
@@ -43,7 +43,6 @@ int main(int argc, char** argv)
         {
             for (j = 0; j < sizeN; j++)
             {
-                arrayC[i][j] = 0;
                 for (int k = 0; k < sizeN; k++)
                 {
                     arrayC[i][j] = arrayC[i][j] + arrayA[i][k] * arrayB[k][j];
@@ -65,7 +64,7 @@ int main(int argc, char** argv)
     }
 
 
-void genNumbers( int **arrayA, int **arrayB, int size )
+void genNumbers( int **arrayA, int **arrayB, int **arrayC, int size )
     {
     for( int i = 0; i < size; i++ )
         {
@@ -74,9 +73,12 @@ void genNumbers( int **arrayA, int **arrayB, int size )
                 {
                 //srand(time(NULL));
                  arrayA[i][j] = rand()%100;
+                 
                  //srand(time(NULL));
                  arrayB[i][j] = rand()%100;
                  
+                 // Set array C to 0 (For proper calculations)
+                 arrayC[i][j] = 0;
                 }
         }
     }
