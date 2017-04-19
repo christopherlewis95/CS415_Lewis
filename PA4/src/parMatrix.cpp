@@ -67,6 +67,7 @@ int main( int argc, char **argv ) {
 void master(char **argv )
     {
     // Init Size and populate array with rand Numbers
+    FILE *fp;
         int sizeN = atoi(argv[1]);
         fp = fopen(argv[2], "a+");
 
@@ -80,7 +81,7 @@ void master(char **argv )
         arrayB[i] = new int[sizeN];  
         arrayC[i] = new int[sizeN];      
         }
-    genNumbers( arrayA, arrayB, arrayC, sizeN)
+    genNumbers( arrayA, arrayB, arrayC, sizeN);
     
 
 
