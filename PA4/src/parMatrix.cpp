@@ -24,7 +24,7 @@ using namespace std;
 // function prototype for calculation
 void master(char **argv);
 void slave( int taskId );
-void genNumbers( int **arrayA, int **arrayB, int **arrayC, int sizeN )
+void genNumbers( int **arrayA, int **arrayB, int **arrayC, int sizeN );
 
 // main function
 int main( int argc, char **argv ) {
