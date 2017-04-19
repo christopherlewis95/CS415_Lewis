@@ -1,3 +1,4 @@
+CC=mpicc
 CXXFLAGS=-Wall
 LIBS=-lpmi
 INDLUDES=-I../includes

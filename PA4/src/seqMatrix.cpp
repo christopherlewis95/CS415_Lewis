@@ -1,7 +1,7 @@
 #include <math.h>
 #include <iostream>
-#include <cstdio>
-#include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 
