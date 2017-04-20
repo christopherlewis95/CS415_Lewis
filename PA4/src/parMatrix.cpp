@@ -28,7 +28,7 @@ using namespace std;
 void master(char **argv);
 void slave( int taskId );
 void shiftLeft( int *matA, int size, int myProcessor, int numProcessors );
-void shiftRight( int *matB, int size, int myProcessor, int numProcessors );
+void shiftUp( int *matB, int size, int myProcessor, int numProcessors );
 
 int getIdLeft( int myProcessor, int numProcessors );
 int getIdUp( int myProcessor, int numProcessors );
@@ -184,22 +184,22 @@ void slave( int taskId )
 
     */ ///////////////
 
-    int **myA = new int *[subMatrixSize/sqrt(numProcessors)];
-    int **myB = new int *[subMatrixSize/sqrt(numProcessors)];
-    int **myC = new int *[subMatrixSize/sqrt(numProcessors)];
+    int **myA = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
+    int **myB = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
+    int **myC = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
 
     for( int i = 0; i < subMatrixSize; i++ )
     {
-    myA[i] = new int [subMatrixSize/sqrt(numProcessors)];
-    myB[i] = new int [subMatrixSize/sqrt(numProcessors)];
-    myC[i] = new int [subMatrixSize/sqrt(numProcessors)];
+    myA[i] = new int [(int)(subMatrixSize/sqrt(numProcessors))];
+    myB[i] = new int [(int)(subMatrixSize/sqrt(numProcessors))];
+    myC[i] = new int [(int)(subMatrixSize/sqrt(numProcessors))];
     }
 
-    genZeroes(myC, subMatrixSize/sqrt(numProcessors) );
+    genZeroes(myC, (int)(subMatrixSize/sqrt(numProcessors)) );
 
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Initial shift (Shift Amount is made by task id % sqrtNumP)
-    for( shifts = 0; shifts < shiftAmnt % sqrt(numProcessors); shifts++ )
+    for( shifts = 0; shifts < shiftAmnt % (int)sqrt(numProcessors); shifts++ )
         {
         shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
         shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
@@ -217,8 +217,8 @@ void slave( int taskId )
         for( int j = 0; j < subMatrixSize/sqrt(numProcessors); j++)
             {
 
-                myA[i][j] = arrayA[ (j * (subMatrixSize/sqrt(numProcessors))) + i];
-                myB[i][j] = arrayB[ (j * (subMatrixSize/sqrt(numProcessors))) + i];
+                myA[i][j] = arrayA[ (j * (int)(subMatrixSize/sqrt(numProcessors))) + i];
+                myB[i][j] = arrayB[ (j * (int)(subMatrixSize/sqrt(numProcessors))) + i];
 
             }
     }
@@ -228,9 +228,9 @@ void slave( int taskId )
     /* MULTIPLY THE NUMBERS */
     for (int i = 0; i < sizeN; i++)
     {
-        for (int j = 0; j < (subMatrixSize/sqrt(numProcessors); j++)
+        for (int j = 0; j < (int)(subMatrixSize/sqrt(numProcessors)); j++)
         {
-            for (int k = 0; k < (subMatrixSize/sqrt(numProcessors); k++)
+            for (int k = 0; k < (int)(subMatrixSize/sqrt(numProcessors)); k++)
             {
                 myC[i][j] = myC[i][j] + myA[i][k] * myB[k][j];
             }
