@@ -187,7 +187,7 @@ int getIdLeft( int myProcessor, int numProcessors )
     {
     int idToMyLeft;
 
-    if(( myProcessor % sqrt(numProcessors)) == 0 )
+    if(( myProcessor % (int)sqrt(numProcessors)) == 0 )
         {
             idToMyLeft = myProcessor + (sqrt(numProcessors) - 1);
         }
@@ -205,7 +205,7 @@ int getIdUp( int myProcessor, int numProcessors )
     {
     int idAboveMe;
 
-    if(( myProcessor < sqrt(numProcessors))
+    if(( myProcessor < sqrt(numProcessors)))
         {
             idAboveMe = myProcessor + (numProcessors - sqrt(numProcessors));
         }
