@@ -76,6 +76,12 @@ Generates zeroes for C (Needed for Slave)
 */
 void genZeroes( int **arrayC, int sizeN );
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 // main function
 int main( int argc, char **argv ) {
 
@@ -125,6 +131,7 @@ void master(char **argv )
 
         int *arrayA = new int [sizeN*sizeN];
         int *arrayB = new int [sizeN*sizeN];
+        int *arrayC = new int [sizeN*sizeN];
 
         int *sendArrayA = new int [subMatrixSize];
         int *sendArrayB = new int [subMatrixSize];
@@ -178,7 +185,7 @@ void master(char **argv )
 			//actually send to other processes
 			else{
 				MPI_Send(sendArrayA, subMatrixSize, MPI_INT, processNum, M_A_DATA, MPI_COMM_WORLD);
-				MPI_Send(sendArrayB, subMatrixSize, MPI_INT, processNum, m_B_DATA, MPI_COMM_WORLD);
+				MPI_Send(sendArrayB, subMatrixSize, MPI_INT, processNum, M_B_DATA, MPI_COMM_WORLD);
 			}
 			
 		}
