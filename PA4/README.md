@@ -12,24 +12,17 @@ ssh username@ubuntu.cse.unr.edu
 ssh username@h1.cse.unr.edu
 ```
 
-## Building and Running
-There are two options to build this project, CMake or Makefile.  CMake makes including new libraries easier, and handles new files added automatically to the src and include directory.  CMake, however, requires a small new learning curve, but it will make things easier in the long run.  Also, it is recommended to learn CMake for industry C/C++.
-The second option is to use the provided Makefile, which is easier to look at and compile from.
+## Compilation Options
+There is only one option for this project and it is to use a makefile. Use the makefile provided in PA4/
 
-# Quick running
-You may simple run the build script with a few commands.
+# Running
+You may simple run the program with a few commands from the PA4 home directory.
 ```bash
-
-```
-
-Running the make in a separate directory will allow easy cleanup of the build data, and an easy way to prevent unnecessary data to be added to the git repository.  
-
-### CMake Instructions
-TBD
-
-### Makefile Instructions
-The makefile works as expected and must be updated with new files added in.
-
-```bash
+$ mkdir build (if not made)
+$ cp makefile build/
+$ cp src/parMatrix.sh (Shell script is only set to 300 * 300 Matrix)
+$ cd build
+$ make
+$ sbatch parMatrix.sh
 
 ```
