@@ -171,7 +171,7 @@ void slave( int taskId )
 
     int *arrayB = new int [subMatrixSize];
 
-
+    cout << "Both recieved" << endl;
     }
 
 void shiftLeft( int **mat1, int **mat2, int myProcessor, int numProcessors )
