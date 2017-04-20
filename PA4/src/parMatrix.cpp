@@ -89,6 +89,8 @@ void master(char **argv )
     int blockRowOriginPoint;
     int blockColOriginPoint;
     int processNum;
+    int subMatrixSize = sumMatrixDimension*sumMatrixDimension;
+
 
     // Init Size and populate array with rand Numbers
 
@@ -96,11 +98,11 @@ void master(char **argv )
         int *arrayB = new int [sizeN*sizeN];
         int *arrayC = new int [sizeN*sizeN];
 
-        int *m_ar = new int [sumMatrixDimension*sumMatrixDimension];
-        int *m_br = new int [sumMatrixDimension*sumMatrixDimension];
+        int *m_ar = new int [subMatrixSize];
+        int *m_br = new int [subMatrixSize];
 
-        int *m_a = new int [sumMatrixDimension*sumMatrixDimension];
-        int *m_b = new int [sumMatrixDimension*sumMatrixDimension];
+        int *m_a = new int [subMatrixSize];
+        int *m_b = new int [subMatrixSize];
 
     genNumbers( arrayA, arrayB, arrayC, sizeN);
 
@@ -138,7 +140,7 @@ void master(char **argv )
 			//if master just copy into local
 			// matrices
 			if(processNum == MASTER){
-				for(int i = 0; i < sumMatrixDimension * sumMatrixDimension; i++){
+				for(int i = 0; i < subMatrixSize; i++){
 					m_a[i] = m_ar[i];
 					m_b[i] = m_br[i];
 				}
@@ -146,12 +148,77 @@ void master(char **argv )
 			
 			//actually send to other processes
 			else{
-				MPI_Send(m_ar, sumMatrixDimension * sumMatrixDimension, MPI_INT, processNum, M_A_DATA, MPI_COMM_WORLD);
-				MPI_Send(m_br, sumMatrixDimension * sumMatrixDimension, MPI_INT, processNum, M_B_DATA, MPI_COMM_WORLD);
+				MPI_Send(m_ar, subMatrixSize, MPI_INT, processNum, M_A_DATA, MPI_COMM_WORLD);
+				MPI_Send(m_br, subMatrixSize, MPI_INT, processNum, M_B_DATA, MPI_COMM_WORLD);
 			}
 			
 		}
 	}
+
+/*/////////////////////////////////////////////////////
+
+                START THE MATRIX MATH HERE
+
+////////////////////////////////////////////////////*/
+
+ /* ///////////////
+
+    INIT 2D ARAYS
+
+    */ ///////////////
+
+    int **myA = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
+    int **myB = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
+    int **myC = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
+
+    for( int i = 0; i < subMatrixSize; i++ )
+    {
+    myA[i] = new int [(int)(subMatrixSize/sqrt(numProcessors))];
+    myB[i] = new int [(int)(subMatrixSize/sqrt(numProcessors))];
+    myC[i] = new int [(int)(subMatrixSize/sqrt(numProcessors))];
+    }
+
+    genZeroes(myC, (int)(subMatrixSize/sqrt(numProcessors)) );
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+    // Initial shift (Shift Amount is made by task id % sqrtNumP)
+    for( shifts = 0; shifts < shiftAmnt % (int)sqrt(numProcessors); shifts++ )
+        {
+        shiftLeft( m_a, sumMatrixDimension * sumMatrixDimension, MASTER, numProcessors );
+        shiftUp( m_b, sumMatrixDimension * sumMatrixDimension, MASTER, numProcessors );
+        }
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+    /* ///////////////
+
+    CONVERT 2D ARAYS
+
+    */ ///////////////
+
+    for( int i = 0; i < subMatrixSize/sqrt(numProcessors); i++)
+    {
+        for( int j = 0; j < subMatrixSize/sqrt(numProcessors); j++)
+            {
+
+                myA[i][j] = arrayA[ (j * (int)(subMatrixSize/sqrt(numProcessors))) + i];
+                myB[i][j] = arrayB[ (j * (int)(subMatrixSize/sqrt(numProcessors))) + i];
+
+            }
+    }
+
+
+    // Optimize Vars Later
+    /* MULTIPLY THE NUMBERS */
+    for (int i = 0; i < (int)(subMatrixSize/sqrt(numProcessors)); i++)
+    {
+        for (int j = 0; j < (int)(subMatrixSize/sqrt(numProcessors)); j++)
+        {
+            for (int k = 0; k < (int)(subMatrixSize/sqrt(numProcessors)); k++)
+            {
+                myC[i][j] = myC[i][j] + myA[i][k] * myB[k][j];
+            }
+        }
+    }
 
     }
 
@@ -303,6 +370,45 @@ int getIdUp( int myProcessor, int numProcessors )
 
     return idAboveMe;
     }
+
+/*
+int getIdRight( int myProcessor, int numProcessors )
+    {
+    int idAboveMe;
+
+    if(( myProcessor < sqrt(numProcessors)))
+        {
+            idAboveMe = myProcessor + (numProcessors - sqrt(numProcessors));
+        }
+
+    else{
+
+        idAboveMe = myProcessor - sqrt(numProcessors);
+    }
+
+    return idAboveMe;
+
+
+    }
+
+
+int getIdDown( int myProcessor, int numProcessors )
+    {
+    int idBelowMe;
+
+    if(( myProcessor > (numProcessors - sqrt(numProcessors)))
+        {
+            idBelowMe = myProcessor + (numProcessors - sqrt(numProcessors));
+        }
+
+    else{
+
+        idBelowMe = myProcessor - sqrt(numProcessors);
+    }
+
+    return idBelowMe;
+    }
+*/
 
 
 void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN )
