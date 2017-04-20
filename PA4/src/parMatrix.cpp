@@ -156,7 +156,22 @@ void master(char **argv )
 void slave( int taskId )
     {
     int numProcessors;
+    int subMatrixSize;
+    MPI_Status status;
+
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
+
+    MPI_Probe(MASTER, M_A_DATA, MPI_COMM_WORLD, &status );
+
+    MPI_Get_count( &status, MPI_INT, &subMatrixSize );
+
+    int *arrayA = new int [subMatrixSize];
+
+    MPI_Probe(MASTER, M_B_DATA, MPI_COMM_WORLD, &status );
+
+    MPI_Get_count( &status, MPI_INT, &subMatrixSize );
+
+    int *arrayB = new int [subMatrixSize];
 
 
 
