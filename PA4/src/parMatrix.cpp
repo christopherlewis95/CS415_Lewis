@@ -24,6 +24,12 @@ using namespace std;
 // function prototype for calculation
 void master(char **argv);
 void slave( int taskId );
+void shiftLeft( int **mat1, int **mat2, int myProcessor, int numProcessors );
+void shiftRight( int **mat1, int **mat2, int myProcessor, int numProcessors );
+
+int getIdLeft( int myProcessor, int numProcessors );
+int getIdUp( int myProcessor, int numProcessors );
+
 void genNumbers( int **arrayA, int **arrayB, int **arrayC, int sizeN );
 
 // main function
@@ -82,7 +88,6 @@ void master(char **argv )
         arrayC[i] = new int[sizeN];      
         }
     genNumbers( arrayA, arrayB, arrayC, sizeN);
-    
 
 
     }
@@ -91,7 +96,69 @@ void slave( int taskId )
     {
 
 
+
+
+
+
     }
+
+void shiftLeft( int **mat1, int **mat2, int myProcessor, int numProcessors )
+    {
+
+
+
+
+    }
+
+void shiftUp( int **mat1, int **mat2, int myProcessor, int numProcessors );
+    {
+
+
+
+
+
+
+    }
+
+
+
+int getIdLeft( int myProcessor, int numProcessors )
+    {
+    int idToMyLeft;
+
+    if(( myProcessor % sqrt(numProcessors)) == 0 )
+        {
+            idToMyLeft = myProcessor + (sqrt(numProcessors) - 1);
+        }
+
+    else{
+
+        idToMyLeft = myProcessor - 1;
+
+    }
+
+    return idToMyLeft;
+    }
+
+int getIdUp( int myProcessor, int numProcessors )
+    {
+    int idAboveMe;
+
+    if(( myProcessor < sqrt(numProcessors))
+        {
+            idAboveMe = myProcessor + (numProcessors - sqrt(numProcessors));
+        }
+
+    else{
+
+        idAboveMe = myProcessor - sqrt(numProcessors);
+    }
+
+    return idAboveMe;
+    }
+
+
+
 
 void genNumbers( int **arrayA, int **arrayB, int **arrayC, int sizeN )
     {
