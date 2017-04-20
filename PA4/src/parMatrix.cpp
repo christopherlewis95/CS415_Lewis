@@ -90,6 +90,8 @@ void master(char **argv )
     int blockColOriginPoint;
     int processNum;
     int subMatrixSize = sumMatrixDimension*sumMatrixDimension;
+    int shiftAmnt = taskId;
+    int shifts;
 
 
     // Init Size and populate array with rand Numbers
