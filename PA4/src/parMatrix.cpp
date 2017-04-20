@@ -37,7 +37,7 @@ int getIdRight( int myProcessor, int numProcessors );
 int getIdDown( int myProcessor, int numProcessors );
 
 void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN );
-void genZeroes( int **arrayC, int sizeN )
+void genZeroes( int **arrayC, int sizeN );
 
 // main function
 int main( int argc, char **argv ) {
