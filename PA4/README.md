@@ -15,6 +15,9 @@ ssh username@h1.cse.unr.edu
 ## Compilation Options
 There is only one option for this project and it is to use a makefile. Use the makefile provided in PA4/
 
+# IMPORTANT
+Code does not run perfectly. MPI_sendrcv_replace does not work. In the comments mention a fix if you know how to.
+
 # Running
 You may simple run the program with a few commands from the PA4 home directory.
 ```bash
