@@ -171,6 +171,8 @@ void slave( int taskId )
     MPI_Get_count( &status, MPI_INT, &subMatrixSize );
 
     int *arrayB = new int [subMatrixSize];
+
+    cout << "and Here" << endl;
     }
 
 void shiftLeft( int **mat1, int **mat2, int myProcessor, int numProcessors )
