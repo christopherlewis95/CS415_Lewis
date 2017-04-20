@@ -226,7 +226,7 @@ void slave( int taskId )
 
     // Optimize Vars Later
     /* MULTIPLY THE NUMBERS */
-    for (int i = 0; i < sizeN; i++)
+    for (int i = 0; i < (int)(subMatrixSize/sqrt(numProcessors)); i++)
     {
         for (int j = 0; j < (int)(subMatrixSize/sqrt(numProcessors)); j++)
         {
@@ -250,8 +250,7 @@ void shiftLeft( int *matA, int size, int myProcessor, int numProcessors )
 
     destProcessor = getIdLeft( myProcessor, numProcessors );
 
-    int MPI_Sendrecv_replace(matA, size, MPI_INT, destProcessor, M_A_DATA, MPI_ANY_SOURCE, M_A_DATA,
-                       MPI_COMM_WORLD, status);
+    int MPI_Sendrecv_replace(matA, size, MPI_INT, destProcessor, M_A_DATA, MPI_ANY_SOURCE, M_A_DATA, MPI_COMM_WORLD, &status);
 
     }
 
@@ -259,11 +258,11 @@ void shiftUp( int *matB, int size, int myProcessor, int numProcessors )
     {
 
     int destProcessor;
+    MPI_Status status;
 
     destProcessor = getIdUp( myProcessor, numProcessors );
 
-    int MPI_Sendrecv_replace(matB, size, MPI_INT, destProcessor, M_B_DATA, MPI_ANY_SOURCE, M_B_DATA,
-                       MPI_COMM_WORLD, status);
+    int MPI_Sendrecv_replace(matB, size, MPI_INT, destProcessor, M_B_DATA, MPI_ANY_SOURCE, M_B_DATA, MPI_COMM_WORLD, &status);
 
 
     }
