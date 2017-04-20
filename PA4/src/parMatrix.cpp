@@ -27,13 +27,17 @@ using namespace std;
 // function prototype for calculation
 void master(char **argv);
 void slave( int taskId );
-void shiftLeft( int **mat1, int **mat2, int myProcessor, int numProcessors );
-void shiftRight( int **mat1, int **mat2, int myProcessor, int numProcessors );
+void shiftLeft( int *matA, int size, int myProcessor, int numProcessors );
+void shiftRight( int *matB, int size, int myProcessor, int numProcessors );
 
 int getIdLeft( int myProcessor, int numProcessors );
 int getIdUp( int myProcessor, int numProcessors );
 
+int getIdRight( int myProcessor, int numProcessors );
+int getIdDown( int myProcessor, int numProcessors );
+
 void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN );
+void genZeroes( int **arrayC, int sizeN )
 
 // main function
 int main( int argc, char **argv ) {
@@ -154,9 +158,10 @@ void master(char **argv )
 void slave( int taskId )
     {
     int numProcessors;
+    int shiftAmnt = taskId;
+    int shifts;
     int subMatrixSize;
     MPI_Status status;
-    cout << "Here" << endl;
 
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
@@ -172,23 +177,93 @@ void slave( int taskId )
 
     int *arrayB = new int [subMatrixSize];
 
-    cout << "and Here" << endl;
+
+    /* ///////////////
+
+    INIT 2D ARAYS
+
+    */ ///////////////
+
+    int **myA = new int *[subMatrixSize/sqrt(numProcessors)];
+    int **myB = new int *[subMatrixSize/sqrt(numProcessors)];
+    int **myC = new int *[subMatrixSize/sqrt(numProcessors)];
+
+    for( int i = 0; i < subMatrixSize; i++ )
+    {
+    myA[i] = new int [subMatrixSize/sqrt(numProcessors)];
+    myB[i] = new int [subMatrixSize/sqrt(numProcessors)];
+    myC[i] = new int [subMatrixSize/sqrt(numProcessors)];
     }
 
-void shiftLeft( int **mat1, int **mat2, int myProcessor, int numProcessors )
+    genZeroes(myC, subMatrixSize/sqrt(numProcessors) );
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+    // Initial shift (Shift Amount is made by task id % sqrtNumP)
+    for( shifts = 0; shifts < shiftAmnt % sqrt(numProcessors); shifts++ )
+        {
+        shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
+        shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
+        }
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+    /* ///////////////
+
+    CONVERT 2D ARAYS
+
+    */ ///////////////
+
+    for( int i = 0; i < subMatrixSize/sqrt(numProcessors); i++)
     {
+        for( int j = 0; j < subMatrixSize/sqrt(numProcessors); j++)
+            {
+
+                myA[i][j] = arrayA[ (j * (subMatrixSize/sqrt(numProcessors))) + i];
+                myB[i][j] = arrayB[ (j * (subMatrixSize/sqrt(numProcessors))) + i];
+
+            }
+    }
+
+
+    // Optimize Vars Later
+    /* MULTIPLY THE NUMBERS */
+    for (int i = 0; i < sizeN; i++)
+    {
+        for (int j = 0; j < (subMatrixSize/sqrt(numProcessors); j++)
+        {
+            for (int k = 0; k < (subMatrixSize/sqrt(numProcessors); k++)
+            {
+                myC[i][j] = myC[i][j] + myA[i][k] * myB[k][j];
+            }
+        }
+    }
 
 
 
+    
+    }
+
+void shiftLeft( int *matA, int size, int myProcessor, int numProcessors )
+    {
+    int destProcessor;
+    MPI_Status status;
+
+
+    destProcessor = getIdLeft( myProcessor, numProcessors );
+
+    int MPI_Sendrecv_replace(matA, size, MPI_INT, destProcessor, M_A_DATA, MPI_ANY_SOURCE, M_A_DATA,
+                       MPI_COMM_WORLD, status);
 
     }
 
-void shiftUp( int **mat1, int **mat2, int myProcessor, int numProcessors )
+void shiftUp( int *matB, int size, int myProcessor, int numProcessors )
     {
 
+    int destProcessor;
 
+    destProcessor = getIdUp( myProcessor, numProcessors );
 
-
+    int MPI_Sendrecv_replace(matB, size, MPI_INT, destProcessor, M_B_DATA, MPI_ANY_SOURCE, M_B_DATA,
+                       MPI_COMM_WORLD, status);
 
 
     }
@@ -231,8 +306,6 @@ int getIdUp( int myProcessor, int numProcessors )
     }
 
 
-
-
 void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN )
     {
     for( int index = 0; index < (sizeN * sizeN); index++ )
@@ -246,6 +319,16 @@ void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN )
                  
                  // Set array C to 0 (For proper calculations)
                  arrayC[index] = 0;
+        }
+
+    }
+
+void genZeroes( int **arrayC, int sizeN )
+    {
+    for( int index = 0; index < sizeN; index++ )
+        {
+            for( int j = 0; j < sizeN; j++ )
+                 arrayC[index][j] = 0;
         }
 
     }
