@@ -25,18 +25,55 @@ using namespace std;
 // complex struct
 
 // function prototype for calculation
+
+/*
+Function to do all computations for master
+*/
 void master(char **argv);
+
+/*
+Function that takes all data from master thats been sent and does its own calculations
+*/
 void slave( int taskId );
+
+/*
+Makes a whole shift left using a send replace functions and uses position to find it out
+*/
 void shiftLeft( int *matA, int size, int myProcessor, int numProcessors );
+
+/*
+Makes a whole shift up using a send replace functions and uses position to find it out
+*/
 void shiftUp( int *matB, int size, int myProcessor, int numProcessors );
 
+/*
+Finds the id of the processor that is to the left of the current processor (myProcessor)
+*/
 int getIdLeft( int myProcessor, int numProcessors );
+
+/*
+Finds the id of the processor that is above the current processor (myProcessor)
+*/
 int getIdUp( int myProcessor, int numProcessors );
 
+/*
+Finds the id of the processor that is to the right of the current processor (myProcessor)
+*/
 int getIdRight( int myProcessor, int numProcessors );
+
+/*
+Finds the id of the processor that is below the current processor (myProcessor)
+*/
 int getIdDown( int myProcessor, int numProcessors );
 
+/*
+Generates random numbers for arrays A and B. Sets C to 0
+*/
 void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN );
+
+/*
+Generates zeroes for C (Needed for Slave)
+*/
 void genZeroes( int **arrayC, int sizeN );
 
 // main function
@@ -48,17 +85,6 @@ int main( int argc, char **argv ) {
 	MPI_Comm_rank( MPI_COMM_WORLD, &rank );
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
-
-    //genNumbers( arrayA, arrayB, arrayC, sizeN );
-
-    //int numProcessors;
-    int *arr;
-    int i, j;
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    string fileName = "data.txt";
-    int index = 0;
-    int size, num;
-    double start, finished, dt;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if( rank == 0 ) // Master
     { 
@@ -83,14 +109,15 @@ void master(char **argv )
 	MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
+    // Initialize Variables
     int sizeN = atoi(argv[1]);
     int sumMatrixDimension = sizeN/sqrt(numProcessors);
     int fullMatrixDimension = sizeN;
-    int blockRowOriginPoint;
-    int blockColOriginPoint;
+    int rowOriginForSubMatrix;
+    int colOriginForSubMatrix;
     int processNum;
     int subMatrixSize = sumMatrixDimension*sumMatrixDimension;
-    int shiftAmnt = taskId;
+    int shiftAmnt = MASTER; // For Initial Shift
     int shifts;
 
 
@@ -98,60 +125,60 @@ void master(char **argv )
 
         int *arrayA = new int [sizeN*sizeN];
         int *arrayB = new int [sizeN*sizeN];
-        int *arrayC = new int [sizeN*sizeN];
 
-        int *m_ar = new int [subMatrixSize];
-        int *m_br = new int [subMatrixSize];
+        int *sendArrayA = new int [subMatrixSize];
+        int *sendArrayB = new int [subMatrixSize];
 
-        int *m_a = new int [subMatrixSize];
-        int *m_b = new int [subMatrixSize];
+        int *myArrayA = new int [subMatrixSize];
+        int *myArrayB = new int [subMatrixSize];
 
     genNumbers( arrayA, arrayB, arrayC, sizeN);
 
-/**************************
-	 Distribution of Matrices
-	***************************/
 	
-	//iterates over the row origins of submatrix blocks of numbers we will send
-	for(int yoffset = 0 ; yoffset < sqrt(numProcessors); yoffset++){
+	// go though the rows with offset
+	for(int verticalOffset = 0 ; verticalOffset < sqrt(numProcessors); verticalOffset++)
+        {
 		
-		//iterates over the column origins of submatrix blocks of numbers we will send
-		for(int xoffset = 0; xoffset < sqrt(numProcessors); xoffset++){
+		// go thorugh the columns using the offset
+		for(int horizontalOffset = 0; horizontalOffset < sqrt(numProcessors); horizontalOffset++)
+            {
 			
-			//within a given block of numbers iterates over that block's rows
-			for(int row = 0; row < sumMatrixDimension; row++){
+			//go trhough the rows of submatrix
+			for(int row = 0; row < sumMatrixDimension; row++)
+                {
 				
-				//within a given block of numbers iterates over that block's cols
-				for(int col = 0; col < sumMatrixDimension; col++){
+				// go throguh the cols of submatrix
+				for(int col = 0; col < sumMatrixDimension; col++)
+                    {
 					
-					blockRowOriginPoint = ((yoffset * sumMatrixDimension) * fullMatrixDimension);
-					blockColOriginPoint = (xoffset*sumMatrixDimension);
+                    // get location in the submatrix
+					rowOriginForSubMatrix = ((verticalOffset * sumMatrixDimension) * fullMatrixDimension);
+					colOriginForSubMatrix = (horizontalOffset*sumMatrixDimension);
 					
-					//load sub array by iterating over submatrices as located from thier origin in our supermatrix
-					m_ar[row*sumMatrixDimension + col] = arrayA[(blockRowOriginPoint + (row*fullMatrixDimension)) + (blockColOriginPoint + col)];
-					m_br[row*sumMatrixDimension + col] = arrayB[(blockRowOriginPoint + (row*fullMatrixDimension)) + (blockColOriginPoint + col)];
+					//load sub array by going through the submatrix by its location found
+					sendArrayA[row*sumMatrixDimension + col] = arrayA[(rowOriginForSubMatrix + (row*fullMatrixDimension)) + (colOriginForSubMatrix + col)];
+					sendArrayB[row*sumMatrixDimension + col] = arrayB[(rowOriginForSubMatrix + (row*fullMatrixDimension)) + (colOriginForSubMatrix + col)];
 					
-				}
-			}
+				    }
+			    }
 			
-			//dustribute our data into processes
-			// this formula gives us every process in order
-			// with the 2d strcuture of our outer loops
-			processNum = yoffset*sqrt(numProcessors) + xoffset;
+			// send dtata to processes
+			processNum = verticalOffset*sqrt(numProcessors) + horizontalOffset;
 			
-			//if master just copy into local
-			// matrices
-			if(processNum == MASTER){
-				for(int i = 0; i < subMatrixSize; i++){
-					m_a[i] = m_ar[i];
-					m_b[i] = m_br[i];
+			//if the process num is MASTER put data in myArray<A or B>
+			if(processNum == MASTER)
+            {
+				for(int i = 0; i < subMatrixSize; i++)
+                {
+					myArrayA[i] = sendArrayA[i];
+					myArrayB[i] = sendArrayB[i];
 				}
 			}
 			
 			//actually send to other processes
 			else{
-				MPI_Send(m_ar, subMatrixSize, MPI_INT, processNum, M_A_DATA, MPI_COMM_WORLD);
-				MPI_Send(m_br, subMatrixSize, MPI_INT, processNum, M_B_DATA, MPI_COMM_WORLD);
+				MPI_Send(sendArrayA, subMatrixSize, MPI_INT, processNum, M_A_DATA, MPI_COMM_WORLD);
+				MPI_Send(sendArrayB, subMatrixSize, MPI_INT, processNum, m_B_DATA, MPI_COMM_WORLD);
 			}
 			
 		}
@@ -165,7 +192,7 @@ void master(char **argv )
 
  /* ///////////////
 
-    INIT 2D ARAYS
+    INIT MY 2D ARAYS
 
     */ ///////////////
 
@@ -186,8 +213,8 @@ void master(char **argv )
     // Initial shift (Shift Amount is made by task id % sqrtNumP)
     for( shifts = 0; shifts < shiftAmnt % (int)sqrt(numProcessors); shifts++ )
         {
-        shiftLeft( m_a, sumMatrixDimension * sumMatrixDimension, MASTER, numProcessors );
-        shiftUp( m_b, sumMatrixDimension * sumMatrixDimension, MASTER, numProcessors );
+        shiftLeft( myArrayA, sumMatrixDimension * sumMatrixDimension, MASTER, numProcessors );
+        shiftUp( myArrayB, sumMatrixDimension * sumMatrixDimension, MASTER, numProcessors );
         }
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -227,7 +254,7 @@ void master(char **argv )
 void slave( int taskId )
     {
     int numProcessors;
-    int shiftAmnt = taskId;
+    int shiftAmnt = taskId; // For Initial Shift
     int shifts;
     int subMatrixSize;
     MPI_Status status;
