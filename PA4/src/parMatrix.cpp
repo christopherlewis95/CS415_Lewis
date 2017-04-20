@@ -1,3 +1,10 @@
+/*
+Project 4: Matrix Multiplication
+Name: ##################
+Due: April 20th, 2017 
+*/
+
+// Header files
 #include <iostream>
 #include <mpi.h>
 #include <fstream>
@@ -11,7 +18,6 @@
 
 using namespace std;
 
-
 // tags and const that are important to the project 
 #define TERMINATE_TAG 0
 #define DATA_TAG 1
@@ -21,8 +27,6 @@ using namespace std;
 #define MAX_NUM 100000
 #define M_A_DATA 100
 #define M_B_DATA 101
-
-// complex struct
 
 // function prototype for calculation
 
