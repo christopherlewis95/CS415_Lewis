@@ -19,6 +19,8 @@ using namespace std;
 #define MY_MPI_DATA_TAG 3
 #define MASTER 0
 #define MAX_NUM 100000
+#define M_A_DATA 100
+#define M_B_DATA 101
 
 // complex struct
 
@@ -142,8 +144,8 @@ void master(char **argv )
 			
 			//actually send to other processes
 			else{
-				MPI_Send(m_ar, sumMatrixDimension * sumMatrixDimension, MPI_INT, process, M_A_DATA, MPI_COMM_WORLD);
-				MPI_Send(m_br, sumMatrixDimension * sumMatrixDimension, MPI_INT, process, M_B_DATA, MPI_COMM_WORLD);
+				MPI_Send(m_ar, sumMatrixDimension * sumMatrixDimension, MPI_INT, processNum, M_A_DATA, MPI_COMM_WORLD);
+				MPI_Send(m_br, sumMatrixDimension * sumMatrixDimension, MPI_INT, processNum, M_B_DATA, MPI_COMM_WORLD);
 			}
 			
 		}
@@ -169,7 +171,7 @@ void shiftLeft( int **mat1, int **mat2, int myProcessor, int numProcessors )
 
     }
 
-void shiftUp( int **mat1, int **mat2, int myProcessor, int numProcessors );
+void shiftUp( int **mat1, int **mat2, int myProcessor, int numProcessors )
     {
 
 
@@ -194,7 +196,7 @@ int getIdLeft( int myProcessor, int numProcessors )
 
         idToMyLeft = myProcessor - 1;
 
-    }
+        }
 
     return idToMyLeft;
     }
