@@ -87,8 +87,6 @@ void master(char **argv )
     int processNum;
 
     // Init Size and populate array with rand Numbers
-    FILE *fp;
-        fp = fopen(argv[2], "a+");
 
         int *arrayA = new int [sizeN];
         int *arrayB = new int [sizeN];
