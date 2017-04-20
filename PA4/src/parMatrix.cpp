@@ -156,6 +156,7 @@ void slave( int taskId )
     int numProcessors;
     int subMatrixSize;
     MPI_Status status;
+    cout << "Here" << endl;
 
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
@@ -170,8 +171,6 @@ void slave( int taskId )
     MPI_Get_count( &status, MPI_INT, &subMatrixSize );
 
     int *arrayB = new int [subMatrixSize];
-
-    cout << "Both recieved" << endl;
     }
 
 void shiftLeft( int **mat1, int **mat2, int myProcessor, int numProcessors )
