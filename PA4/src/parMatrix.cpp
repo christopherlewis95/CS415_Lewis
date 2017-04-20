@@ -7,6 +7,7 @@
 #include <time.h> 
 #include <vector>
 #include <algorithm>
+#include <math>
 
 using namespace std;
 
@@ -30,7 +31,7 @@ void shiftRight( int **mat1, int **mat2, int myProcessor, int numProcessors );
 int getIdLeft( int myProcessor, int numProcessors );
 int getIdUp( int myProcessor, int numProcessors );
 
-void genNumbers( int **arrayA, int **arrayB, int **arrayC, int sizeN );
+void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN );
 
 // main function
 int main( int argc, char **argv ) {
@@ -141,8 +142,8 @@ void master(char **argv )
 			
 			//actually send to other processes
 			else{
-				MPI_Send(m_ar, mat_area, MPI_INT, process, M_A_DATA, MPI_COMM_WORLD);
-				MPI_Send(m_br, mat_area, MPI_INT, process, M_B_DATA, MPI_COMM_WORLD);
+				MPI_Send(m_ar, sumMatrixDimension * sumMatrixDimension, MPI_INT, process, M_A_DATA, MPI_COMM_WORLD);
+				MPI_Send(m_br, sumMatrixDimension * sumMatrixDimension, MPI_INT, process, M_B_DATA, MPI_COMM_WORLD);
 			}
 			
 		}
