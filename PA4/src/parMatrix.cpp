@@ -88,9 +88,9 @@ void master(char **argv )
 
     // Init Size and populate array with rand Numbers
 
-        int *arrayA = new int [sizeN];
-        int *arrayB = new int [sizeN];
-        int *arrayC = new int [sizeN];
+        int *arrayA = new int [sizeN*sizeN];
+        int *arrayB = new int [sizeN*sizeN];
+        int *arrayC = new int [sizeN*sizeN];
 
         int *m_ar = new int [sumMatrixDimension*sumMatrixDimension];
         int *m_br = new int [sumMatrixDimension*sumMatrixDimension];
@@ -172,8 +172,6 @@ void slave( int taskId )
     int *arrayB = new int [subMatrixSize];
 
 
-
-
     }
 
 void shiftLeft( int **mat1, int **mat2, int myProcessor, int numProcessors )
@@ -236,7 +234,7 @@ int getIdUp( int myProcessor, int numProcessors )
 
 void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN )
     {
-    for( int index = 0; index < sizeN; index++ )
+    for( int index = 0; index < (sizeN * sizeN); index++ )
         {
             //srand(time(NULL));
                 //srand(time(NULL));
