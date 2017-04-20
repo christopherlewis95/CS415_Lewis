@@ -72,30 +72,88 @@ int main( int argc, char **argv ) {
 
 void master(char **argv )
     {
+    int myRank, numProcessors;
+	MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
+    MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
+
+    int sizeN = atoi(argv[1]);
+    int sumMatrixDimension = sizeN/sqrt(numProcessors);
+    int fullMatrixDimension = sizeN;
+    int blockRowOriginPoint;
+    int blockColOriginPoint;
+    int processNum;
+
     // Init Size and populate array with rand Numbers
     FILE *fp;
-        int sizeN = atoi(argv[1]);
         fp = fopen(argv[2], "a+");
 
-        int **arrayA = new int *[sizeN];
-        int **arrayB = new int *[sizeN];
-        int **arrayC = new int *[sizeN];  
+        int *arrayA = new int [sizeN];
+        int *arrayB = new int [sizeN];
+        int *arrayC = new int [sizeN];
 
-        for(int i = 0; i < sizeN; i++)
-        {
-        arrayA[i] = new int[sizeN];  
-        arrayB[i] = new int[sizeN];  
-        arrayC[i] = new int[sizeN];      
-        }
+        int *m_ar = new int [sumMatrixDimension*sumMatrixDimension];
+        int *m_br = new int [sumMatrixDimension*sumMatrixDimension];
+
+        int *m_a = new int [sumMatrixDimension*sumMatrixDimension];
+        int *m_b = new int [sumMatrixDimension*sumMatrixDimension];
+
     genNumbers( arrayA, arrayB, arrayC, sizeN);
 
+/**************************
+	 Distribution of Matrices
+	***************************/
+	
+	//iterates over the row origins of submatrix blocks of numbers we will send
+	for(int yoffset = 0 ; yoffset < sqrt(numProcessors); yoffset++){
+		
+		//iterates over the column origins of submatrix blocks of numbers we will send
+		for(int xoffset = 0; xoffset < sqrt(numProcessors); xoffset++){
+			
+			//within a given block of numbers iterates over that block's rows
+			for(int row = 0; row < sumMatrixDimension; row++){
+				
+				//within a given block of numbers iterates over that block's cols
+				for(int col = 0; col < sumMatrixDimension; col++){
+					
+					blockRowOriginPoint = ((yoffset * sumMatrixDimension) * fullMatrixDimension);
+					blockColOriginPoint = (xoffset*sumMatrixDimension);
+					
+					//load sub array by iterating over submatrices as located from thier origin in our supermatrix
+					m_ar[row*sumMatrixDimension + col] = arrayA[(blockRowOriginPoint + (row*fullMatrixDimension)) + (blockColOriginPoint + col)];
+					m_br[row*sumMatrixDimension + col] = arrayB[(blockRowOriginPoint + (row*fullMatrixDimension)) + (blockColOriginPoint + col)];
+					
+				}
+			}
+			
+			//dustribute our data into processes
+			// this formula gives us every process in order
+			// with the 2d strcuture of our outer loops
+			processNum = yoffset*sqrt(numProcessors) + xoffset;
+			
+			//if master just copy into local
+			// matrices
+			if(processNum == MASTER){
+				for(int i = 0; i < sumMatrixDimension * sumMatrixDimension; i++){
+					m_a[i] = m_ar[i];
+					m_b[i] = m_br[i];
+				}
+			}
+			
+			//actually send to other processes
+			else{
+				MPI_Send(m_ar, mat_area, MPI_INT, process, M_A_DATA, MPI_COMM_WORLD);
+				MPI_Send(m_br, mat_area, MPI_INT, process, M_B_DATA, MPI_COMM_WORLD);
+			}
+			
+		}
+	}
 
     }
 
 void slave( int taskId )
     {
-
-
+    int numProcessors;
+    MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
 
 
@@ -160,22 +218,19 @@ int getIdUp( int myProcessor, int numProcessors )
 
 
 
-void genNumbers( int **arrayA, int **arrayB, int **arrayC, int sizeN )
+void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN )
     {
-    for( int rowIndex = 0; rowIndex < sizeN; rowIndex++ )
+    for( int index = 0; index < sizeN; index++ )
         {
             //srand(time(NULL));
-            for( int columnIndex = 0; columnIndex < sizeN; columnIndex++ )
-                {
                 //srand(time(NULL));
-                 arrayA[rowIndex][columnIndex] = rand()%100;
+                 arrayA[index] = rand()%100;
                  
                  //srand(time(NULL));
-                 arrayB[rowIndex][columnIndex] = rand()%100;
+                 arrayB[index] = rand()%100;
                  
                  // Set array C to 0 (For proper calculations)
-                 arrayC[rowIndex][columnIndex] = 0;
-                }
+                 arrayC[index] = 0;
         }
 
     }
