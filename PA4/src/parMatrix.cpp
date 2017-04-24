@@ -389,7 +389,7 @@ void shiftLeft( int *matA, int size, int myProcessor, int numProcessors )
     destProcessor = getIdLeft( myProcessor, numProcessors );
     recvProcessor = getIdRight( myProcessor, numProcessors );
 
-    printf("My processor is: %d and above me is: %d and im recieving from \n", myProcessor, destProcessor, recvProcessor );
+    printf("My processor is: %d and above me is: %d and im recieving from %d\n", myProcessor, destProcessor, recvProcessor );
 
     MPI_Sendrecv_replace(matA, size, MPI_INT, destProcessor, M_A_DATA, recvProcessor, M_A_DATA, MPI_COMM_WORLD, &status);
 
@@ -407,7 +407,7 @@ void shiftUp( int *matB, int size, int myProcessor, int numProcessors )
     recvProcessor = getIdDown( myProcessor, numProcessors );
 
 
-    printf("My processor is: %d and above me is: %d and im recieving from \n", myProcessor, destProcessor, recvProcessor );
+    printf("My processor is: %d and above me is: %d and im recieving from %d\n", myProcessor, destProcessor, recvProcessor );
 
     MPI_Sendrecv_replace(matB, size, MPI_INT, destProcessor, M_B_DATA, recvProcessor, M_B_DATA, MPI_COMM_WORLD, &status);
 
