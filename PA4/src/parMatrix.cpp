@@ -269,6 +269,7 @@ void slave( int taskId )
     int shifts;
     int subMatrixSize;
     MPI_Status status;
+    int loopAmnt;
 
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
@@ -313,12 +314,22 @@ void slave( int taskId )
         }
 //////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+    /* ///////////////
+
+    Loop for the rest of the multiplication
+
+    */ ///////////////
+
+for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
+    {
+        
     /* ///////////////
 
     CONVERT 2D ARAYS
 
     */ ///////////////
-
     for( int i = 0; i < subMatrixSize/sqrt(numProcessors); i++)
     {
         for( int j = 0; j < subMatrixSize/sqrt(numProcessors); j++)
@@ -329,7 +340,6 @@ void slave( int taskId )
 
             }
     }
-
 
     // Optimize Vars Later
     /* MULTIPLY THE NUMBERS */
@@ -342,6 +352,26 @@ void slave( int taskId )
                 myC[i][j] = myC[i][j] + myA[i][k] * myB[k][j];
             }
         }
+    }
+
+    // Put into 1D array for passing
+    for( int i = 0; i < subMatrixSize/sqrt(numProcessors); i++)
+    {
+        for( int j = 0; j < subMatrixSize/sqrt(numProcessors); j++)
+            {
+                for( int k = 0; k < subMatrixSize/sqrt(numProcessors); k++ )
+                    {
+                        arrayA[k] = myA[i][j];
+                        arrayB[k] = myB[i][j];
+                    }
+            }
+    }
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+    // Do final shift (Shift Amount is made by task id % sqrtNumP)
+        shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
+        shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
+//////////////////////////////////////////////////////////////////////////////////////////////
     }
 
 
@@ -420,9 +450,9 @@ int getIdRight( int myProcessor, int numProcessors )
     {
     int idToMyRight;
 
-    if( (myProcessor % sqrt(numProcessors)) < (sqrt(numProcessors) - 1) )
+    if( (myProcessor % sqrt(numProcessors)) < (int)(sqrt(numProcessors) - 1) )
         {
-            idToMyRight = myProcessor -  ( sqrt(numProcessors) + 1 )
+            idToMyRight = myProcessor -  ( sqrt(numProcessors) + 1 );
         }
 
     else{
@@ -445,7 +475,7 @@ int getIdDown( int myProcessor, int numProcessors )
         }
     else{
 
-        idBelowMe = myProcessor % sqrt(numProcessors);
+        idBelowMe = myProcessor % (int)sqrt(numProcessors);
     }
 
     return idBelowMe;
