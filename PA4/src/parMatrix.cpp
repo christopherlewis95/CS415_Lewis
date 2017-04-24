@@ -352,10 +352,12 @@ void slave( int taskId )
 void shiftLeft( int *matA, int size, int myProcessor, int numProcessors )
     {
     int destProcessor;
+    int recvProcessor;
     MPI_Status status;
 
 
     destProcessor = getIdLeft( myProcessor, numProcessors );
+    recvProcessor = getIdRight( myProcessor, numProcessors );
 
     MPI_Sendrecv_replace(matA, size, MPI_INT, destProcessor, M_A_DATA, MPI_ANY_SOURCE, M_A_DATA, MPI_COMM_WORLD, &status);
 
@@ -365,9 +367,11 @@ void shiftUp( int *matB, int size, int myProcessor, int numProcessors )
     {
 
     int destProcessor;
+    int recvProcessor;
     MPI_Status status;
 
     destProcessor = getIdUp( myProcessor, numProcessors );
+    recvProcessor = getIdDown( myProcessor, numProcessors );
 
     MPI_Sendrecv_replace(matB, size, MPI_INT, destProcessor, M_B_DATA, MPI_ANY_SOURCE, M_B_DATA, MPI_COMM_WORLD, &status);
 
