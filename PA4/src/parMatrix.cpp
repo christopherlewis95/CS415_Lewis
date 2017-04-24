@@ -411,24 +411,21 @@ int getIdUp( int myProcessor, int numProcessors )
     return idAboveMe;
     }
 
-/*
+
 int getIdRight( int myProcessor, int numProcessors )
     {
-    int idAboveMe;
+    int idToMyRight;
 
-    if(( myProcessor < sqrt(numProcessors)))
+    if( (myProcessor % sqrt(numProcessors)) < (sqrt(numProcessors) - 1) )
         {
-            idAboveMe = myProcessor + (numProcessors - sqrt(numProcessors));
+            idToMyRight = myProcessor -  ( sqrt(numProcessors) + 1 )
         }
 
     else{
-
-        idAboveMe = myProcessor - sqrt(numProcessors);
+        idToMyRight = myProcessor + 1;
+        
     }
-
-    return idAboveMe;
-
-
+    return idToMyRight;
     }
 
 
@@ -436,19 +433,20 @@ int getIdDown( int myProcessor, int numProcessors )
     {
     int idBelowMe;
 
-    if(( myProcessor > (numProcessors - sqrt(numProcessors)))
+    if( myProcessor <= ( numProcessors - sqrt(numProcessors)) )
         {
-            idBelowMe = myProcessor + (numProcessors - sqrt(numProcessors));
-        }
+            idBelowMe = myProcessor + sqrt(numProcessors);
 
+
+        }
     else{
 
-        idBelowMe = myProcessor - sqrt(numProcessors);
+        idBelowMe = myProcessor % sqrt(numProcessors);
     }
 
     return idBelowMe;
     }
-*/
+
 
 
 void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN )
