@@ -404,7 +404,7 @@ void shiftUp( int *matB, int size, int myProcessor, int numProcessors )
     int destProcessor;
     int recvProcessor;
     MPI_Status status;
-m
+
 
 
     destProcessor = getIdUp( myProcessor, numProcessors );
