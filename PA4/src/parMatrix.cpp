@@ -354,8 +354,10 @@ for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
             for (int k = 0; k < (int)(subMatrixSize/sqrt(numProcessors)); k++)
             {
                 myC[i][j] = myC[i][j] + myA[i][k] * myB[k][j];
+                cout << c[i][j];
             }
         }
+        cout << endl;
     }
 
     // Put into 1D array for passing
