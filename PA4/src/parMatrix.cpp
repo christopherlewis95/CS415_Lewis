@@ -354,10 +354,10 @@ for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
             for (int k = 0; k < (int)(subMatrixSize/sqrt(numProcessors)); k++)
             {
                 myC[i][j] = myC[i][j] + myA[i][k] * myB[k][j];
-                cout << myC[i][j];
+               // cout << myC[i][j];
             }
         }
-        cout << endl;
+        //cout << endl;
     }
 
     // Put into 1D array for passing
@@ -481,7 +481,7 @@ int getIdRight( int myProcessor, int numProcessors )
     {
     int idToMyRight;
 
-    if( (myProcessor % (int)sqrt(numProcessors)) == (int)(sqrt(numProcessors) - 1) )
+    if( (myProcessor % (int)sqrt(numProcessors)) < (int)(sqrt(numProcessors) - 1) )
         {
             idToMyRight = myProcessor -  ( (int)sqrt(numProcessors) + 1 );
         }
