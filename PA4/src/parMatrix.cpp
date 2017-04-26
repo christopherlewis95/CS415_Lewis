@@ -195,6 +195,8 @@ void master(char **argv )
 		}
 	}
 
+/* ADD A BARRIER */
+
 /*/////////////////////////////////////////////////////
 
                 START THE MATRIX MATH HERE
@@ -259,6 +261,8 @@ void master(char **argv )
             }
         }
     }
+
+    /* ADD BACK TO 1D */
 
     }
 
@@ -389,7 +393,7 @@ void shiftLeft( int *matA, int size, int myProcessor, int numProcessors )
     destProcessor = getIdLeft( myProcessor, numProcessors );
     recvProcessor = getIdRight( myProcessor, numProcessors );
 
-    printf("My processor is: %d and above me is: %d and im recieving from %d\n", myProcessor, destProcessor, recvProcessor );
+    printf("My processor is: %d and left of me is: %d and im recieving (right) from %d\n", myProcessor, destProcessor, recvProcessor );
 
     MPI_Sendrecv_replace(matA, size, MPI_INT, destProcessor, M_A_DATA, recvProcessor, M_A_DATA, MPI_COMM_WORLD, &status);
 
@@ -400,38 +404,18 @@ void shiftUp( int *matB, int size, int myProcessor, int numProcessors )
     int destProcessor;
     int recvProcessor;
     MPI_Status status;
-
+m
 
 
     destProcessor = getIdUp( myProcessor, numProcessors );
     recvProcessor = getIdDown( myProcessor, numProcessors );
 
 
-    printf("My processor is: %d and above me is: %d and im recieving from %d\n", myProcessor, destProcessor, recvProcessor );
+    printf("My processor is: %d and above me is: %d and im recieving (down) from %d\n", myProcessor, destProcessor, recvProcessor );
 
     MPI_Sendrecv_replace(matB, size, MPI_INT, destProcessor, M_B_DATA, recvProcessor, M_B_DATA, MPI_COMM_WORLD, &status);
 
 
-    }
-
-
-
-int getIdLeft( int myProcessor, int numProcessors )
-    {
-    int idToMyLeft;
-
-    if(( myProcessor % (int)sqrt(numProcessors)) == 0 )
-        {
-            idToMyLeft = myProcessor + (int)(sqrt(numProcessors) - 1);
-        }
-
-    else{
-
-        idToMyLeft = myProcessor - 1;
-
-        }
-
-    return idToMyLeft;
     }
 
 int getIdUp( int myProcessor, int numProcessors )
@@ -452,23 +436,6 @@ int getIdUp( int myProcessor, int numProcessors )
     }
 
 
-int getIdRight( int myProcessor, int numProcessors )
-    {
-    int idToMyRight;
-
-    if( (myProcessor % (int)sqrt(numProcessors)) < (int)(sqrt(numProcessors) - 1) )
-        {
-            idToMyRight = myProcessor -  ( (int)sqrt(numProcessors) + 1 );
-        }
-
-    else{
-        idToMyRight = myProcessor + 1;
-        
-    }
-    return idToMyRight;
-    }
-
-
 int getIdDown( int myProcessor, int numProcessors )
     {
     int idBelowMe;
@@ -486,6 +453,45 @@ int getIdDown( int myProcessor, int numProcessors )
 
     return idBelowMe;
     }
+
+int getIdLeft( int myProcessor, int numProcessors )
+    {
+    int idToMyLeft;
+
+    if(( myProcessor % (int)sqrt(numProcessors)) == 0 )
+        {
+            idToMyLeft = myProcessor + (int)(sqrt(numProcessors) - 1);
+        }
+
+    else{
+
+        idToMyLeft = myProcessor - 1;
+
+        }
+
+    return idToMyLeft;
+    }
+
+
+
+
+int getIdRight( int myProcessor, int numProcessors )
+    {
+    int idToMyRight;
+
+    if( (myProcessor % (int)sqrt(numProcessors)) < (int)(sqrt(numProcessors) - 1) )
+        {
+            idToMyRight = myProcessor -  ( (int)sqrt(numProcessors) + 1 );
+        }
+
+    else{
+        idToMyRight = myProcessor + 1;
+        
+    }
+    return idToMyRight;
+    }
+
+
 
 
 
