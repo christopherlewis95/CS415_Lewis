@@ -479,7 +479,7 @@ int getIdRight( int myProcessor, int numProcessors )
     {
     int idToMyRight;
 
-    if( (myProcessor % (int)sqrt(numProcessors)) < (int)(sqrt(numProcessors) - 1) )
+    if( (myProcessor % (int)sqrt(numProcessors)) == (int)(sqrt(numProcessors) - 1) )
         {
             idToMyRight = myProcessor -  ( (int)sqrt(numProcessors) + 1 );
         }
