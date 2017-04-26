@@ -397,8 +397,9 @@ void shiftLeft( int *matA, int size, int myProcessor, int numProcessors )
 
     printf("My processor is: %d and left of me is: %d and im recieving (right) from %d\n", myProcessor, destProcessor, recvProcessor );
 
+    /*
     MPI_Sendrecv_replace(matA, size, MPI_INT, destProcessor, M_A_DATA, recvProcessor, M_A_DATA, MPI_COMM_WORLD, &status);
-
+    */
     }
 
 void shiftUp( int *matB, int size, int myProcessor, int numProcessors )
@@ -415,8 +416,9 @@ void shiftUp( int *matB, int size, int myProcessor, int numProcessors )
 
     printf("My processor is: %d and above me is: %d and im recieving (down) from %d\n", myProcessor, destProcessor, recvProcessor );
 
+    /*
     MPI_Sendrecv_replace(matB, size, MPI_INT, destProcessor, M_B_DATA, recvProcessor, M_B_DATA, MPI_COMM_WORLD, &status);
-
+    */
 
     }
 
@@ -481,7 +483,7 @@ int getIdRight( int myProcessor, int numProcessors )
     {
     int idToMyRight;
 
-    if( (myProcessor % (int)sqrt(numProcessors)) < (int)(sqrt(numProcessors) - 1) )
+    if( (myProcessor % (int)sqrt(numProcessors)) == (int)(sqrt(numProcessors) - 1) )
         {
             idToMyRight = myProcessor -  ( (int)sqrt(numProcessors) + 1 );
         }
