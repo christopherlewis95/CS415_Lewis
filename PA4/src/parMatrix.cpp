@@ -287,6 +287,7 @@ void slave( int taskId )
 
     int *arrayA = new int [subMatrixSize];
 
+    fprintf(fp, "Recieving A\n");
      MPI_Recv( &arrayA, subMatrixSize, MPI_INT, MASTER, M_A_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
      fprintf(fp, "Recieved A\n");
 
