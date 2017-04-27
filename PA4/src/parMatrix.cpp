@@ -196,6 +196,8 @@ void master(char **argv )
 	}
 
 /* ADD A BARRIER */
+MPI_Barrier(MPI_COMM_WORLD );
+
 
 /*/////////////////////////////////////////////////////
 
@@ -283,11 +285,15 @@ void slave( int taskId )
 
     int *arrayA = new int [subMatrixSize];
 
+     MPI_Recv( &arrayA, subMatrixSize, MPI_INT, MASTER, M_A_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
+
     MPI_Probe(MASTER, M_B_DATA, MPI_COMM_WORLD, &status );
 
     MPI_Get_count( &status, MPI_INT, &subMatrixSize );
 
     int *arrayB = new int [subMatrixSize];
+
+     MPI_Recv( &arrayB, subMatrixSize, MPI_INT, MASTER, M_B_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
 
 
     /* ///////////////
@@ -397,9 +403,9 @@ void shiftLeft( int *matA, int size, int myProcessor, int numProcessors )
 
     printf("My processor is: %d and left of me is: %d and im recieving (right) from %d\n", myProcessor, destProcessor, recvProcessor );
 
-    /*
+    
     MPI_Sendrecv_replace(matA, size, MPI_INT, destProcessor, M_A_DATA, recvProcessor, M_A_DATA, MPI_COMM_WORLD, &status);
-    */
+    
     }
 
 void shiftUp( int *matB, int size, int myProcessor, int numProcessors )
@@ -416,10 +422,9 @@ void shiftUp( int *matB, int size, int myProcessor, int numProcessors )
 
     printf("My processor is: %d and above me is: %d and im recieving (down) from %d\n", myProcessor, destProcessor, recvProcessor );
 
-    /*
+    
     MPI_Sendrecv_replace(matB, size, MPI_INT, destProcessor, M_B_DATA, recvProcessor, M_B_DATA, MPI_COMM_WORLD, &status);
-    */
-
+    
     }
 
 int getIdUp( int myProcessor, int numProcessors )
