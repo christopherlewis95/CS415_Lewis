@@ -270,12 +270,14 @@ MPI_Barrier(MPI_COMM_WORLD );
 
 void slave( int taskId )
     {
+    FILE *fp;
     int numProcessors;
     int shiftAmnt = taskId; // For Initial Shift
     int shifts;
     int subMatrixSize;
     MPI_Status status;
     int loopAmnt;
+    fp = fopen("slave.txt", "w");
 
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
@@ -286,6 +288,8 @@ void slave( int taskId )
     int *arrayA = new int [subMatrixSize];
 
      MPI_Recv( &arrayA, subMatrixSize, MPI_INT, MASTER, M_A_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
+     fprintf(fp, "Recieved A\n");
+
 
     MPI_Probe(MASTER, M_B_DATA, MPI_COMM_WORLD, &status );
 
@@ -294,8 +298,7 @@ void slave( int taskId )
     int *arrayB = new int [subMatrixSize];
 
      MPI_Recv( &arrayB, subMatrixSize, MPI_INT, MASTER, M_B_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
-
-
+     fprintf(fp, "Recieved B\n");
     /* ///////////////
 
     INIT 2D ARAYS
@@ -313,15 +316,20 @@ void slave( int taskId )
     myC[i] = new int [(int)(subMatrixSize/sqrt(numProcessors))];
     }
 
+    fprintf(fp, "Generating C\n");
     genZeroes(myC, (int)(subMatrixSize/sqrt(numProcessors)) );
 
+    fprintf(fp, "Generated C\n");
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Initial shift (Shift Amount is made by task id % sqrtNumP)
+
+    fprintf(fp, "Doing INitiaial Shift C\n");
     for( shifts = 0; shifts < shiftAmnt % (int)sqrt(numProcessors); shifts++ )
         {
         shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
         shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
         }
+    fprintf(fp, "Did Initial Shift\n");
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -332,6 +340,7 @@ void slave( int taskId )
 
     */ ///////////////
 
+    fprintf(fp, "Looping for multiplication\n");
 for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
     {
         
@@ -340,6 +349,7 @@ for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
     CONVERT 2D ARAYS
 
     */ ///////////////
+    fprintf(fp, "converting to 2D\n");
     for( int i = 0; i < subMatrixSize/sqrt(numProcessors); i++)
     {
         for( int j = 0; j < subMatrixSize/sqrt(numProcessors); j++)
@@ -353,6 +363,8 @@ for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
 
     // Optimize Vars Later
     /* MULTIPLY THE NUMBERS */
+
+    fprintf(fp, "Multiplying\n");
     for (int i = 0; i < (int)(subMatrixSize/sqrt(numProcessors)); i++)
     {
         for (int j = 0; j < (int)(subMatrixSize/sqrt(numProcessors)); j++)
@@ -366,6 +378,7 @@ for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
         //cout << endl;
     }
 
+    fprintf(fp, "Putting into 1D\n");
     // Put into 1D array for passing
     for( int i = 0; i < subMatrixSize/sqrt(numProcessors); i++)
     {
@@ -379,6 +392,7 @@ for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
             }
     }
 
+    fprintf(fp, "Doing Final Shift\n");
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Do final shift (Shift Amount is made by task id % sqrtNumP)
         shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
@@ -413,8 +427,6 @@ void shiftUp( int *matB, int size, int myProcessor, int numProcessors )
     int destProcessor;
     int recvProcessor;
     MPI_Status status;
-
-
 
     destProcessor = getIdUp( myProcessor, numProcessors );
     recvProcessor = getIdDown( myProcessor, numProcessors );
