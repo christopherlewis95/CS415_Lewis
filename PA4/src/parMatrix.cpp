@@ -88,7 +88,7 @@ void genZeroes( int **arrayC, int sizeN );
 
 // main function
 int main( int argc, char **argv ) {
-
+    printf("This is to ensure alot of headache to be solved\n");
     int rank;
     int numProcessors;
     MPI_Init( &argc, &argv );
