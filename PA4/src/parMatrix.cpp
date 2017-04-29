@@ -90,13 +90,13 @@ void genZeroes( int **arrayC, int sizeN );
 int main( int argc, char **argv ) {
     printf("Arguements in the code: %d", argc);
     printf("This is to ensure alot of headache to be solved\n");
-    /*
+
     int rank;
     int numProcessors;
     MPI_Init( &argc, &argv );
 	MPI_Comm_rank( MPI_COMM_WORLD, &rank );
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
-
+    /*
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if( rank == 0 ) // Master
     { 
