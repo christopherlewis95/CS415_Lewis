@@ -115,10 +115,14 @@ int main( int argc, char **argv ) {
 
 void master(char **argv )
     {
+    FILE *masterFp;
+    masterFp = fopen("master.txt", "w");
     int myRank, numProcessors;
 	MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
+
+    fprintf(masterFp, "Init Vars\n");
     // Initialize Variables
     int sizeN = atoi(argv[1]);
     int sumMatrixDimension = sizeN/sqrt(numProcessors);
@@ -133,6 +137,7 @@ void master(char **argv )
 
     // Init Size and populate array with rand Numbers
 
+    fprintf(masterFp, "Init Arrays\n");
         int *arrayA = new int [sizeN*sizeN];
         int *arrayB = new int [sizeN*sizeN];
         int *arrayC = new int [sizeN*sizeN];
@@ -143,9 +148,13 @@ void master(char **argv )
         int *myArrayA = new int [subMatrixSize];
         int *myArrayB = new int [subMatrixSize];
 
-    genNumbers( arrayA, arrayB, arrayC, sizeN);
 
+fprintf(masterFp, "Gen Humbers\n");
+    genNumbers( arrayA, arrayB, arrayC, sizeN);
+fprintf(masterFp, "Nums Gnerated\n");
 	
+
+    fprintf(masterFp, "Going through data\n");
 	// go though the rows with offset
 	for(int verticalOffset = 0 ; verticalOffset < sqrt(numProcessors); verticalOffset++)
         {
@@ -188,12 +197,16 @@ void master(char **argv )
 			
 			//actually send to other processes
 			else{
+                fprintf(masterFp, "Sending Data\n");
 				MPI_Send(sendArrayA, subMatrixSize, MPI_INT, processNum, M_A_DATA, MPI_COMM_WORLD);
 				MPI_Send(sendArrayB, subMatrixSize, MPI_INT, processNum, M_B_DATA, MPI_COMM_WORLD);
+                fprintf(masterFp, "Sending Data Done\n");
 			}
 			
 		}
 	}
+
+fprintf(masterFp, "Went through data\n");
 
 /* ADD A BARRIER */
 MPI_Barrier(MPI_COMM_WORLD );
@@ -211,6 +224,7 @@ MPI_Barrier(MPI_COMM_WORLD );
 
     */ ///////////////
 
+    fprintf(masterFp, "Initing 2D arrays\n");
     int **myA = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
     int **myB = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
     int **myC = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
@@ -222,9 +236,11 @@ MPI_Barrier(MPI_COMM_WORLD );
     myC[i] = new int [(int)(subMatrixSize/sqrt(numProcessors))];
     }
 
+    fprintf(masterFp, "GenData for myC\n");
     genZeroes(myC, (int)(subMatrixSize/sqrt(numProcessors)) );
 
 //////////////////////////////////////////////////////////////////////////////////////////////
+fprintf(masterFp, "Doing initial shift \n");
     // Initial shift (Shift Amount is made by task id % sqrtNumP)
     for( shifts = 0; shifts < shiftAmnt % (int)sqrt(numProcessors); shifts++ )
         {
@@ -232,13 +248,14 @@ MPI_Barrier(MPI_COMM_WORLD );
         shiftUp( myArrayB, sumMatrixDimension * sumMatrixDimension, MASTER, numProcessors );
         }
 //////////////////////////////////////////////////////////////////////////////////////////////
-
+fprintf(masterFp, "Did initial shift \n");
     /* ///////////////
 
     CONVERT 2D ARAYS
 
     */ ///////////////
 
+fprintf(masterFp, "Going through 2D arrays \n");
     for( int i = 0; i < subMatrixSize/sqrt(numProcessors); i++)
     {
         for( int j = 0; j < subMatrixSize/sqrt(numProcessors); j++)
@@ -250,7 +267,7 @@ MPI_Barrier(MPI_COMM_WORLD );
             }
     }
 
-
+fprintf(masterFp, "Matrix Mult \n");
     // Optimize Vars Later
     /* MULTIPLY THE NUMBERS */
     for (int i = 0; i < (int)(subMatrixSize/sqrt(numProcessors)); i++)
@@ -263,7 +280,7 @@ MPI_Barrier(MPI_COMM_WORLD );
             }
         }
     }
-
+fprintf(masterFp, "Did the matrix Mult \n");
     /* ADD BACK TO 1D */
 
     }
