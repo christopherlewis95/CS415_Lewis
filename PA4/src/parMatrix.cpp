@@ -117,7 +117,7 @@ int main( int argc, char **argv ) {
 	else 
     { 
         // Slave I plulled down this curly cause that might have cause issues... you never know with todays society
-        printf("MAIN: my Rank going to slave is: %d", rank);
+        printf("MAIN: my Rank going to slave is: %d\n\n", rank);
         slave(rank);
     }
     
@@ -137,7 +137,7 @@ void master(char **argv )
     int myRank, numProcessors;
 	MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
-    fprintf(masterFp, "My rank is: %d", myRank);
+    fprintf(masterFp, "My rank is: %d\n", myRank);
     
     /*
     fprintf(masterFp, "Init Vars\n");
@@ -330,7 +330,7 @@ void slave( int taskId )
     int myRank;
 
     MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
-    printf("SLAVE: my Rank is: %d", myRank);
+    printf("SLAVE: my Rank is: %d\n\n", myRank);
     /*
 //////////////////////////////
     
