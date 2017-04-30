@@ -98,7 +98,7 @@ int main( int argc, char **argv ) {
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     
     FILE *masterFp;
-    masterFp = fopen("main.txt", "w");
+    masterFp = fopen("main.txt", "a+");
     fprintf(masterFp, "My rank is: %d\n", rank);
 
     /*
