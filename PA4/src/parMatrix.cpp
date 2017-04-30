@@ -184,7 +184,7 @@ fprintf(masterFp, "Nums Gnerated\n");
 			//go trhough the rows of submatrix
 			for(int row = 0; row < sumMatrixDimension; row++)
                 {
-				
+                    ////
 				// go throguh the cols of submatrix
 				for(int col = 0; col < sumMatrixDimension; col++)
                     {
