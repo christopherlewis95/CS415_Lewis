@@ -125,6 +125,7 @@ void master(char **argv )
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     fprintf(masterFp, "My rank is: %d", myRank);
 
+    /*
     fprintf(masterFp, "Init Vars\n");
     // Initialize Variables
     int sizeN = atoi(argv[1]);
@@ -201,11 +202,11 @@ fprintf(masterFp, "Nums Gnerated\n");
 			//actually send to other processes
 			else{
                 fprintf(masterFp, "Sending Data\n");
-                /*
+                
 				MPI_Send(sendArrayA, subMatrixSize, MPI_INT, processNum, M_A_DATA, MPI_COMM_WORLD);
                 
 				MPI_Send(sendArrayB, subMatrixSize, MPI_INT, processNum, M_B_DATA, MPI_COMM_WORLD);
-                */
+
                 fprintf(masterFp, "Sending Data Done\n");
 			}
 			
@@ -214,21 +215,20 @@ fprintf(masterFp, "Nums Gnerated\n");
 
 fprintf(masterFp, "Went through data\n");
 
-/* ADD A BARRIER */
+// ADD A BARRIER 
 
 
 
-/*/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
 
-                START THE MATRIX MATH HERE
+               // START THE MATRIX MATH HERE
 
-////////////////////////////////////////////////////*/
+////////////////////////////////////////////////////
 
- /* ///////////////
 
-    INIT MY 2D ARAYS
 
-    */ ///////////////
+//    INIT MY 2D ARAYS
+
 
     fprintf(masterFp, "Initing 2D arrays\n");
     int **myA = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
@@ -286,11 +286,11 @@ fprintf(masterFp, "Matrix Mult \n");
         }
     }
 fprintf(masterFp, "Did the matrix Mult \n");
-    /* ADD BACK TO 1D */
+    // ADD BACK TO 1D 
 
     // DELETE THESE SAVAGE BEASTS
 
-        /*
+        
             int *arrayA = new int [sizeN*sizeN];
         int *arrayB = new int [sizeN*sizeN];
         int *arrayC = new int [sizeN*sizeN];
@@ -300,9 +300,9 @@ fprintf(masterFp, "Did the matrix Mult \n");
 
         int *myArrayA = new int [subMatrixSize];
         int *myArrayB = new int [subMatrixSize];
+        
+
         */
-
-
 
     }
 
