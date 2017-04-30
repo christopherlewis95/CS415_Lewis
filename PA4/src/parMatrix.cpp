@@ -99,7 +99,7 @@ int main( int argc, char **argv ) {
     
     FILE *masterFp;
     masterFp = fopen("main.txt", "w");
-    fprintf(masterFp, "My rank is: %d\n", myRank);
+    fprintf(masterFp, "My rank is: %d\n", rank);
 
     /*
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
