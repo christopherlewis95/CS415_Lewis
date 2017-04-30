@@ -25,8 +25,8 @@ using namespace std;
 #define MY_MPI_DATA_TAG 3
 #define MASTER 0
 #define MAX_NUM 100000
-#define M_A_DATA 100
-#define M_B_DATA 101
+#define M_A_DATA 10
+#define M_B_DATA 11
 
 // function prototype for calculation
 
