@@ -99,12 +99,12 @@ int main( int argc, char **argv ) {
 	MPI_Comm_rank( MPI_COMM_WORLD, &rank );
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     
- //   FILE *masterFp;
- //   masterFp = fopen("main.txt", "a+");
+    FILE *masterFp;
+    masterFp = fopen("main.txt", "a+");
     cout << "My rank is: " << rank << "                             PLEASE HELP ME DEAR JESUS" << endl;  
 
 
-   // fprintf(masterFp, "My rank is: %d\n", rank);
+   
 
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,7 +114,10 @@ int main( int argc, char **argv ) {
 	}
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	else { // Slave
+	else 
+    { 
+        // Slave I plulled down this curly cause that might have cause issues... you never know with todays society
+        fprintf(masterFp, "My rank is: %d\n", rank);
         slave(rank);
     }
     
