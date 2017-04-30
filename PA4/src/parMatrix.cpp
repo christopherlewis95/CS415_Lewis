@@ -332,7 +332,7 @@ void slave( int taskId )
 
     MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
     printf("SLAVE: my Rank is: %d\n\n", myRank);
-    /*
+    
 //////////////////////////////
     
     int numProcessors;
@@ -344,7 +344,7 @@ void slave( int taskId )
     int loopAmnt;
 
  ////////////////////////////
-      
+      /*
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
     MPI_Probe(MASTER, M_A_DATA, MPI_COMM_WORLD, &status );
