@@ -287,6 +287,22 @@ fprintf(masterFp, "Matrix Mult \n");
 fprintf(masterFp, "Did the matrix Mult \n");
     /* ADD BACK TO 1D */
 
+    // DELETE THESE SAVAGE BEASTS
+
+        /*
+            int *arrayA = new int [sizeN*sizeN];
+        int *arrayB = new int [sizeN*sizeN];
+        int *arrayC = new int [sizeN*sizeN];
+
+        int *sendArrayA = new int [subMatrixSize];
+        int *sendArrayB = new int [subMatrixSize];
+
+        int *myArrayA = new int [subMatrixSize];
+        int *myArrayB = new int [subMatrixSize];
+        */
+
+
+
     }
 
 void slave( int taskId )
@@ -296,16 +312,20 @@ void slave( int taskId )
     FILE *fp;
     fp = fopen("slave.txt", "w");
     fprintf(fp,"This is wasting my time\n");
+    int myRank;
 
-    /*
+    MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
+//////////////////////////////
+    
     int numProcessors;
-    int shiftAmnt = taskId; // For Initial Shift
+   // int shiftAmnt = taskId; // For Initial Shift///////////////////////not going to work
+    int shiftAmnt = myRank;
     int shifts;
     int subMatrixSize;
     MPI_Status status;
     int loopAmnt;
 
-
+ ////////////////////////////
       
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
@@ -432,7 +452,7 @@ for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
     }
 
 
-    */
+    
     
     }
 
