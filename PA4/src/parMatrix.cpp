@@ -311,7 +311,7 @@ void slave( int taskId )
         
     
     FILE *fp;
-    fp = fopen("slave.txt", "w");
+    fp = fopen("slave.txt", "a+");
     fprintf(fp,"This is wasting my time\n");
     int myRank;
 
