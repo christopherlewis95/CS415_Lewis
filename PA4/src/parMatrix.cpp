@@ -92,7 +92,7 @@ int main( int argc, char **argv ) {
     printf("Arguements in the code: %d\n", argc);
     printf("This is to ensure alot of headache to be solved\n");
     */
-
+// /
     int rank;
     int numProcessors;
     MPI_Init( &argc, &argv );
