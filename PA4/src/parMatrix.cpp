@@ -294,14 +294,16 @@ void slave( int taskId )
         
     
     FILE *fp;
+    fp = fopen("slave.txt", "w");
+    fprintf(fp,"This is wasting my time\n");
+
     int numProcessors;
     int shiftAmnt = taskId; // For Initial Shift
     int shifts;
     int subMatrixSize;
     MPI_Status status;
     int loopAmnt;
-    fp = fopen("slave.txt", "w");
-    fprintf(fp,"This is wasting my time\n");
+
 
     /*    
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
