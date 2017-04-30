@@ -254,12 +254,11 @@ fprintf(masterFp, "Doing initial shift \n");
         }
 //////////////////////////////////////////////////////////////////////////////////////////////
 fprintf(masterFp, "Did initial shift \n");
-    /* ///////////////
+ ///////////////
 
-    CONVERT 2D ARAYS
+ ///   CONVERT 2D ARAYS
 
-    */ ///////////////
-
+///////
 fprintf(masterFp, "Going through 2D arrays \n");
     for( int i = 0; i < subMatrixSize/sqrt(numProcessors); i++)
     {
@@ -274,7 +273,7 @@ fprintf(masterFp, "Going through 2D arrays \n");
 
 fprintf(masterFp, "Matrix Mult \n");
     // Optimize Vars Later
-    /* MULTIPLY THE NUMBERS */
+    // MULT NUMBER
     for (int i = 0; i < (int)(subMatrixSize/sqrt(numProcessors)); i++)
     {
         for (int j = 0; j < (int)(subMatrixSize/sqrt(numProcessors)); j++)
@@ -304,7 +303,7 @@ void slave( int taskId )
     fp = fopen("slave.txt", "w");
     fprintf(fp,"This is wasting my time\n","w")
 
-    
+    /*    
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
     MPI_Probe(MASTER, M_A_DATA, MPI_COMM_WORLD, &status );
@@ -329,11 +328,11 @@ void slave( int taskId )
     MPI_Barrier(MPI_COMM_WORLD );
 
      fprintf(fp, "Recieved B\n");
-    /* ///////////////
 
-    INIT 2D ARAYS
 
-    */ ///////////////
+    //    INIT 2D ARAYS
+
+
 
     int **myA = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
     int **myB = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
@@ -364,21 +363,20 @@ void slave( int taskId )
 
 
 
-    /* ///////////////
 
-    Loop for the rest of the multiplication
+//    Loop for the rest of the multiplication
 
-    */ ///////////////
+
 
     fprintf(fp, "Looping for multiplication\n");
 for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
     {
         
-    /* ///////////////
 
-    CONVERT 2D ARAYS
 
-    */ ///////////////
+//    CONVERT 2D ARAYS
+
+
     fprintf(fp, "converting to 2D\n");
     for( int i = 0; i < subMatrixSize/sqrt(numProcessors); i++)
     {
@@ -392,7 +390,7 @@ for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
     }
 
     // Optimize Vars Later
-    /* MULTIPLY THE NUMBERS */
+    // MULTIPLY THE NUMBERS
 
     fprintf(fp, "Multiplying\n");
     for (int i = 0; i < (int)(subMatrixSize/sqrt(numProcessors)); i++)
@@ -431,7 +429,7 @@ for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
     }
 
 
-
+    */
     
     }
 
