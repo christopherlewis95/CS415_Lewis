@@ -117,7 +117,7 @@ int main( int argc, char **argv ) {
 	else 
     { 
         // Slave I plulled down this curly cause that might have cause issues... you never know with todays society
-        printf("MAIN: my Rank going to slave is: %d", myRank);
+        printf("MAIN: my Rank going to slave is: %d", rank);
         slave(rank);
     }
     
