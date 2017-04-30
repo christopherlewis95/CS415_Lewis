@@ -174,11 +174,11 @@ fprintf(masterFp, "Nums Gnerated\n");
 
     fprintf(masterFp, "Going through data\n");
 	// go though the rows with offset
-	for(int verticalOffset = 0 ; verticalOffset < sqrt(numProcessors); verticalOffset++)
+	for(int verticalOffset = 0 ; verticalOffset < (int)sqrt(numProcessors); verticalOffset++)
         {
 		
 		// go thorugh the columns using the offset
-		for(int horizontalOffset = 0; horizontalOffset < sqrt(numProcessors); horizontalOffset++)
+		for(int horizontalOffset = 0; horizontalOffset < (int)sqrt(numProcessors); horizontalOffset++)
             {
 			
 			//go trhough the rows of submatrix
@@ -201,7 +201,7 @@ fprintf(masterFp, "Nums Gnerated\n");
 			    }
 			
 			// send dtata to processes
-			processNum = verticalOffset*sqrt(numProcessors) + horizontalOffset;
+			processNum = verticalOffset*(int)sqrt(numProcessors) + horizontalOffset;
 			
 			//if the process num is MASTER put data in myArray<A or B>
 			if(processNum == MASTER)
@@ -248,19 +248,19 @@ fprintf(masterFp, "Went through data\n");
 
 
     fprintf(masterFp, "Initing 2D arrays\n");
-    int **myA = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
-    int **myB = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
-    int **myC = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
+    int **myA = new int *[(int)(subMatrixSize/(int)sqrt(numProcessors))];
+    int **myB = new int *[(int)(subMatrixSize/(int)sqrt(numProcessors))];
+    int **myC = new int *[(int)(subMatrixSize/(int)sqrt(numProcessors))];
 
     for( int i = 0; i < subMatrixSize; i++ )
     {
-    myA[i] = new int [(int)(subMatrixSize/sqrt(numProcessors))];
-    myB[i] = new int [(int)(subMatrixSize/sqrt(numProcessors))];
-    myC[i] = new int [(int)(subMatrixSize/sqrt(numProcessors))];
+    myA[i] = new int [(int)(subMatrixSize/(int)sqrt(numProcessors))];
+    myB[i] = new int [(int)(subMatrixSize/(int)sqrt(numProcessors))];
+    myC[i] = new int [(int)(subMatrixSize/(int)sqrt(numProcessors))];
     }
 
     fprintf(masterFp, "GenData for myC\n");
-    genZeroes(myC, (int)(subMatrixSize/sqrt(numProcessors)) );
+    genZeroes(myC, (int)(subMatrixSize/(int)sqrt(numProcessors)) );
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 fprintf(masterFp, "Doing initial shift \n");
@@ -278,13 +278,13 @@ fprintf(masterFp, "Did initial shift \n");
 
 ///////
 fprintf(masterFp, "Going through 2D arrays \n");
-    for( int i = 0; i < subMatrixSize/sqrt(numProcessors); i++)
+    for( int i = 0; i < subMatrixSize/(int)sqrt(numProcessors); i++)
     {
-        for( int j = 0; j < subMatrixSize/sqrt(numProcessors); j++)
+        for( int j = 0; j < subMatrixSize/(int)sqrt(numProcessors); j++)
             {
 
-                myA[i][j] = arrayA[ (j * (int)(subMatrixSize/sqrt(numProcessors))) + i];
-                myB[i][j] = arrayB[ (j * (int)(subMatrixSize/sqrt(numProcessors))) + i];
+                myA[i][j] = arrayA[ (j * (int)(subMatrixSize/(int)sqrt(numProcessors))) + i];
+                myB[i][j] = arrayB[ (j * (int)(subMatrixSize/(int)sqrt(numProcessors))) + i];
 
             }
     }
@@ -292,11 +292,11 @@ fprintf(masterFp, "Going through 2D arrays \n");
 fprintf(masterFp, "Matrix Mult \n");
     // Optimize Vars Later
     // MULT NUMBER
-    for (int i = 0; i < (int)(subMatrixSize/sqrt(numProcessors)); i++)
+    for (int i = 0; i < (int)(subMatrixSize/(int)sqrt(numProcessors)); i++)
     {
-        for (int j = 0; j < (int)(subMatrixSize/sqrt(numProcessors)); j++)
+        for (int j = 0; j < (int)(subMatrixSize/(int)sqrt(numProcessors)); j++)
         {
-            for (int k = 0; k < (int)(subMatrixSize/sqrt(numProcessors)); k++)
+            for (int k = 0; k < (int)(subMatrixSize/(int)sqrt(numProcessors)); k++)
             {
                 myC[i][j] = myC[i][j] + myA[i][k] * myB[k][j];
             }
@@ -377,19 +377,19 @@ void slave( int taskId )
 
 
 
-    int **myA = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
-    int **myB = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
-    int **myC = new int *[(int)(subMatrixSize/sqrt(numProcessors))];
+    int **myA = new int *[(int)(subMatrixSize/(int)sqrt(numProcessors))];
+    int **myB = new int *[(int)(subMatrixSize/(int)sqrt(numProcessors))];
+    int **myC = new int *[(int)(subMatrixSize/(int)sqrt(numProcessors))];
 
     for( int i = 0; i < subMatrixSize; i++ )
     {
-    myA[i] = new int [(int)(subMatrixSize/sqrt(numProcessors))];
-    myB[i] = new int [(int)(subMatrixSize/sqrt(numProcessors))];
-    myC[i] = new int [(int)(subMatrixSize/sqrt(numProcessors))];
+    myA[i] = new int [(int)(subMatrixSize/(int)sqrt(numProcessors))];
+    myB[i] = new int [(int)(subMatrixSize/(int)sqrt(numProcessors))];
+    myC[i] = new int [(int)(subMatrixSize/(int)sqrt(numProcessors))];
     }
 
     fprintf(fp, "Generating C\n");
-    genZeroes(myC, (int)(subMatrixSize/sqrt(numProcessors)) );
+    genZeroes(myC, (int)(subMatrixSize/(int)sqrt(numProcessors)) );
 
     fprintf(fp, "Generated C\n");
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -412,7 +412,7 @@ void slave( int taskId )
 
 
     fprintf(fp, "Looping for multiplication\n");
-for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
+for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     {
         
 
@@ -421,13 +421,13 @@ for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
 
 
     fprintf(fp, "converting to 2D\n");
-    for( int i = 0; i < subMatrixSize/sqrt(numProcessors); i++)
+    for( int i = 0; i < subMatrixSize/(int)sqrt(numProcessors); i++)
     {
-        for( int j = 0; j < subMatrixSize/sqrt(numProcessors); j++)
+        for( int j = 0; j < subMatrixSize/(int)sqrt(numProcessors); j++)
             {
 
-                myA[i][j] = arrayA[ (j * (int)(subMatrixSize/sqrt(numProcessors))) + i];
-                myB[i][j] = arrayB[ (j * (int)(subMatrixSize/sqrt(numProcessors))) + i];
+                myA[i][j] = arrayA[ (j * (int)(subMatrixSize/(int)sqrt(numProcessors))) + i];
+                myB[i][j] = arrayB[ (j * (int)(subMatrixSize/(int)sqrt(numProcessors))) + i];
 
             }
     }
@@ -436,11 +436,11 @@ for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
     // MULTIPLY THE NUMBERS
 
     fprintf(fp, "Multiplying\n");
-    for (int i = 0; i < (int)(subMatrixSize/sqrt(numProcessors)); i++)
+    for (int i = 0; i < (int)(subMatrixSize/(int)sqrt(numProcessors)); i++)
     {
-        for (int j = 0; j < (int)(subMatrixSize/sqrt(numProcessors)); j++)
+        for (int j = 0; j < (int)(subMatrixSize/(int)sqrt(numProcessors)); j++)
         {
-            for (int k = 0; k < (int)(subMatrixSize/sqrt(numProcessors)); k++)
+            for (int k = 0; k < (int)(subMatrixSize/(int)sqrt(numProcessors)); k++)
             {
                 myC[i][j] = myC[i][j] + myA[i][k] * myB[k][j];
                // cout << myC[i][j];
@@ -451,11 +451,11 @@ for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
 
     fprintf(fp, "Putting into 1D\n");
     // Put into 1D array for passing
-    for( int i = 0; i < subMatrixSize/sqrt(numProcessors); i++)
+    for( int i = 0; i < subMatrixSize/(int)sqrt(numProcessors); i++)
     {
-        for( int j = 0; j < subMatrixSize/sqrt(numProcessors); j++)
+        for( int j = 0; j < subMatrixSize/(int)sqrt(numProcessors); j++)
             {
-                for( int k = 0; k < subMatrixSize/sqrt(numProcessors); k++ )
+                for( int k = 0; k < subMatrixSize/(int)sqrt(numProcessors); k++ )
                     {
                         arrayA[k] = myA[i][j];
                         arrayB[k] = myB[i][j];
@@ -552,7 +552,7 @@ int getIdLeft( int myProcessor, int numProcessors )
 
     if(( myProcessor % (int)sqrt(numProcessors)) == 0 )
         {
-            idToMyLeft = myProcessor + (int)(sqrt(numProcessors) - 1);
+            idToMyLeft = myProcessor + (int)((int)sqrt(numProcessors) - 1);
         }
 
     else{
@@ -571,9 +571,9 @@ int getIdRight( int myProcessor, int numProcessors )
     {
     int idToMyRight;
 
-    if( (myProcessor % (int)sqrt(numProcessors)) >= (int)(sqrt(numProcessors) - 1) )
+    if( (myProcessor % (int)sqrt(numProcessors)) >= (int)((int)sqrt(numProcessors) - 1) )
         {
-            idToMyRight = myProcessor - ( sqrt(numProcessors) - 1 );
+            idToMyRight = myProcessor - ( (int)sqrt(numProcessors) - 1 );
         }
 
     else{
