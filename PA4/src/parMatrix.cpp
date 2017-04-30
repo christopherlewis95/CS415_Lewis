@@ -212,7 +212,7 @@ fprintf(masterFp, "Nums Gnerated\n");
 					myArrayB[i] = sendArrayB[i];
 				}
 			}
-			/*
+			
 			//actually send to other processes
 			else{
                 fprintf(masterFp, "Sending Data\n");
@@ -223,7 +223,7 @@ fprintf(masterFp, "Nums Gnerated\n");
 
                 fprintf(masterFp, "Sending Data Done\n");
 			}
-            */
+            
 			
 		}
 	}
