@@ -88,8 +88,10 @@ void genZeroes( int **arrayC, int sizeN );
 
 // main function
 int main( int argc, char **argv ) {
+    /*
     printf("Arguements in the code: %d\n", argc);
     printf("This is to ensure alot of headache to be solved\n");
+    */
 
     int rank;
     int numProcessors;
@@ -97,14 +99,14 @@ int main( int argc, char **argv ) {
 	MPI_Comm_rank( MPI_COMM_WORLD, &rank );
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     
-    FILE *masterFp;
-    masterFp = fopen("main.txt", "a+");
-    cout << "My rank is: " << rank << " PLEASE HELP ME DEAR JESUS" << endl;  
+ //   FILE *masterFp;
+ //   masterFp = fopen("main.txt", "a+");
+    cout << "My rank is: " << rank << "                             PLEASE HELP ME DEAR JESUS" << endl;  
 
 
    // fprintf(masterFp, "My rank is: %d\n", rank);
 
-    /*
+    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if( rank == 0 ) // Master
     { 
@@ -115,7 +117,7 @@ int main( int argc, char **argv ) {
 	else { // Slave
         slave(rank);
     }
-    */
+    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	MPI_Finalize();
     
@@ -126,14 +128,14 @@ int main( int argc, char **argv ) {
 
 void master(char **argv )
     {
-    /*
+    
     FILE *masterFp;
-    masterFp = fopen("master.txt", "w");
+    masterFp = fopen("master.txt", "a+");
     int myRank, numProcessors;
 	MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     fprintf(masterFp, "My rank is: %d", myRank);
-    */
+    
     /*
     fprintf(masterFp, "Init Vars\n");
     // Initialize Variables
