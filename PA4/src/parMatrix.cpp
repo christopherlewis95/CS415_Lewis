@@ -303,6 +303,8 @@ void slave( int taskId )
     int loopAmnt;
     fp = fopen("slave.txt", "w");
     fprintf(fp,"This is wasting my time\n","w")
+
+    
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
     MPI_Probe(MASTER, M_A_DATA, MPI_COMM_WORLD, &status );
