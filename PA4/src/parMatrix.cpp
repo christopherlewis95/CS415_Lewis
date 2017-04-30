@@ -88,7 +88,7 @@ void genZeroes( int **arrayC, int sizeN );
 
 // main function
 int main( int argc, char **argv ) {
-    printf("Arguements in the code: %d", argc);
+    printf("Arguements in the code: %d\n", argc);
     printf("This is to ensure alot of headache to be solved\n");
 
     int rank;
@@ -96,21 +96,21 @@ int main( int argc, char **argv ) {
     MPI_Init( &argc, &argv );
 	MPI_Comm_rank( MPI_COMM_WORLD, &rank );
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
-    /*
+    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if( rank == 0 ) // Master
     { 
         master(argv);
 	}
-
+/*
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	else { // Slave
         slave(rank);
     }
-
+*/
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	MPI_Finalize();
-    */
+    
 	return 0;
 }
 
