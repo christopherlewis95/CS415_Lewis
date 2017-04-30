@@ -97,6 +97,11 @@ int main( int argc, char **argv ) {
 	MPI_Comm_rank( MPI_COMM_WORLD, &rank );
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     
+    FILE *masterFp;
+    masterFp = fopen("main.txt", "w");
+    fprintf(masterFp, "My rank is: %d\n", myRank);
+
+    /*
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if( rank == 0 ) // Master
     { 
@@ -107,7 +112,7 @@ int main( int argc, char **argv ) {
 	else { // Slave
         slave(rank);
     }
-    
+    */
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	MPI_Finalize();
     
@@ -118,13 +123,14 @@ int main( int argc, char **argv ) {
 
 void master(char **argv )
     {
+    /*
     FILE *masterFp;
     masterFp = fopen("master.txt", "w");
     int myRank, numProcessors;
 	MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     fprintf(masterFp, "My rank is: %d", myRank);
-
+    */
     /*
     fprintf(masterFp, "Init Vars\n");
     // Initialize Variables
