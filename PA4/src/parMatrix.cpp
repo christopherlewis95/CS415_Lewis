@@ -120,7 +120,7 @@ int main( int argc, char **argv ) {
         printf("MAIN: my Rank going to slave is: %d\n\n", rank);
         slave(rank);
     }
-    
+    //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	MPI_Finalize();
     
