@@ -99,7 +99,7 @@ int main( int argc, char **argv ) {
     
     FILE *masterFp;
     masterFp = fopen("main.txt", "a+");
-    cout << "My rank is: " << rank << " PLEASE HELP ME DEAR JESUS" << endl;
+    cout << "My rank is: " << rank << " PLEASE HELP ME DEAR JESUS" << endl;  
 
 
    // fprintf(masterFp, "My rank is: %d\n", rank);
