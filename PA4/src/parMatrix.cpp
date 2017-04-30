@@ -292,6 +292,7 @@ fprintf(masterFp, "Did the matrix Mult \n");
 
 void slave( int taskId )
     {
+    printf("This is wasting my time\n","w")
     FILE *fp;
     int numProcessors;
     int shiftAmnt = taskId; // For Initial Shift
