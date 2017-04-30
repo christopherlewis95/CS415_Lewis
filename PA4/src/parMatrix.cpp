@@ -345,9 +345,23 @@ void slave( int taskId )
     MPI_Status status;
     int loopAmnt;
 
- ////////////////////////////
       
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
+
+/*
+    MPI_Probe(MASTER, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status );
+
+    MPI_Get_count( &status, MPI_INT, &capacity );
+
+    int *arr = new int [capacity];
+
+    //cout << capacity << endl;
+    MPI_Recv( arr, capacity, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
+
+    MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
+*/
+ ////////////////////////////
+
 
     MPI_Probe(MASTER, M_A_DATA, MPI_COMM_WORLD, &status );
 
@@ -356,7 +370,7 @@ void slave( int taskId )
     int *arrayA = new int [subMatrixSize];
 
     fprintf(fp, "Recieving A\n");
-     MPI_Recv( &arrayA, subMatrixSize, MPI_INT, MASTER, M_A_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
+     MPI_Recv( arrayA, subMatrixSize, MPI_INT, 0, M_A_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
      fprintf(fp, "Recieved A\n");
 
 
@@ -366,7 +380,7 @@ void slave( int taskId )
 
     int *arrayB = new int [subMatrixSize];
 
-     MPI_Recv( &arrayB, subMatrixSize, MPI_INT, MASTER, M_B_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
+     MPI_Recv( arrayB, subMatrixSize, MPI_INT, MASTER, M_B_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
 
      fprintf(fp, "Recieved B\n");
 
