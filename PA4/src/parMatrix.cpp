@@ -344,7 +344,7 @@ void slave( int taskId )
     int loopAmnt;
 
  ////////////////////////////
-      /*
+      
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
     MPI_Probe(MASTER, M_A_DATA, MPI_COMM_WORLD, &status );
@@ -370,7 +370,7 @@ void slave( int taskId )
 
      fprintf(fp, "Recieved B\n");
 
-
+     /*
     //    INIT 2D ARAYS
 
 
