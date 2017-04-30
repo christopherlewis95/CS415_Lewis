@@ -123,7 +123,7 @@ void master(char **argv )
     int myRank, numProcessors;
 	MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
-
+    fprintf(masterFp, "My rank is: %d", myRank);
 
     fprintf(masterFp, "Init Vars\n");
     // Initialize Variables
@@ -315,6 +315,8 @@ void slave( int taskId )
     int myRank;
 
     MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
+    fprintf(fp, "my Rank is: %d", myRank);
+    /*
 //////////////////////////////
     
     int numProcessors;
@@ -453,7 +455,7 @@ for( loopAmnt = 0; loopAmnt < sqrt(numProcessors); loopAmnt++ )
 
 
     
-    
+    */
     }
 
 void shiftLeft( int *matA, int size, int myProcessor, int numProcessors )
