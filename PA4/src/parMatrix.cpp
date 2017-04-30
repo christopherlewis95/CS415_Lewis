@@ -325,9 +325,9 @@ void slave( int taskId )
     {
         
     
-   // FILE *fp;
-   // fp = fopen("slave.txt", "a+");
-   // fprintf(fp,"This is wasting my time\n");
+    FILE *fp;
+    fp = fopen("slave.txt", "a+");
+    fprintf(fp,"This is wasting my time\n");
     int myRank;
 
     MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
