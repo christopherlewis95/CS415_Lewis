@@ -297,6 +297,7 @@ void slave( int taskId )
     fp = fopen("slave.txt", "w");
     fprintf(fp,"This is wasting my time\n");
 
+    /*
     int numProcessors;
     int shiftAmnt = taskId; // For Initial Shift
     int shifts;
@@ -305,7 +306,7 @@ void slave( int taskId )
     int loopAmnt;
 
 
-    /*    
+      
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
     MPI_Probe(MASTER, M_A_DATA, MPI_COMM_WORLD, &status );
