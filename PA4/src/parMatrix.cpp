@@ -292,7 +292,8 @@ fprintf(masterFp, "Did the matrix Mult \n");
 
 void slave( int taskId )
     {
-    printf("This is wasting my time\n","w")
+        
+    
     FILE *fp;
     int numProcessors;
     int shiftAmnt = taskId; // For Initial Shift
@@ -301,7 +302,7 @@ void slave( int taskId )
     MPI_Status status;
     int loopAmnt;
     fp = fopen("slave.txt", "w");
-
+    fprintf(fp,"This is wasting my time\n","w")
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
     MPI_Probe(MASTER, M_A_DATA, MPI_COMM_WORLD, &status );
