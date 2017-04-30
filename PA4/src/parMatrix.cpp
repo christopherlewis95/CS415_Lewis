@@ -215,7 +215,7 @@ fprintf(masterFp, "Nums Gnerated\n");
 			
 			//actually send to other processes
 			else{
-                /*
+                
                 fprintf(masterFp, "Sending Data\n");
                 // MPI_Send(&arr[counter], split, MPI_INT, i, MY_MPI_DATA_TAG, MPI_COMM_WORLD); 
 				MPI_Send(sendArrayA, subMatrixSize, MPI_INT, processNum, M_A_DATA, MPI_COMM_WORLD);
@@ -223,7 +223,7 @@ fprintf(masterFp, "Nums Gnerated\n");
 				MPI_Send(sendArrayB, subMatrixSize, MPI_INT, processNum, M_B_DATA, MPI_COMM_WORLD);
 
                 fprintf(masterFp, "Sending Data Done\n");
-                */
+                
 			}
             
 			
