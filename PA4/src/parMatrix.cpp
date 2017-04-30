@@ -139,11 +139,11 @@ void master(char **argv )
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     fprintf(masterFp, "My rank is: %d\n", myRank);
     
-    /*
+    
     fprintf(masterFp, "Init Vars\n");
     // Initialize Variables
     int sizeN = atoi(argv[1]);
-    int sumMatrixDimension = sizeN/sqrt(numProcessors);
+    int sumMatrixDimension = sizeN/(int)sqrt(numProcessors);
     int fullMatrixDimension = sizeN;
     int rowOriginForSubMatrix;
     int colOriginForSubMatrix;
@@ -212,7 +212,7 @@ fprintf(masterFp, "Nums Gnerated\n");
 					myArrayB[i] = sendArrayB[i];
 				}
 			}
-			
+			/*
 			//actually send to other processes
 			else{
                 fprintf(masterFp, "Sending Data\n");
@@ -223,6 +223,7 @@ fprintf(masterFp, "Nums Gnerated\n");
 
                 fprintf(masterFp, "Sending Data Done\n");
 			}
+            */
 			
 		}
 	}
@@ -239,7 +240,7 @@ fprintf(masterFp, "Went through data\n");
 
 ////////////////////////////////////////////////////
 
-
+/*
 
 //    INIT MY 2D ARAYS
 
@@ -335,7 +336,7 @@ void slave( int taskId )
 //////////////////////////////
     
     int numProcessors;
-   // int shiftAmnt = taskId; // For Initial Shift///////////////////////not going to work
+   // int shiftAmnt = taskId; // For Initial Shift
     int shiftAmnt = myRank;
     int shifts;
     int subMatrixSize;
