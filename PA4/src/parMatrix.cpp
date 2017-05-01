@@ -384,7 +384,7 @@ void slave( int taskId )
 
      fprintf(fp, "Recieved B\n");
 
-     /*
+     
     fprintf(fp, "Array A\n");
      for(int i = 0; i < subMatrixSize; i++){
 
@@ -392,7 +392,7 @@ void slave( int taskId )
 
 
      }
-//
+
    fprintf(fp, "Array B\n");
      for(int i = 0; i < subMatrixSize; i++){
 
@@ -400,7 +400,7 @@ void slave( int taskId )
 
 
      }
-     */
+     
      
     //    INIT 2D ARAYS
 
