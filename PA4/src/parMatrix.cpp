@@ -337,8 +337,6 @@ fprintf(masterFp, "Did the matrix Mult \n");
 
 void slave( int taskId )
     {
-        
-    
     FILE *fp;
     fp = fopen("slave.txt", "a+");
     fprintf(fp,"This is wasting my time\n");
@@ -360,21 +358,6 @@ void slave( int taskId )
       
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
 
-/*
-    MPI_Probe(MASTER, MY_MPI_DATA_TAG, MPI_COMM_WORLD, &status );
-
-    MPI_Get_count( &status, MPI_INT, &capacity );
-
-    int *arr = new int [capacity];
-
-    //cout << capacity << endl;
-    MPI_Recv( arr, capacity, MPI_INT, 0, MY_MPI_DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE ); // '0' needs to be master variable
-
-    MPI_Barrier(MPI_COMM_WORLD); // Stopped at MPI Barrier
-*/
- ////////////////////////////
-
-
     MPI_Probe(MASTER, M_A_DATA, MPI_COMM_WORLD, &status );
 
     MPI_Get_count( &status, MPI_INT, &subMatrixSize );
@@ -387,7 +370,7 @@ void slave( int taskId )
 
 
     MPI_Probe(MASTER, M_B_DATA, MPI_COMM_WORLD, &status );
-
+ 
     MPI_Get_count( &status, MPI_INT, &subMatrixSize );
 
     int *arrayB = new int [subMatrixSize];
@@ -402,9 +385,7 @@ void slave( int taskId )
 
         fprintf(fp, "%d ", arrayA[i]);
 
-
      }
-
         fprintf(fp, "\n");
 
    fprintf(fp, "Array B\n");
