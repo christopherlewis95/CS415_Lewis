@@ -410,19 +410,19 @@ void slave( int taskId )
 
 
 
-    int **myA = new int *[subMatrixSize];
-    int **myB = new int *[subMatrixSize];
-    int **myC = new int *[subMatrixSize];
+    int **myA = new int *[(int)sqrt(subMatrixSize)];
+    int **myB = new int *[(int)sqrt(subMatrixSize)];
+    int **myC = new int *[(int)sqrt(subMatrixSize)];
 
     for( int i = 0; i < subMatrixSize; i++ )
     {
-    myA[i] = new int [subMatrixSize];
-    myB[i] = new int [subMatrixSize];
-    myC[i] = new int [subMatrixSize];
+    myA[i] = new int [(int)sqrt(subMatrixSize)];
+    myB[i] = new int [(int)sqrt(subMatrixSize)];
+    myC[i] = new int [(int)sqrt(subMatrixSize)];
     }
 
     fprintf(fp, "Generating C\n");
-    genZeroes(myC, subMatrixSize );
+    genZeroes(myC, (int)sqrt(subMatrixSize) );
 
     fprintf(fp, "Generated C\n");
 
@@ -465,13 +465,13 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     
 
     fprintf(fp, "converting to 2D\n");
-    for( int i = 0; i < subMatrixSize; i++)
+    for( int i = 0; i < subMatrixSize/(int)sqrt(numProcessors); i++)
     {
-        for( int j = 0; j < subMatrixSize; j++)
+        for( int j = 0; j < subMatrixSize/(int)sqrt(numProcessors); j++)
             {
 
-                myA[i][j] = arrayA[ (j * subMatrixSize) + i];
-                myB[i][j] = arrayB[ (j * subMatrixSize) + i];
+                myA[i][j] = arrayA[ (j * (int)sqrt(subMatrixSize)) + i];
+                myB[i][j] = arrayB[ (j * (int)sqrt(subMatrixSize)) + i];
 
             }
     }
@@ -479,12 +479,11 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     // Optimize Vars Later
     // MULTIPLY THE NUMBERS
 
-    int loopLength = subMatrixSize;
+    int loopLength = (int)sqrt(subMatrixSize));
     fprintf(fp, "Loop length is: %d\n", loopLength);
 
     fprintf(fp, "Multiplying\n");
     
-    /*
     for (int i = 0; i < loopLength; i++)
     {
         for (int j = 0; j < loopLength; j++)
@@ -497,8 +496,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         }
         //cout << endl;
     }
-    */
-
+    
 
     /*
     fprintf(fp, "Putting into 1D\n");
