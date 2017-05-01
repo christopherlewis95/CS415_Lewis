@@ -384,7 +384,7 @@ void slave( int taskId )
 
      fprintf(fp, "Recieved B\n");
 
-
+     /*
     fprintf(fp, "Array A\n");
      for(int i = 0; i < subMatrixSize; i++){
 
@@ -400,8 +400,8 @@ void slave( int taskId )
 
 
      }
-
-     /*
+     */
+     
     //    INIT 2D ARAYS
 
 
@@ -421,6 +421,9 @@ void slave( int taskId )
     genZeroes(myC, (int)(subMatrixSize/(int)sqrt(numProcessors)) );
 
     fprintf(fp, "Generated C\n");
+
+
+/*
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Initial shift (Shift Amount is made by task id % sqrtNumP)
 
