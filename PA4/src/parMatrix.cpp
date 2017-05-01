@@ -475,7 +475,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
 
             }
     }
-    /*
+    
     // Optimize Vars Later
     // MULTIPLY THE NUMBERS
 
@@ -492,7 +492,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         }
         //cout << endl;
     }
-
+    /*
     fprintf(fp, "Putting into 1D\n");
     // Put into 1D array for passing
     for( int i = 0; i < subMatrixSize/(int)sqrt(numProcessors); i++)
