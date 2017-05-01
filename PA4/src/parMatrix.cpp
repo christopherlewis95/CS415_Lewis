@@ -392,7 +392,7 @@ void slave( int taskId )
 
 
      }
-
+//
    fprintf(fp, "Array B\n");
      for(int i = 0; i < subMatrixSize; i++){
 
