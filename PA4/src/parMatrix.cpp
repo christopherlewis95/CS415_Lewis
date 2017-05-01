@@ -400,7 +400,7 @@ void slave( int taskId )
     fprintf(fp, "Array A\n");
      for(int i = 0; i < subMatrixSize; i++){
 
-        fprintf(fp, "%d", arrayA[i]);
+        fprintf(fp, "%d ", arrayA[i]);
 
 
      }
@@ -410,7 +410,7 @@ void slave( int taskId )
    fprintf(fp, "Array B\n");
      for(int i = 0; i < subMatrixSize; i++){
 
-        fprintf(fp, "%d", arrayB[i]);
+        fprintf(fp, "%d ", arrayB[i]);
 
 
      }
