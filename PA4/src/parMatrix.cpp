@@ -388,23 +388,25 @@ void slave( int taskId )
 
      fprintf(fp, "Recieved B\n");
 
-    /*     
+    
     fprintf(fp, "Array A\n");
      for(int i = 0; i < subMatrixSize; i++){
 
-        fprintf(fp, "%d\n", arrayA[i]);
+        fprintf(fp, "%d", arrayA[i]);
 
 
      }
+
+        fprintf(fp, "\n");
 
    fprintf(fp, "Array B\n");
      for(int i = 0; i < subMatrixSize; i++){
 
-        fprintf(fp, "%d\n", arrayB[i]);
+        fprintf(fp, "%d", arrayB[i]);
 
 
      }
-     */
+     fprintf(fp, "\n");
      
     //    INIT 2D ARAYS
 
@@ -465,9 +467,9 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     
 
     fprintf(fp, "converting to 2D\n");
-    for( int i = 0; i < subMatrixSize/(int)sqrt(numProcessors); i++)
+    for( int i = 0; i < subMatrixSize; i++)
     {
-        for( int j = 0; j < subMatrixSize/(int)sqrt(numProcessors); j++)
+        for( int j = 0; j < subMatrixSize; j++)
             {
 
                 myA[i][j] = arrayA[ (j * (int)sqrt(subMatrixSize)) + i];
@@ -476,9 +478,32 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
             }
     }
     
+    fprintf(fp, "myA\n");
+    for( int i = 0; i < (int)sqrt(subMatrixSize); i++ )
+        {
+            for( int j = 0; j < (int)sqrt(subMatrixSize); j++ )
+            {
+            fprintf(fp, "%d", myA[i][j]);
+            }
+        fprintf(fp, "\n");
+        }
+
+    fprintf(fp, "myB\n");
+    for( int i = 0; i < (int)sqrt(subMatrixSize); i++ )
+        {
+            for( int j = 0; j < (int)sqrt(subMatrixSize); j++ )
+            {
+            fprintf(fp, "%d", myB[i][j]);
+            }
+        fprintf(fp, "\n");
+        }
     // Optimize Vars Later
     // MULTIPLY THE NUMBERS
 //
+
+
+    /*
+
     int loopLength = (int)sqrt(subMatrixSize);
     fprintf(fp, "Loop length is: %d\n", loopLength);
 
@@ -496,7 +521,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         }
         //cout << endl;
     }
-    
+    */
 
     /*
     fprintf(fp, "Putting into 1D\n");
