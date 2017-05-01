@@ -410,19 +410,19 @@ void slave( int taskId )
 
 
 
-    int **myA = new int *[(int)(subMatrixSize/(int)sqrt(numProcessors))];
-    int **myB = new int *[(int)(subMatrixSize/(int)sqrt(numProcessors))];
-    int **myC = new int *[(int)(subMatrixSize/(int)sqrt(numProcessors))];
+    int **myA = new int *[subMatrixSize];
+    int **myB = new int *[subMatrixSize];
+    int **myC = new int *[subMatrixSize];
 
     for( int i = 0; i < subMatrixSize; i++ )
     {
-    myA[i] = new int [(int)(subMatrixSize/(int)sqrt(numProcessors))];
-    myB[i] = new int [(int)(subMatrixSize/(int)sqrt(numProcessors))];
-    myC[i] = new int [(int)(subMatrixSize/(int)sqrt(numProcessors))];
+    myA[i] = new int [subMatrixSize];
+    myB[i] = new int [subMatrixSize];
+    myC[i] = new int [subMatrixSize];
     }
 
     fprintf(fp, "Generating C\n");
-    genZeroes(myC, (int)(subMatrixSize/(int)sqrt(numProcessors)) );
+    genZeroes(myC, subMatrixSize );
 
     fprintf(fp, "Generated C\n");
 
@@ -465,13 +465,13 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     
 
     fprintf(fp, "converting to 2D\n");
-    for( int i = 0; i < subMatrixSize/(int)sqrt(numProcessors); i++)
+    for( int i = 0; i < subMatrixSize; i++)
     {
-        for( int j = 0; j < subMatrixSize/(int)sqrt(numProcessors); j++)
+        for( int j = 0; j < subMatrixSize; j++)
             {
 
-                myA[i][j] = arrayA[ (j * (int)(subMatrixSize/(int)sqrt(numProcessors))) + i];
-                myB[i][j] = arrayB[ (j * (int)(subMatrixSize/(int)sqrt(numProcessors))) + i];
+                myA[i][j] = arrayA[ (j * subMatrixSize) + i];
+                myB[i][j] = arrayB[ (j * subMatrixSize) + i];
 
             }
     }
@@ -479,7 +479,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     // Optimize Vars Later
     // MULTIPLY THE NUMBERS
 
-    int loopLength = subMatrixSize/(int)sqrt(numProcessors);
+    int loopLength = subMatrixSize);
     fprintf(fp, "Loop length is: %d\n", loopLength);
 
     fprintf(fp, "Multiplying\n");
@@ -498,7 +498,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     }
     */
 
-    
+
     /*
     fprintf(fp, "Putting into 1D\n");
     // Put into 1D array for passing
