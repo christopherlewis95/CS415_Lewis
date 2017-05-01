@@ -516,7 +516,6 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     */
     }
 
-    */
     }
 
 /*
