@@ -479,12 +479,15 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     // Optimize Vars Later
     // MULTIPLY THE NUMBERS
 
+    int loopLength = subMatrixSize/(int)sqrt(numProcessors);
+
+
     fprintf(fp, "Multiplying\n");
-    for (int i = 0; i < (int)(subMatrixSize/(int)sqrt(numProcessors)); i++)
+    for (int i = 0; i < loopLength; i++)
     {
-        for (int j = 0; j < (int)(subMatrixSize/(int)sqrt(numProcessors)); j++)
+        for (int j = 0; j < loopLength; j++)
         {
-            for (int k = 0; k < (int)(subMatrixSize/(int)sqrt(numProcessors)); k++)
+            for (int k = 0; k < loopLength; k++)
             {
                 myC[i][j] = myC[i][j] + myA[i][k] * myB[k][j];
                // cout << myC[i][j];
