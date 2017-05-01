@@ -447,23 +447,9 @@ void slave( int taskId )
     // Initial shift (Shift Amount is made by task id % sqrtNumP)
 initShift( myRank, numProcessors, left, up, right, down, subMatrixSize, (int)sqrt(numProcessors), arrayA, arrayB);
 
-/*
-    fprintf(fp, "Doing INitiaial Shift C\n");
-    for( shifts = 0; shifts < shiftAmnt % (int)sqrt(numProcessors); shifts++ )
-        {
-        shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
-        shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
-        }
-    fprintf(fp, "Did Initial Shift\n");
-    */
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
 //    Loop for the rest of the multiplication
-
-
 
     fprintf(fp, "Looping for multiplication\n");
 for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
@@ -475,9 +461,9 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     
 
     fprintf(fp, "converting to 2D\n");
-    for( int i = 0; i < subMatrixSize; i++)
+    for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
     {
-        for( int j = 0; j < subMatrixSize; j++)
+        for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
             {
 
                 myA[i][j] = arrayA[ (j * (int)sqrt(subMatrixSize)) + i];
