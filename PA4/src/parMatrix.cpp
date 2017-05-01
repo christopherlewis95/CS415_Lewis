@@ -471,7 +471,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
 
             }
     }
-    
+    /*
     fprintf(fp, "myA\n");
     for( int i = 0; i < (int)sqrt(subMatrixSize); i++ )
         {
@@ -496,7 +496,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
 //
 
 
-    /*
+    
 
     int loopLength = (int)sqrt(subMatrixSize);
     fprintf(fp, "Loop length is: %d\n", loopLength);
