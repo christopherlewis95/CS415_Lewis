@@ -423,19 +423,19 @@ void slave( int taskId )
     fprintf(fp, "Generated C\n");
 
 
-/*
+
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Initial shift (Shift Amount is made by task id % sqrtNumP)
 
     fprintf(fp, "Doing INitiaial Shift C\n");
     for( shifts = 0; shifts < shiftAmnt % (int)sqrt(numProcessors); shifts++ )
         {
-        shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
-        shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
+        shiftLeft( &arrayA, subMatrixSize, taskId, numProcessors );
+        shiftUp( &arrayB, subMatrixSize, taskId, numProcessors );
         }
     fprintf(fp, "Did Initial Shift\n");
 //////////////////////////////////////////////////////////////////////////////////////////////
-*/
+
 
 /*
 
