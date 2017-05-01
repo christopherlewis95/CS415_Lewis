@@ -310,20 +310,28 @@ fprintf(masterFp, "Did the matrix Mult \n");
     // ADD BACK TO 1D 
 
     // DELETE THESE SAVAGE BEASTS
-
+*/
         
-            int *arrayA = new int [sizeN*sizeN];
-        int *arrayB = new int [sizeN*sizeN];
-        int *arrayC = new int [sizeN*sizeN];
+        delete arrayA;
+      delete arrayB;
+        delete arrayC;
 
-        int *sendArrayA = new int [subMatrixSize];
-        int *sendArrayB = new int [subMatrixSize];
+        delete sendArrayA;
+        delete sendArrayB;
 
-        int *myArrayA = new int [subMatrixSize];
-        int *myArrayB = new int [subMatrixSize];
+        delete myArrayA;
+        delete myArrayB;
         
+        arrayA = NULL;
+       arrayB = NULL;
+       arrayC = NULL;
 
-        */
+       sendArrayA = NULL;
+       sendArrayB = NULL;
+
+       myArrayA = NULL;
+       myArrayB = NULL;
+        
 
     }
 
