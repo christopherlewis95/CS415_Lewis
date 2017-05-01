@@ -478,7 +478,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     
     // Optimize Vars Later
     // MULTIPLY THE NUMBERS
-
+//
     int loopLength = (int)sqrt(subMatrixSize));
     fprintf(fp, "Loop length is: %d\n", loopLength);
 
