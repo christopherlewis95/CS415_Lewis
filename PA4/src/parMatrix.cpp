@@ -384,7 +384,7 @@ void slave( int taskId )
 
      fprintf(fp, "Recieved B\n");
 
-     /*
+     
     //    INIT 2D ARAYS
 
 
@@ -485,7 +485,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
 
 
     
-    */
+    
     }
 
 void shiftLeft( int *matA, int size, int myProcessor, int numProcessors )
