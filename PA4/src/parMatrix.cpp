@@ -81,6 +81,10 @@ Generates zeroes for C (Needed for Slave)
 void genZeroes( int **arrayC, int sizeN );
 
 
+
+void initShift(int myrank, int numCores, int left, int up, int right, int down, int size, int root, int* dataA, int* dataB);
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -423,10 +427,17 @@ void slave( int taskId )
     fprintf(fp, "Generated C\n");
 
 //
-/*
+
+    int left = getIdLeft(myRank, numProcessors);
+    int right = getIdLeft(myRank, numProcessors);
+    int down = getIdDown(myRank, numProcessors);
+    int up = getIdUp(myRank, numProcessors);
+
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Initial shift (Shift Amount is made by task id % sqrtNumP)
+initShift( myRank, numProcessors, left, up, right, down, subMatrixSize, (int)sqrt(numProcessors), arrayA, arrayB);
 
+/*
     fprintf(fp, "Doing INitiaial Shift C\n");
     for( shifts = 0; shifts < shiftAmnt % (int)sqrt(numProcessors); shifts++ )
         {
@@ -434,8 +445,9 @@ void slave( int taskId )
         shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
         }
     fprintf(fp, "Did Initial Shift\n");
+    */
 //////////////////////////////////////////////////////////////////////////////////////////////
-*/
+
 
 /*
 
@@ -507,6 +519,37 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     
     */
     }
+
+/*
+ * Name: initshift
+ * In: rank of left Processor and up processor as well as current processor, size of row, root of numCores,A matrix and B matrix, number of cores used
+ * Out: none
+ * Function: shifts a cirtain ammount for initial shift
+ * Notes: None 
+ */
+void initShift(int myrank, int numCores, int left, int up, int right, int down, int size, int root, int* dataA, int* dataB)
+{
+
+    int indexCol = (myrank % root);
+    int indexRow = (myrank/root);
+    int count;
+
+    for(count = 0; count < indexRow; count++)
+    {
+        shiftLeft( dataA, size, myrank, numCores );
+    }
+
+    for(count = 0; count < indexCol; count++)
+    {
+        shiftUp( dataB, size, myrank, numCores );
+    }
+}
+
+
+
+
+
+
 
 void shiftLeft( int *matA, int size, int myProcessor, int numProcessors )
     {
