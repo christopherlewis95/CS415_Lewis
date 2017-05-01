@@ -462,7 +462,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
 
 
 //    CONVERT 2D ARAYS
-
+    
 
     fprintf(fp, "converting to 2D\n");
     for( int i = 0; i < subMatrixSize/(int)sqrt(numProcessors); i++)
@@ -475,7 +475,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
 
             }
     }
-
+    /*
     // Optimize Vars Later
     // MULTIPLY THE NUMBERS
 
@@ -513,9 +513,10 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
         shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
 //////////////////////////////////////////////////////////////////////////////////////////////
+    */
     }
 
-
+    */
     }
 
 /*
