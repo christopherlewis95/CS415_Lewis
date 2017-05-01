@@ -422,7 +422,7 @@ void slave( int taskId )
 
     fprintf(fp, "Generated C\n");
 
-
+//
 /*
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Initial shift (Shift Amount is made by task id % sqrtNumP)
