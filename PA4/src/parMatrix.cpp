@@ -449,7 +449,7 @@ initShift( myRank, numProcessors, left, up, right, down, subMatrixSize, (int)sqr
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*
+
 
 //    Loop for the rest of the multiplication
 
@@ -516,8 +516,6 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     }
 
 
-    
-    */
     }
 
 /*
