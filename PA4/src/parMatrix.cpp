@@ -480,9 +480,10 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     // MULTIPLY THE NUMBERS
 
     int loopLength = subMatrixSize/(int)sqrt(numProcessors);
-
+    fprintf(fp, "Loop length is: %d\n", loopLength);
 
     fprintf(fp, "Multiplying\n");
+    /*
     for (int i = 0; i < loopLength; i++)
     {
         for (int j = 0; j < loopLength; j++)
@@ -495,6 +496,9 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         }
         //cout << endl;
     }
+    */
+
+    
     /*
     fprintf(fp, "Putting into 1D\n");
     // Put into 1D array for passing
