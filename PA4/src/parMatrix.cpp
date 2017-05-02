@@ -440,7 +440,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
 
 //    CONVERT 2D ARAYS
     
-
+    /*
     fprintf(fp, "converting to 2D\n");
     for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
     {
@@ -452,6 +452,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
 
             }
     }
+    */
     /*
     fprintf(fp, "myA\n");
     for( int i = 0; i < (int)sqrt(subMatrixSize); i++ )
