@@ -616,7 +616,7 @@ int getIdDown( int myProcessor, int numProcessors )
     {
     int idBelowMe;
 
-    if( myProcessor <= ( numProcessors - (int)sqrt(numProcessors)) )
+    if( myProcessor < ( numProcessors - (int)sqrt(numProcessors)) )
         {
             idBelowMe = myProcessor + (int)sqrt(numProcessors);
 
