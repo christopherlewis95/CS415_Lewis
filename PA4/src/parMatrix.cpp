@@ -374,7 +374,7 @@ fprintf(masterFp, "Putting into 1D\n");
     }
 
 
-    fprintf(fp, "Doing Final Shift\n");
+    fprintf(masterFp, "Doing Final Shift\n");
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Do final shift (Shift Amount is made by task id % sqrtNumP)
         shiftLeft( arrayA, subMatrixSize, myRank, numProcessors );
