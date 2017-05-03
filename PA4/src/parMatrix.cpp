@@ -205,9 +205,9 @@ fprintf(masterFp, "Nums Gnerated\n");
 			    }
 			
 			// send dtata to processes
-			processNum = verticalOffset*numProcessors + horizontalOffset;
+			processNum = verticalOffset*(int)sqrt(numProcessors) + horizontalOffset;
 			
-
+            
 
 
 			//if the process num is MASTER put data in myArray<A or B>
