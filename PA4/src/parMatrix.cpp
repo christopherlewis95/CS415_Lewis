@@ -431,7 +431,7 @@ void slave( int taskId )
     fprintf(fp, "Generated C\n");
 
 //
-
+    /*
     int left = getIdLeft(myRank, numProcessors);
     int right = getIdLeft(myRank, numProcessors);
     int down = getIdDown(myRank, numProcessors);
@@ -535,7 +535,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     
     }
     
-
+    */
     }
 
 /*
