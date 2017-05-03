@@ -528,9 +528,9 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
         shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
 //////////////////////////////////////////////////////////////////////////////////////////////
-    */
+    
     }
-
+    */
     }
 
 /*
