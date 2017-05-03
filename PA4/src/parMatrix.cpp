@@ -274,7 +274,8 @@ fprintf(masterFp, "Went through data\n");
 
 ////////////////////////////////////////////////////
 
-
+for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
+    {
 
 //    INIT MY 2D ARAYS
 
@@ -299,8 +300,9 @@ fprintf(masterFp, "Went through data\n");
 
     genZeroes(myC, (int)(subMatrixSize/(int)sqrt(numProcessors)) );
 
-    
 
+
+/*
 //////////////////////////////////////////////////////////////////////////////////////////////
 fprintf(masterFp, "Doing initial shift \n");
     // Initial shift (Shift Amount is made by task id % sqrtNumP)
@@ -310,7 +312,10 @@ fprintf(masterFp, "Doing initial shift \n");
         shiftUp( myArrayB, sumMatrixDimension * sumMatrixDimension, MASTER, numProcessors );
         }
 //////////////////////////////////////////////////////////////////////////////////////////////
+
 fprintf(masterFp, "Did initial shift \n");
+
+*/
  ///////////////
 
  ///   CONVERT 2D ARAYS
@@ -318,15 +323,23 @@ fprintf(masterFp, "Did initial shift \n");
 ///////
 
 
-/*
-fprintf(masterFp, "Going through 2D arrays \n");
-    for( int i = 0; i < subMatrixSize/(int)sqrt(numProcessors); i++)
-    {
-        for( int j = 0; j < subMatrixSize/(int)sqrt(numProcessors); j++)
-            {
 
-                myA[i][j] = arrayA[ (j * (int)(subMatrixSize/(int)sqrt(numProcessors))) + i];
-                myB[i][j] = arrayB[ (j * (int)(subMatrixSize/(int)sqrt(numProcessors))) + i];
+
+
+
+int offset = subMatrixSize/(int)sqrt(subMatrixSize);
+int offsetTimesJ;
+
+
+fprintf(masterFp, "Going through 2D arrays \n");
+    for( int i = 0; i < subMatrixSize/(int)sqrt(subMatrixSize); i++)
+    {
+        for( int j = 0; j < subMatrixSize/(int)sqrt(subMatrixSize); j++)
+            {
+                offsetTimesJ = j * offset;
+
+                myA[i][j] = arrayA[ offsetTimesJ + i]; ////////// May need to sway I and J
+                myB[i][j] = arrayB[ offsetTimesJ + i]; //////////
 
             }
     }
@@ -344,11 +357,32 @@ fprintf(masterFp, "Matrix Mult \n");
             }
         }
     }
-fprintf(masterFp, "Did the matrix Mult \n");
-    // ADD BACK TO 1D 
+    
+fprintf(fp, "Putting into 1D\n");
+    // Put into 1D array for passing
+    for( int i = 0; i < subMatrixSize/(int)sqrt(subMatrixSize); i++)
+    {
+        for( int j = 0; j < subMatrixSize/(int)sqrt(subMatrixSize); j++)
+            {
+                for( int k = 0; k < subMatrixSize; k++ )
+                    {
+                        arrayA[k] = myA[i][j];
+                        arrayB[k] = myB[i][j];
+                    }
+            }
+    }
+
+
+    fprintf(fp, "Doing Final Shift\n");
+//////////////////////////////////////////////////////////////////////////////////////////////
+    // Do final shift (Shift Amount is made by task id % sqrtNumP)
+        shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
+        shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
+//////////////////////////////////////////////////////////////////////////////////////////////
+    }
 
     // DELETE THESE SAVAGE BEASTS
-*/
+
         
         delete arrayA;
       delete arrayB;
@@ -560,7 +594,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     {
         for( int j = 0; j < subMatrixSize/(int)sqrt(subMatrixSize); j++)
             {
-                for( int k = 0; k < subMatrixSize/(int)sqrt(subMatrixSize); k++ )
+                for( int k = 0; k < subMatrixSize; k++ )
                     {
                         arrayA[k] = myA[i][j];
                         arrayB[k] = myB[i][j];
