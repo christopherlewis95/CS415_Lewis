@@ -337,6 +337,8 @@ fprintf(masterFp, "Did the matrix Mult \n");
 
 void slave( int taskId )
     {
+
+    /*
     FILE *fp;
     fp = fopen("slave.txt", "a+");
     fprintf(fp,"This is wasting my time\n");
@@ -417,7 +419,7 @@ void slave( int taskId )
 
     fprintf(fp, "After malloc part 2\n");
 
-
+    
     fprintf(fp, "Generating C\n");
     genZeroes(myC, (int)sqrt(subMatrixSize) );
 
@@ -446,7 +448,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
 
 //    CONVERT 2D ARAYS
     
-    /*
+    
     fprintf(fp, "converting to 2D\n");
     for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
     {
