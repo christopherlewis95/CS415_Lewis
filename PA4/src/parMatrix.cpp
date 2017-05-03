@@ -205,8 +205,11 @@ fprintf(masterFp, "Nums Gnerated\n");
 			    }
 			
 			// send dtata to processes
-			processNum = verticalOffset*(int)sqrt(numProcessors) + horizontalOffset;
+			processNum = verticalOffset*numProcessors + horizontalOffset;
 			
+
+
+
 			//if the process num is MASTER put data in myArray<A or B>
 			if(processNum == MASTER)
             {
@@ -447,7 +450,6 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     {
         
 
-
 //    CONVERT 2D ARAYS
     
     
@@ -533,6 +535,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     
     }
     
+
     }
 
 /*
