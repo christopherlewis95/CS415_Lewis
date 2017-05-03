@@ -218,7 +218,7 @@ fprintf(masterFp, "Nums Gnerated\n");
 			}
 			
 			//actually send to other processes
-			else{
+			else if(processNum > MASTER){
                 
                 fprintf(masterFp, "Sending Data\n");
                 // MPI_Send(&arr[counter], split, MPI_INT, i, MY_MPI_DATA_TAG, MPI_COMM_WORLD); 
