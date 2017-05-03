@@ -507,7 +507,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
             }
     }
     
-    /*
+    
     fprintf(fp, "myA\n");
     for( int i = 0; i < (int)sqrt(subMatrixSize); i++ )
         {
@@ -556,11 +556,11 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     
     fprintf(fp, "Putting into 1D\n");
     // Put into 1D array for passing
-    for( int i = 0; i < subMatrixSize/(int)sqrt(numProcessors); i++)
+    for( int i = 0; i < subMatrixSize/(int)sqrt(subMatrixSize); i++)
     {
-        for( int j = 0; j < subMatrixSize/(int)sqrt(numProcessors); j++)
+        for( int j = 0; j < subMatrixSize/(int)sqrt(subMatrixSize); j++)
             {
-                for( int k = 0; k < subMatrixSize/(int)sqrt(numProcessors); k++ )
+                for( int k = 0; k < subMatrixSize/(int)sqrt(subMatrixSize); k++ )
                     {
                         arrayA[k] = myA[i][j];
                         arrayB[k] = myB[i][j];
@@ -574,7 +574,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
         shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
 //////////////////////////////////////////////////////////////////////////////////////////////
-    */
+    
     }
     
     
