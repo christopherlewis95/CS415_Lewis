@@ -225,7 +225,7 @@ fprintf(masterFp, "Nums Gnerated\n");
 				MPI_Send(sendArrayA, subMatrixSize, MPI_INT, processNum, M_A_DATA, MPI_COMM_WORLD);
                 
 				MPI_Send(sendArrayB, subMatrixSize, MPI_INT, processNum, M_B_DATA, MPI_COMM_WORLD);
-                MPI_Barrier(MPI_COMM_WORLD);
+               // MPI_Barrier(MPI_COMM_WORLD);
                 fprintf(masterFp, "Sending Data Done\n");
                 
 			}
@@ -338,7 +338,7 @@ fprintf(masterFp, "Did the matrix Mult \n");
 void slave( int taskId )
     {
 
-    /*
+    
     FILE *fp;
     fp = fopen("slave.txt", "a+");
     fprintf(fp,"This is wasting my time\n");
@@ -445,7 +445,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     {
         
 
-
+/*
 //    CONVERT 2D ARAYS
     
     
@@ -528,9 +528,9 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
         shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
 //////////////////////////////////////////////////////////////////////////////////////////////
-    
-    }
     */
+    }
+    
     }
 
 /*
