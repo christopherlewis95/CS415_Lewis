@@ -33,7 +33,7 @@ using namespace std;
 /*
 Function to do all computations for master
 */
-void master(char **argv);
+void master( char **argv );
 
 /*
 Function that takes all data from master thats been sent and does its own calculations
