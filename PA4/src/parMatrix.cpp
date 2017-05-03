@@ -399,18 +399,24 @@ void slave( int taskId )
      
     //    INIT 2D ARAYS
 
-
+    fprintf(fp, "Before MAlloc part 1\n");
 
     int **myA = new int *[(int)sqrt(subMatrixSize)];
     int **myB = new int *[(int)sqrt(subMatrixSize)];
     int **myC = new int *[(int)sqrt(subMatrixSize)];
+    
+    fprintf(fp, "After malloc part 1\n");
 
+    fprintf(fp, "Before MAlloc part 2\n");
     for( int i = 0; i < subMatrixSize; i++ )
     {
     myA[i] = new int [(int)sqrt(subMatrixSize)];
     myB[i] = new int [(int)sqrt(subMatrixSize)];
     myC[i] = new int [(int)sqrt(subMatrixSize)];
     }
+
+    fprintf(fp, "After malloc part 2\n");
+
 
     fprintf(fp, "Generating C\n");
     genZeroes(myC, (int)sqrt(subMatrixSize) );
@@ -549,12 +555,6 @@ void initShift(int myrank, int numCores, int left, int up, int right, int down, 
         shiftUp( dataB, size, myrank, numCores );
     }
 }
-
-
-
-
-
-
 
 void shiftLeft( int *matA, int size, int myProcessor, int numProcessors )
     {
