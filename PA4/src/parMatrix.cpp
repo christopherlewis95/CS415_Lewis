@@ -471,7 +471,7 @@ void slave( int taskId )
     fprintf(fp, "Generated C\n");
 
 //
-    /*
+    
     int left = getIdLeft(myRank, numProcessors);
     int right = getIdLeft(myRank, numProcessors);
     int down = getIdDown(myRank, numProcessors);
@@ -491,21 +491,23 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         
 
 //    CONVERT 2D ARAYS
-    
+    int offset = (int)sqrt(subMatrixSize);
+    int offsetTimesY; 
     
     fprintf(fp, "converting to 2D\n");
     for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
     {
         for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
             {
+                offsetTimesY = j * offset;
 
-                myA[i][j] = arrayA[ (j * (int)sqrt(subMatrixSize)) + i];
-                myB[i][j] = arrayB[ (j * (int)sqrt(subMatrixSize)) + i];
+                myA[i][j] = arrayA[ offsetTimesY + i];
+                myB[i][j] = arrayB[ offsetTimesY + i];
 
             }
     }
     
-    
+    /*
     fprintf(fp, "myA\n");
     for( int i = 0; i < (int)sqrt(subMatrixSize); i++ )
         {
@@ -572,10 +574,10 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
         shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
 //////////////////////////////////////////////////////////////////////////////////////////////
-    
+    */
     }
     
-    */
+    
     }
 
 /*
