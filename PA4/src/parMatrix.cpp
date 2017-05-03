@@ -299,7 +299,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
 
     fprintf(masterFp, "GenData for myC\n");
 
-    genZeroes(myC, (int)(subMatrixSize/(int)sqrt(numProcessors)) );
+    genZeroes(myC, (int)(subMatrixSize/(int)sqrt(subMatrixSize)) );
 
 
 
@@ -348,11 +348,15 @@ fprintf(masterFp, "Going through 2D arrays \n");
 fprintf(masterFp, "Matrix Mult \n");
     // Optimize Vars Later
     // MULT NUMBER
-    for (int i = 0; i < (int)(subMatrixSize/(int)sqrt(numProcessors)); i++)
+    int loopLength = (int)sqrt(subMatrixSize);
+    fprintf(fp, "Loop length is: %d\n", loopLength);
+
+
+    for (int i = 0; i < loopLength; i++)
     {
-        for (int j = 0; j < (int)(subMatrixSize/(int)sqrt(numProcessors)); j++)
+        for (int j = 0; j < loopLength; j++)
         {
-            for (int k = 0; k < (int)(subMatrixSize/(int)sqrt(numProcessors)); k++)
+            for (int k = 0; k < loopLength; k++)
             {
                 myC[i][j] = myC[i][j] + myA[i][k] * myB[k][j];
             }
