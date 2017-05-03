@@ -278,7 +278,7 @@ fprintf(masterFp, "Went through data\n");
 
 //    INIT MY 2D ARAYS
 
-    int twoDimSplit = (int)(subMatrixSize/(int)sqrt(numProcessors));
+    int twoDimSplit = (int)(subMatrixSize/(int)sqrt(subMatrixSize));
 
     fprintf(masterFp, "Initing 2D arrays\n");
     int **myA = new int *[twoDimSplit];
