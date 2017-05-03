@@ -226,8 +226,29 @@ fprintf(masterFp, "Nums Gnerated\n");
                 fprintf(masterFp, "Data being sent to PROCESS NUM: %d\n\n", processNum);
                 fprintf(masterFp, "Sending Data\n");
                 // MPI_Send(&arr[counter], split, MPI_INT, i, MY_MPI_DATA_TAG, MPI_COMM_WORLD); 
+
+                fprintf(masterFp, "Array A:\n\n");
+                for( int i = 0; i < subMatrixSize; i++ )
+                    {
+
+                        fprintf(masterFp, "%d ", sendArrayA[i] );
+
+                    }
+                    fprintf(masterFp, "\n\n");
+
 				MPI_Send(sendArrayA, subMatrixSize, MPI_INT, processNum, M_A_DATA, MPI_COMM_WORLD);
                 // MPI_Barrier(MPI_COMM_WORLD);
+
+                fprintf(masterFp, "Array A:\n\n");
+                for( int i = 0; i < subMatrixSize; i++ )
+                    {
+
+                        fprintf(masterFp, "%d ", sendArrayB[i] );
+
+                    }
+                    fprintf(masterFp, "\n\n");
+
+
 				MPI_Send(sendArrayB, subMatrixSize, MPI_INT, processNum, M_B_DATA, MPI_COMM_WORLD);
                 fprintf(masterFp, "Data has been sent to PROCESS NUM: %d\n\n", processNum);
                // MPI_Barrier(MPI_COMM_WORLD);
