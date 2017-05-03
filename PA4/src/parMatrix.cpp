@@ -403,20 +403,20 @@ void slave( int taskId )
     fprintf(fp, "Before MAlloc part 1\n");
 
 
-    int 2DBoxDimension = ((int)sqrt(subMatrixSize));
+    int SmallBoxDimension = ((int)sqrt(subMatrixSize));
 
-    int **myA = new int *[2DBoxDimension];
-    int **myB = new int *[2DBoxDimension];
-    int **myC = new int *[2DBoxDimension];
+    int **myA = new int *[SmallBoxDimension];
+    int **myB = new int *[SmallBoxDimension];
+    int **myC = new int *[SmallBoxDimension];
     
     fprintf(fp, "After malloc part 1\n");
 
     fprintf(fp, "Before MAlloc part 2\n");
-    for( int i = 0; i < subMatrixSize; i++ )
+    for( int i = 0; i < SmallBoxDimension; i++ )
     {
-    myA[i] = new int [2DBoxDimension];
-    myB[i] = new int [2DBoxDimension];
-    myC[i] = new int [2DBoxDimension];
+    myA[i] = new int [SmallBoxDimension];
+    myB[i] = new int [SmallBoxDimension];
+    myC[i] = new int [SmallBoxDimension];
     }
 
     fprintf(fp, "After malloc part 2\n");
