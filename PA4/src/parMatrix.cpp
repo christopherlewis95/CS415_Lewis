@@ -283,21 +283,23 @@ fprintf(masterFp, "Went through data\n");
 
     fprintf(masterFp, "Initing 2D arrays\n");
 
-    /*
     int **myA = new int *[twoDimSplit];
     int **myB = new int *[twoDimSplit];
     int **myC = new int *[twoDimSplit];
 
-    for( int i = 0; i < subMatrixSize; i++ )
+    for( int i = 0; i < twoDimSplit; i++ )
     {
     myA[i] = new int [twoDimSplit];
     myB[i] = new int [twoDimSplit];
     myC[i] = new int [twoDimSplit];
     }
 
+
     fprintf(masterFp, "GenData for myC\n");
 
     genZeroes(myC, (int)(subMatrixSize/(int)sqrt(numProcessors)) );
+
+    
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 fprintf(masterFp, "Doing initial shift \n");
@@ -314,6 +316,9 @@ fprintf(masterFp, "Did initial shift \n");
  ///   CONVERT 2D ARAYS
 
 ///////
+
+
+/*
 fprintf(masterFp, "Going through 2D arrays \n");
     for( int i = 0; i < subMatrixSize/(int)sqrt(numProcessors); i++)
     {
