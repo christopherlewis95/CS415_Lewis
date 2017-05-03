@@ -387,7 +387,7 @@ fprintf(masterFp, "Putting into 1D\n");
     }
 
 
-    fprintf(fp, "My Results for MAT processor: %d\n\n", myRank)
+    fprintf(masterFp, "My Results for MAT processor: %d\n\n", myRank);
     for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
         {
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
@@ -629,7 +629,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
 
     }
 
-    fprintf(fp, "My Results for MAT processor: %d\n\n", myRank)
+    fprintf(fp, "My Results for MAT processor: %d\n\n", myRank);
     for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
         {
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
