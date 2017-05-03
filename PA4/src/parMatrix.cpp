@@ -469,7 +469,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         {
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++ )
             {
-            fprintf(fp, "%d", myA[i][j]);
+            fprintf(fp, "%d ", myA[i][j]);
             }
         fprintf(fp, "\n");
         }
@@ -479,7 +479,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         {
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++ )
             {
-            fprintf(fp, "%d", myB[i][j]);
+            fprintf(fp, "%d ", myB[i][j]);
             }
         fprintf(fp, "\n");
         }
