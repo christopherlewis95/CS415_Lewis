@@ -237,7 +237,7 @@ fprintf(masterFp, "Nums Gnerated\n");
             
 			
 		}
-        MPI_Barrier(MPI_COMM_WORLD);
+       // MPI_Barrier(MPI_COMM_WORLD);
     
 	}
 
@@ -389,7 +389,7 @@ void slave( int taskId )
     int *arrayB = new int [subMatrixSize];
 
      MPI_Recv( arrayB, subMatrixSize, MPI_INT, MASTER, M_B_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
-     MPI_Barrier(MPI_COMM_WORLD);
+    // MPI_Barrier(MPI_COMM_WORLD);
 
      fprintf(fp, "Recieved B\n");
     
