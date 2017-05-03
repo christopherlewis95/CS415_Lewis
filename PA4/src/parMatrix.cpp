@@ -393,7 +393,7 @@ fprintf(masterFp, "Putting into 1D\n");
                 {
                     fprintf(masterFp, "%d ", myC[i][j]);
                 }
-            fprintf(masterFp, "/n ");
+            fprintf(masterFp, "\n ");
         }
 
 
@@ -579,10 +579,6 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         }
     // Optimize Vars Later
     // MULTIPLY THE NUMBERS
-//
-
-
-    
 
     int loopLength = (int)sqrt(subMatrixSize);
     fprintf(fp, "Loop length is: %d\n", loopLength);
@@ -635,9 +631,8 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
                 {
                     fprintf(fp, "%d ", myC[i][j]);
                 }
-            fprintf(fp, "/n ");
+            fprintf(fp, "\n ");
         }
-    
     
     }
 
@@ -754,9 +749,6 @@ int getIdLeft( int myProcessor, int numProcessors )
     return idToMyLeft;
     }
 
-
-
-
 int getIdRight( int myProcessor, int numProcessors )
     {
     int idToMyRight;
@@ -772,10 +764,6 @@ int getIdRight( int myProcessor, int numProcessors )
     }
     return idToMyRight;
     }
-
-
-
-
 
 void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN )
     {
