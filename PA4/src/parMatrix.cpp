@@ -155,6 +155,7 @@ void master(char **argv )
     int subMatrixSize = sumMatrixDimension*sumMatrixDimension;
     int shiftAmnt = MASTER; // For Initial Shift
     int shifts;
+    int loopAmnt;
 
 
     // Init Size and populate array with rand Numbers
@@ -358,7 +359,7 @@ fprintf(masterFp, "Matrix Mult \n");
         }
     }
     
-fprintf(fp, "Putting into 1D\n");
+fprintf(masterFp, "Putting into 1D\n");
     // Put into 1D array for passing
     for( int i = 0; i < subMatrixSize/(int)sqrt(subMatrixSize); i++)
     {
@@ -376,8 +377,8 @@ fprintf(fp, "Putting into 1D\n");
     fprintf(fp, "Doing Final Shift\n");
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Do final shift (Shift Amount is made by task id % sqrtNumP)
-        shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
-        shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
+        shiftLeft( arrayA, subMatrixSize, myRank, numProcessors );
+        shiftUp( arrayB, subMatrixSize, myRank, numProcessors );
 //////////////////////////////////////////////////////////////////////////////////////////////
     }
 
