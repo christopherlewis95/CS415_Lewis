@@ -636,7 +636,7 @@ int getIdLeft( int myProcessor, int numProcessors )
 
     if(( myProcessor % (int)sqrt(numProcessors)) == 0 )
         {
-            idToMyLeft = myProcessor + (int)((int)sqrt(numProcessors) - 1);
+            idToMyLeft = myProcessor + ((int)sqrt(numProcessors) - 1);
         }
 
     else{
@@ -655,7 +655,7 @@ int getIdRight( int myProcessor, int numProcessors )
     {
     int idToMyRight;
 
-    if( (myProcessor % (int)sqrt(numProcessors)) >= (int)((int)sqrt(numProcessors) - 1) )
+    if( (myProcessor % (int)sqrt(numProcessors)) >= ((int)sqrt(numProcessors) - 1) )
         {
             idToMyRight = myProcessor - ( (int)sqrt(numProcessors) - 1 );
         }
