@@ -226,9 +226,9 @@ fprintf(masterFp, "Nums Gnerated\n");
                 fprintf(masterFp, "Sending Data\n");
                 // MPI_Send(&arr[counter], split, MPI_INT, i, MY_MPI_DATA_TAG, MPI_COMM_WORLD); 
 				MPI_Send(sendArrayA, subMatrixSize, MPI_INT, processNum, M_A_DATA, MPI_COMM_WORLD);
-                
+                 MPI_Barrier(MPI_COMM_WORLD);
 				MPI_Send(sendArrayB, subMatrixSize, MPI_INT, processNum, M_B_DATA, MPI_COMM_WORLD);
-               // MPI_Barrier(MPI_COMM_WORLD);
+                MPI_Barrier(MPI_COMM_WORLD);
                 fprintf(masterFp, "Sending Data Done\n");
                 
 			}
@@ -372,8 +372,10 @@ void slave( int taskId )
 
     fprintf(fp, "Recieving A\n");
      MPI_Recv( arrayA, subMatrixSize, MPI_INT, 0, M_A_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
+    MPI_Barrier(MPI_COMM_WORLD);
      fprintf(fp, "Recieved A\n");
 
+    
 
     MPI_Probe(MASTER, M_B_DATA, MPI_COMM_WORLD, &status );
  
@@ -382,6 +384,7 @@ void slave( int taskId )
     int *arrayB = new int [subMatrixSize];
 
      MPI_Recv( arrayB, subMatrixSize, MPI_INT, MASTER, M_B_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
+MPI_Barrier(MPI_COMM_WORLD);
 
      fprintf(fp, "Recieved B\n");
     
