@@ -275,11 +275,6 @@ fprintf(masterFp, "Went through data\n");
 
 ////////////////////////////////////////////////////
 
-for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
-    {
-
-//    INIT MY 2D ARAYS
-
     int twoDimSplit = (int)(subMatrixSize/(int)sqrt(subMatrixSize));
     fprintf(masterFp, "THE SPLIT IS: %d\n\n", twoDimSplit);
 
@@ -302,6 +297,10 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     genZeroes(myC, (int)(subMatrixSize/(int)sqrt(subMatrixSize)) );
 
 
+for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
+    {
+
+//    INIT MY 2D ARAYr
 
 /*
 //////////////////////////////////////////////////////////////////////////////////////////////
