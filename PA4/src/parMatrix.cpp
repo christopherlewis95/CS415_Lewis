@@ -279,8 +279,11 @@ fprintf(masterFp, "Went through data\n");
 //    INIT MY 2D ARAYS
 
     int twoDimSplit = (int)(subMatrixSize/(int)sqrt(subMatrixSize));
+    fprintf(masterFp, "THE SPLIT IS: %d\n\n", twoDimSplit);
 
     fprintf(masterFp, "Initing 2D arrays\n");
+
+    /*
     int **myA = new int *[twoDimSplit];
     int **myB = new int *[twoDimSplit];
     int **myC = new int *[twoDimSplit];
@@ -294,7 +297,6 @@ fprintf(masterFp, "Went through data\n");
 
     fprintf(masterFp, "GenData for myC\n");
 
-/*
     genZeroes(myC, (int)(subMatrixSize/(int)sqrt(numProcessors)) );
 
 //////////////////////////////////////////////////////////////////////////////////////////////
