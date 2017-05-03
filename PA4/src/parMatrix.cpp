@@ -375,11 +375,13 @@ fprintf(masterFp, "Putting into 1D\n");
 
 
     fprintf(masterFp, "Doing Final Shift\n");
+    /*
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Do final shift (Shift Amount is made by task id % sqrtNumP)
         shiftLeft( arrayA, subMatrixSize, myRank, numProcessors );
         shiftUp( arrayB, subMatrixSize, myRank, numProcessors );
 //////////////////////////////////////////////////////////////////////////////////////////////
+*/
     }
 
     // DELETE THESE SAVAGE BEASTS
@@ -604,12 +606,13 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     }
 
     fprintf(fp, "Doing Final Shift\n");
+    /*
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Do final shift (Shift Amount is made by task id % sqrtNumP)
         shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
         shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
 //////////////////////////////////////////////////////////////////////////////////////////////
-    
+    */
     }
     
     
