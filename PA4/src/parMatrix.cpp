@@ -349,7 +349,7 @@ fprintf(masterFp, "Matrix Mult \n");
     // Optimize Vars Later
     // MULT NUMBER
     int loopLength = (int)sqrt(subMatrixSize);
-    fprintf(fp, "Loop length is: %d\n", loopLength);
+    fprintf(masterFp, "Loop length is: %d\n", loopLength);
 
 
     for (int i = 0; i < loopLength; i++)
