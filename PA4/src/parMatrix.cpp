@@ -370,6 +370,8 @@ void slave( int taskId )
 
     MPI_Get_count( &status, MPI_INT, &subMatrixSize );
 
+    cout << "The status of this bullshit is: " << status << endl;
+
     int *arrayA = new int [subMatrixSize];
 
     fprintf(fp, "Recieving A\n");
@@ -382,6 +384,9 @@ void slave( int taskId )
     MPI_Probe(MASTER, M_B_DATA, MPI_COMM_WORLD, &status );
  
     MPI_Get_count( &status, MPI_INT, &subMatrixSize );
+
+    cout << "The status of this bullshit is: " << status << endl;
+
 
     int *arrayB = new int [subMatrixSize];
 
