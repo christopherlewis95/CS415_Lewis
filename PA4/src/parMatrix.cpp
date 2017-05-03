@@ -379,14 +379,24 @@ fprintf(masterFp, "Putting into 1D\n");
 
 
     fprintf(masterFp, "Doing Final Shift\n");
-    /*
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Do final shift (Shift Amount is made by task id % sqrtNumP)
         shiftLeft( arrayA, subMatrixSize, myRank, numProcessors );
         shiftUp( arrayB, subMatrixSize, myRank, numProcessors );
 //////////////////////////////////////////////////////////////////////////////////////////////
-*/
     }
+
+
+    fprintf(fp, "My Results for MAT processor: %d\n\n", myRank)
+    for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
+        {
+            for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
+                {
+                    fprintf(fp, "%d ", myC[i][j]);
+                }
+            fprintf(fp, "/n ");
+        }
+
 
     // DELETE THESE SAVAGE BEASTS
 
@@ -610,14 +620,24 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     }
 
     fprintf(fp, "Doing Final Shift\n");
-    /*
+    
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Do final shift (Shift Amount is made by task id % sqrtNumP)
         shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
         shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
 //////////////////////////////////////////////////////////////////////////////////////////////
-    */
+
     }
+
+    fprintf(fp, "My Results for MAT processor: %d\n\n", myRank)
+    for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
+        {
+            for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
+                {
+                    fprintf(fp, "%d ", myC[i][j]);
+                }
+            fprintf(fp, "/n ");
+        }
     
     
     }
