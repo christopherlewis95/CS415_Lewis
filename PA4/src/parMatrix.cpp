@@ -392,9 +392,9 @@ fprintf(masterFp, "Putting into 1D\n");
         {
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
                 {
-                    fprintf(fp, "%d ", myC[i][j]);
+                    fprintf(masterFp, "%d ", myC[i][j]);
                 }
-            fprintf(fp, "/n ");
+            fprintf(masterFp, "/n ");
         }
 
 
