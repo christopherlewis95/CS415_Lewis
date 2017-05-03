@@ -365,7 +365,7 @@ void slave( int taskId )
     int *arrayA = new int [subMatrixSize];
 
     fprintf(fp, "Recieving A\n");
-     MPI_Recv( arrayA[0], subMatrixSize, MPI_INT, 0, M_A_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
+     MPI_Recv( &arrayA, subMatrixSize, MPI_INT, 0, M_A_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
      fprintf(fp, "Recieved A\n");
 
 
@@ -375,7 +375,7 @@ void slave( int taskId )
 
     int *arrayB = new int [subMatrixSize];
 
-     MPI_Recv( arrayB[0], subMatrixSize, MPI_INT, MASTER, M_B_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
+     MPI_Recv( &arrayB, subMatrixSize, MPI_INT, MASTER, M_B_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
 
      fprintf(fp, "Recieved B\n");
      MPI_Barrier(MPI_COMM_WORLD);
