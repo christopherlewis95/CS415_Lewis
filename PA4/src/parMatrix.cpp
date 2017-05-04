@@ -240,7 +240,7 @@ fprintf(masterFp, "Nums Gnerated\n");
 				MPI_Send(sendArrayA, subMatrixSize, MPI_INT, processNum, M_A_DATA, MPI_COMM_WORLD);
                 // MPI_Barrier(MPI_COMM_WORLD);
 
-                fprintf(masterFp, "Array A:\n\n");
+                fprintf(masterFp, "Array B:\n\n");
                 for( int i = 0; i < subMatrixSize; i++ )
                     {
 
@@ -304,30 +304,6 @@ fprintf(masterFp, "Went through data\n");
 for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     {
 
-//    INIT MY 2D ARAYr
-
-
-
-
-/*
-//////////////////////////////////////////////////////////////////////////////////////////////
-fprintf(masterFp, "Doing initial shift \n");
-    // Initial shift (Shift Amount is made by task id % sqrtNumP)
-    for( shifts = 0; shifts < shiftAmnt % (int)sqrt(numProcessors); shifts++ )
-        {
-        shiftLeft( myArrayA, sumMatrixDimension * sumMatrixDimension, MASTER, numProcessors );
-        shiftUp( myArrayB, sumMatrixDimension * sumMatrixDimension, MASTER, numProcessors );
-        }
-//////////////////////////////////////////////////////////////////////////////////////////////
-
-fprintf(masterFp, "Did initial shift \n");
-
-*/
-
-
-
-
-
  ///////////////
 
  ///   CONVERT 2D ARAYS
@@ -335,23 +311,20 @@ fprintf(masterFp, "Did initial shift \n");
 ///////
 
 
-
-
-
-
 int offset = subMatrixSize/(int)sqrt(subMatrixSize);
 int offsetTimesJ;
 
 
-fprintf(masterFp, "Going through 2D arrays \n");
+fprintf(masterFp, "Converting to 2D\n");
     for( int i = 0; i < subMatrixSize/(int)sqrt(subMatrixSize); i++)
     {
         for( int j = 0; j < subMatrixSize/(int)sqrt(subMatrixSize); j++)
             {
-                offsetTimesJ = j * offset;
+                offsetTimesJ = i * offset;
 
-                myA[i][j] = arrayA[ offsetTimesJ + i]; ////////// May need to sway I and J
-                myB[i][j] = arrayB[ offsetTimesJ + i]; //////////
+                //Add offset * y to the lenggth
+                myA[i][j] = arrayA[ offsetTimesJ + j]; ////////// May need to sway I and J
+                myB[i][j] = arrayB[ offsetTimesJ + j]; //////////
 
             }
     }
@@ -503,6 +476,9 @@ void slave( int taskId )
 
     int *arrayB = new int [subMatrixSize];
 
+
+   
+     fprintf(fp, "Recieving B\n");
      MPI_Recv( arrayB, subMatrixSize, MPI_INT, MASTER, M_B_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
     // MPI_Barrier(MPI_COMM_WORLD);
 
@@ -587,10 +563,12 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     {
         for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
             {
-                offsetTimesY = j * offset;
+                offsetTimesY = i * offset;
 
-                myA[i][j] = arrayA[ offsetTimesY + i];
-                myB[i][j] = arrayB[ offsetTimesY + i];
+
+                //Add offset * y to the lenggth
+                myA[i][j] = arrayA[ offsetTimesY + j];
+                myB[i][j] = arrayB[ offsetTimesY + j];
 
             }
     }
@@ -694,13 +672,6 @@ MPI_Barrier(MPI_COMM_WORLD);
     
     }
 
-/*
- * Name: initshift
- * In: rank of left Processor and up processor as well as current processor, size of row, root of numCores,A matrix and B matrix, number of cores used
- * Out: none
- * Function: shifts a cirtain ammount for initial shift
- * Notes: None 
- */
 void initShift(int myrank, int numCores, int left, int up, int right, int down, int size, int root, int* dataA, int* dataB)
 {
 
