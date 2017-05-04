@@ -400,8 +400,6 @@ fprintf(masterFp, "Putting into 1D\n");
     }
 
 
-MPI_Barrier(MPI_COMM_WORLD);
-
 
 MPI_Barrier(MPI_COMM_WORLD);
 
