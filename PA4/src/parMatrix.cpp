@@ -401,7 +401,7 @@ fprintf(masterFp, "Putting into 1D\n");
             fprintf(outMaster, "\n ");
         }
     
-    }
+    
 
 ///////////////
     // DELETE THESE SAVAGE BEASTS
