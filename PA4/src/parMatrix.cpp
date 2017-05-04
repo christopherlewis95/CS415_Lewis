@@ -297,10 +297,17 @@ fprintf(masterFp, "Went through data\n");
     genZeroes(myC, (int)(subMatrixSize/(int)sqrt(subMatrixSize)) );
 
 
+    MPI_Barrier(MPI_COMM_WORLD);
+
+
+
 for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     {
 
 //    INIT MY 2D ARAYr
+
+
+
 
 /*
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -316,6 +323,11 @@ fprintf(masterFp, "Doing initial shift \n");
 fprintf(masterFp, "Did initial shift \n");
 
 */
+
+
+
+
+
  ///////////////
 
  ///   CONVERT 2D ARAYS
@@ -362,6 +374,8 @@ fprintf(masterFp, "Matrix Mult \n");
         }
     }
     
+
+
 fprintf(masterFp, "Putting into 1D\n");
     // Put into 1D array for passing
     for( int i = 0; i < subMatrixSize/(int)sqrt(subMatrixSize); i++)
@@ -384,6 +398,10 @@ fprintf(masterFp, "Putting into 1D\n");
         shiftUp( arrayB, subMatrixSize, myRank, numProcessors );
 //////////////////////////////////////////////////////////////////////////////////////////////
     }
+
+
+MPI_Barrier(MPI_COMM_WORLD);
+
 
     FILE *outMaster;
 
@@ -536,6 +554,10 @@ void slave( int taskId )
 
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Initial shift (Shift Amount is made by task id % sqrtNumP)
+
+MPI_Barrier(MPI_COMM_WORLD);
+
+
 initShift( myRank, numProcessors, left, up, right, down, subMatrixSize, (int)sqrt(numProcessors), arrayA, arrayB);
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -630,6 +652,10 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
 //////////////////////////////////////////////////////////////////////////////////////////////
 
     }
+
+
+    
+MPI_Barrier(MPI_COMM_WORLD);
 
     FILE *outSlave;
 
