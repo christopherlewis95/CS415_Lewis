@@ -403,21 +403,32 @@ fprintf(masterFp, "Putting into 1D\n");
 MPI_Barrier(MPI_COMM_WORLD);
 
 
+MPI_Barrier(MPI_COMM_WORLD);
+
     FILE *outMaster;
 
-     outMaster = fopen("Output.txt","a+");
 
 
 
+    outMaster = fopen("Output.txt","a+");
     fprintf(outMaster, "My Results for MAT processor: %d\n\n", myRank);
-    for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
-        {
+
+    for( int count = 0; count < numProcessors; count++ )
+    {
+
+    	if( count == myRank )
+    	{
+   		 for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
+        	{
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
                 {
                     fprintf(outMaster, "%d ", myC[i][j]);
                 }
             fprintf(outMaster, "\n ");
-        }
+       		}
+    	}
+	MPI_Barrier(MPI_COMM_WORLD);
+    }
     
     
 
@@ -654,24 +665,34 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     }
 
 
-    
+
 MPI_Barrier(MPI_COMM_WORLD);
 
     FILE *outSlave;
 
+
+
+
     outSlave = fopen("Output.txt","a+");
-
-
-
     fprintf(outSlave, "My Results for MAT processor: %d\n\n", myRank);
-    for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
-        {
+
+    for( int count = 0; count < numProcessors; count++ )
+    {
+
+    	if( count == myRank )
+    	{
+   		 for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
+        	{
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
                 {
                     fprintf(outSlave, "%d ", myC[i][j]);
                 }
             fprintf(outSlave, "\n ");
-        }
+       		}
+    	}
+	MPI_Barrier(MPI_COMM_WORLD);
+    }
+
     
     }
 
