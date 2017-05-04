@@ -385,18 +385,25 @@ fprintf(masterFp, "Putting into 1D\n");
 //////////////////////////////////////////////////////////////////////////////////////////////
     }
 
+    FILE *outMaster;
 
-    fprintf(masterFp, "My Results for MAT processor: %d\n\n", myRank);
+     outMaster = fopen("Output.txt","a+");
+
+
+
+    fprintf(outMaster, "My Results for MAT processor: %d\n\n", myRank);
     for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
         {
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
                 {
-                    fprintf(masterFp, "%d ", myC[i][j]);
+                    fprintf(outMaster, "%d ", myC[i][j]);
                 }
-            fprintf(masterFp, "\n ");
+            fprintf(outMaster, "\n ");
         }
+    
+    }
 
-
+///////////////
     // DELETE THESE SAVAGE BEASTS
 
         
@@ -624,14 +631,20 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
 
     }
 
-    fprintf(fp, "My Results for MAT processor: %d\n\n", myRank);
+    FILE *outSlave;
+
+    outSlave = fopen("Output.txt","a+");
+
+
+
+    fprintf(outSlave, "My Results for MAT processor: %d\n\n", myRank);
     for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
         {
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
                 {
-                    fprintf(fp, "%d ", myC[i][j]);
+                    fprintf(outSlave, "%d ", myC[i][j]);
                 }
-            fprintf(fp, "\n ");
+            fprintf(outSlave, "\n ");
         }
     
     }
