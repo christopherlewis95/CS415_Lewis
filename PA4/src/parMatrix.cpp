@@ -320,7 +320,7 @@ fprintf(masterFp, "Went through data\n");
      fprintf(fpMaster, "\n");
 
 
-
+////////////////////////
 for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     {
 
