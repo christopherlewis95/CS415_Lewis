@@ -302,22 +302,22 @@ fprintf(masterFp, "Went through data\n");
 
 
 
-    fprintf(fpMaster, "\n\nArray A\n");
+    fprintf(masterFp, "\n\nArray A\n");
      for(int i = 0; i < subMatrixSize; i++){
 
-        fprintf(fpMaster, "%d ", arrayA[i]);
+        fprintf(masterFp, "%d ", arrayA[i]);
 
      }
-        fprintf(fpMaster, "\n");
+        fprintf(masterFp, "\n");
 
-   fprintf(fpMaster, "\n\nArray B\n");
+   fprintf(masterFp, "\n\nArray B\n");
      for(int i = 0; i < subMatrixSize; i++){
 
-        fprintf(fpMaster, "%d ", arrayB[i]);
+        fprintf(masterFp, "%d ", arrayB[i]);
 
 
      }
-     fprintf(fpMaster, "\n");
+     fprintf(masterFp, "\n");
 
 
 ////////////////////////
