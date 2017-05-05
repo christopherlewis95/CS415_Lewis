@@ -849,7 +849,7 @@ void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN, int argc, cha
 		fin >> number;
             //srand(time(NULL));
                 //srand(time(NULL));
-                 arrayA[index] = number;
+                 arrayB[index] = number;
                  // Set array C to 0 (For proper calculations)
         }
 	fin.close();
