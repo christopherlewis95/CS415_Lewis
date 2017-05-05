@@ -33,7 +33,7 @@ using namespace std;
 /*
 Function to do all computations for master
 */
-void master( char **argv );
+void master( char **argv, int argc );
 
 /*
 Function that takes all data from master thats been sent and does its own calculations
@@ -73,7 +73,7 @@ int getIdDown( int myProcessor, int numProcessors );
 /*
 Generates random numbers for arrays A and B. Sets C to 0
 */
-void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN );
+void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN, int argc, char **argv );
 
 /*
 Generates zeroes for C (Needed for Slave)
@@ -105,7 +105,7 @@ int main( int argc, char **argv ) {
     
     FILE *masterFp;
     masterFp = fopen("main.txt", "a+");
-    cout << "My rank is: " << rank << "                             PLEASE HELP ME DEAR JESUS" << endl;  
+    cout << "My rank is: " << endl;  
 
 
    
@@ -133,7 +133,7 @@ int main( int argc, char **argv ) {
 
 /////////////// THIS IS FOR THE INCLUDED FUNCTION ////////////
 
-void master(char **argv )
+void master(char **argv, int argc )
     {
     
     FILE *masterFp;
@@ -173,7 +173,7 @@ void master(char **argv )
 
 
 fprintf(masterFp, "Gen Humbers\n");
-    genNumbers( arrayA, arrayB, arrayC, sizeN);
+    genNumbers( arrayA, arrayB, arrayC, sizeN, argc, argv);
 fprintf(masterFp, "Nums Gnerated\n");
 	
 
@@ -799,8 +799,16 @@ int getIdRight( int myProcessor, int numProcessors )
     return idToMyRight;
     }
 
-void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN )
+void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN, int argc, char **argv )
     {
+
+	ifstream fin;
+
+	
+
+
+	if( argc < 3 )
+	{
     for( int index = 0; index < (sizeN * sizeN); index++ )
         {
             //srand(time(NULL));
@@ -813,6 +821,43 @@ void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN )
                  // Set array C to 0 (For proper calculations)
                  arrayC[index] = 0;
         }
+	}
+	else{
+	
+	fin.clear();
+	fin.open(argv[2]);
+	int number;
+
+    for( int index = 0; index < (sizeN * sizeN); index++ )
+        {
+		fin >> number;
+            //srand(time(NULL));
+                //srand(time(NULL));
+                 arrayA[index] = number;
+                 // Set array C to 0 (For proper calculations)
+                 arrayC[index] = 0;
+        }
+	fin.close();
+
+	// Open second file though this is very unoptimized... NOT RECOMMENDED FOR EVERY DAY USE
+
+	fin.clear();
+	fin.open(argv[3]);
+	int number;
+
+    for( int index = 0; index < (sizeN * sizeN); index++ )
+        {
+		fin >> number;
+            //srand(time(NULL));
+                //srand(time(NULL));
+                 arrayA[index] = number;
+                 // Set array C to 0 (For proper calculations)
+        }
+	fin.close();
+
+	}
+
+
 
     }
 
