@@ -587,6 +587,8 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
             {
                 offsetTimesY = i * offset;
 
+				cout << "This is for Results: " << arrayA[ offsetTimesY + j] << endl << endl;
+
 
                 //Add offset * y to the lenggth
                 myA[i][j] = arrayA[ offsetTimesY + j];
