@@ -301,6 +301,26 @@ fprintf(masterFp, "Went through data\n");
 
 
 
+
+    fprintf(fpMaster, "\n\nArray A\n");
+     for(int i = 0; i < subMatrixSize; i++){
+
+        fprintf(fpMaster, "%d ", arrayA[i]);
+
+     }
+        fprintf(fpMaster, "\n");
+
+   fprintf(fpMaster, "\n\nArray B\n");
+     for(int i = 0; i < subMatrixSize; i++){
+
+        fprintf(fpMaster, "%d ", arrayB[i]);
+
+
+     }
+     fprintf(fpMaster, "\n");
+
+
+
 for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     {
 
