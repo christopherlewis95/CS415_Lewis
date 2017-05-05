@@ -805,7 +805,9 @@ void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN, int argc, cha
 	ifstream fin;
 	cout << endl << endl << endl << "ARG COUNT IS: " << argc << endl << endl;
 	
+	cout << endl << endl << endl << "ARG 2 IS: " << argv[2] << endl << endl;
 
+	cout << endl << endl << endl << "ARG 3 IS: " << argv[3] << endl << endl;	
 
 	if( argc < 3 )
 	{
