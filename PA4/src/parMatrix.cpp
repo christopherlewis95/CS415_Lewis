@@ -381,7 +381,7 @@ MPI_Barrier(MPI_COMM_WORLD);
 
 
 
-    outMaster = fopen("Output.txt","a+");
+    outMaster = fopen("DataResults.txt","a+");
     fprintf(outMaster, "My Results for MAT processor: %d\n\n", myRank);
 
     for( int count = 0; count < numProcessors; count++ )
@@ -389,6 +389,8 @@ MPI_Barrier(MPI_COMM_WORLD);
 
     	if( count == myRank )
     	{
+	cout << "My rank is: " << myRank << "And I am printing my results" << endl << endl;
+
    		 for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
         	{
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
@@ -654,9 +656,12 @@ MPI_Barrier(MPI_COMM_WORLD);
 
     for( int count = 0; count < numProcessors; count++ )
     {
-
+	
     	if( count == myRank )
     	{
+
+	cout << "My rank is: " << myRank << "And I am printing my results" << endl << endl; 
+
    		 for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
         	{
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
@@ -820,3 +825,5 @@ void genZeroes( int **arrayC, int sizeN )
         }
 
     }
+
+
