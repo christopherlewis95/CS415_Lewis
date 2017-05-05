@@ -114,7 +114,7 @@ int main( int argc, char **argv ) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if( rank == 0 ) // Master
     { 
-        master(argv);
+        master(argv, argc);
 	}
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -843,7 +843,6 @@ void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN, int argc, cha
 
 	fin.clear();
 	fin.open(argv[3]);
-	int number;
 
     for( int index = 0; index < (sizeN * sizeN); index++ )
         {
