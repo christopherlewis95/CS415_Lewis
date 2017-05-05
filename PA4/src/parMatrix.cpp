@@ -803,7 +803,7 @@ void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN, int argc, cha
     {
 
 	ifstream fin;
-
+	cout << endl << endl << endl << "ARG COUNT IS: " << argc << endl << endl;
 	
 
 
