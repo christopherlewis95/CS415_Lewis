@@ -389,15 +389,15 @@ MPI_Barrier(MPI_COMM_WORLD);
 
     	if( count == myRank )
     	{
-	cout << "My rank is: " << myRank << "And I am printing my results" << endl << endl;
+	cout << endl << endl << "My rank is: " << myRank << "And I am printing my results" << endl << endl;
 
    		 for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
         	{
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
                 {
-                    fprintf(outMaster, "%d ", myC[i][j]);
+                    cout << " " << myC[i][j];
                 }
-            fprintf(outMaster, "\n ");
+            cout << endl;
        		}
     	}
 	MPI_Barrier(MPI_COMM_WORLD);
@@ -660,15 +660,15 @@ MPI_Barrier(MPI_COMM_WORLD);
     	if( count == myRank )
     	{
 
-	cout << "My rank is: " << myRank << "And I am printing my results" << endl << endl; 
+	cout << endl << endl << "My rank is: " << myRank << "And I am printing my results" << endl << endl; 
 
    		 for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
         	{
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
                 {
-                    fprintf(outSlave, "%d ", myC[i][j]);
+                    cout << " " << myC[i][j];
                 }
-            fprintf(outSlave, "\n ");
+            cout << endl;
        		}
     	}
 	MPI_Barrier(MPI_COMM_WORLD);
