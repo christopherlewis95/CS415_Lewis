@@ -482,9 +482,6 @@ void slave( int taskId )
 
 
      MPI_Recv( arrayA, subMatrixSize, MPI_INT, 0, M_A_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
-   
-    
-
     
 
     MPI_Probe(MASTER, M_B_DATA, MPI_COMM_WORLD, &status );
@@ -493,35 +490,8 @@ void slave( int taskId )
 
 
     int *arrayB = new int [subMatrixSize];
-
-
-   
     
      MPI_Recv( arrayB, subMatrixSize, MPI_INT, MASTER, M_B_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
-    // MPI_Barrier(MPI_COMM_WORLD);
-
-    
-    
-
-     for(int i = 0; i < subMatrixSize; i++){
-
-    
-
-     }
-    
-
-
-     for(int i = 0; i < subMatrixSize; i++){
-
-    
-
-
-     }
-    
-     
-    //    INIT 2D ARAYS
-
-
 
 
     int SmallBoxDimension = ((int)sqrt(subMatrixSize));
@@ -530,9 +500,6 @@ void slave( int taskId )
     int **myB = new int *[SmallBoxDimension];
     int **myC = new int *[SmallBoxDimension];
     
-
-
-
     for( int i = 0; i < SmallBoxDimension; i++ )
     {
     myA[i] = new int [SmallBoxDimension];
@@ -540,15 +507,7 @@ void slave( int taskId )
     myC[i] = new int [SmallBoxDimension];
     }
 
-
-
-    
-
     genZeroes(myC, (int)sqrt(subMatrixSize) );
-
-
-
-//
     
     int left = getIdLeft(myRank, numProcessors);
     int right = getIdLeft(myRank, numProcessors);
@@ -593,26 +552,6 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
             }
     }
     
-    
-
-    for( int i = 0; i < (int)sqrt(subMatrixSize); i++ )
-        {
-            for( int j = 0; j < (int)sqrt(subMatrixSize); j++ )
-            {
-        
-            }
-    
-        }
-
-
-    for( int i = 0; i < (int)sqrt(subMatrixSize); i++ )
-        {
-            for( int j = 0; j < (int)sqrt(subMatrixSize); j++ )
-            {
-        
-            }
-    
-        }
     // Optimize Vars Later
     // MULTIPLY THE NUMBERS
 
@@ -674,6 +613,8 @@ MPI_Barrier(MPI_COMM_WORLD);
     outSlave = fopen("Output.txt","a+");
 
 
+    cout << "Slave " << taskId << "Results " << endl << endl;
+
     for( int count = 0; count < numProcessors; count++ )
     {
 	
@@ -685,9 +626,9 @@ MPI_Barrier(MPI_COMM_WORLD);
         	{
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
                 {
-                  
+                  cout << myC[i][j];
                 }
-          
+            cout << endl;       
        		}
     	}
 	MPI_Barrier(MPI_COMM_WORLD);
