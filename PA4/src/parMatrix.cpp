@@ -340,15 +340,15 @@ fprintf(masterFp, "Converting to 2D\n");
     {
         for( int j = 0; j < subMatrixSize/(int)sqrt(subMatrixSize); j++)
             {
-                offsetTimesJ = j * offset;
+                offsetTimesJ = i * offset;
 
                 //Add offset * y to the lenggth
-                myA[i][j] = arrayA[ offsetTimesJ + i]; ////////// May need to sway I and J
+                myA[i][j] = arrayA[ offsetTimesJ + j]; ////////// May need to sway I and J
                 cout << "My result for A is: " << myA[i][j] << endl;
 
 
 
-                myB[i][j] = arrayB[ offsetTimesJ + i]; //////////
+                myB[i][j] = arrayB[ offsetTimesJ + j]; //////////
 
                 cout << "My result for B is: " << myB[i][j] << endl;
             }
@@ -624,14 +624,14 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     {
         for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
             {
-                offsetTimesY = j * offset;
+                offsetTimesY = i * offset;
 
                 cout << "This is for Results: " << arrayA[ offsetTimesY + j] << endl << endl;
 
 
                 //Add offset * y to the lenggth
-                myA[i][j] = arrayA[ offsetTimesY + i];
-                myB[i][j] = arrayB[ offsetTimesY + i];
+                myA[i][j] = arrayA[ offsetTimesY + j];
+                myB[i][j] = arrayB[ offsetTimesY + j];
 
             }
     }
