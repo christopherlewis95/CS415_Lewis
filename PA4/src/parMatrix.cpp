@@ -628,7 +628,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
             for (int k = 0; k < loopLength; k++)
             {
                 myC[i][j] = myC[i][j] + myA[i][k] * myB[k][j];
-               /
+               
             }
         }
         
