@@ -1,0 +1,1064 @@
+My rank is: 
+My rank is: 
+My rank is: 
+My rank is: 
+My rank is: 
+MAIN: my Rank going to slave is: 6
+
+SLAVE: my Rank is: 6
+
+My processor is: 6 and left of me is: 8 and im recieving (right) from 7
+My processor is: 6 and left of me is: 8 and im recieving (right) from 7
+This is for Results: 104
+
+This is for Results: 117
+
+This is for Results: 130
+
+This is for Results: 143
+
+This is for Results: 104
+
+This is for Results: 117
+
+This is for Results: 130
+
+This is for Results: 143
+
+This is for Results: 104
+
+This is for Results: 117
+
+This is for Results: 130
+
+This is for Results: 143
+
+This is for Results: 104
+
+This is for Results: 117
+
+This is for Results: 130
+
+This is for Results: 143
+
+MAIN: my Rank going to slave is: 7
+
+SLAVE: my Rank is: 7
+
+My processor is: 7 and left of me is: 6 and im recieving (right) from 8
+My processor is: 7 and left of me is: 6 and im recieving (right) from 8
+My processor is: 7 and above me is: 4 and im recieving (down) from 1
+This is for Results: 96
+
+This is for Results: 109
+
+This is for Results: 122
+
+This is for Results: 135
+
+This is for Results: 96
+
+This is for Results: 109
+
+This is for Results: 122
+
+This is for Results: 135
+
+This is for Results: 96
+
+This is for Results: 109
+
+This is for Results: 122
+
+This is for Results: 135
+
+This is for Results: 96
+
+This is for Results: 109
+
+This is for Results: 122
+
+This is for Results: 135
+
+MAIN: my Rank going to slave is: 5
+
+SLAVE: my Rank is: 5
+
+My processor is: 5 and left of me is: 4 and im recieving (right) from 3
+My processor is: 5 and above me is: 2 and im recieving (down) from 8
+My processor is: 5 and above me is: 2 and im recieving (down) from 8
+This is for Results: 48
+
+This is for Results: 61
+
+This is for Results: 74
+
+This is for Results: 87
+
+This is for Results: 48
+
+This is for Results: 61
+
+This is for Results: 74
+
+This is for Results: 87
+
+This is for Results: 48
+
+This is for Results: 61
+
+This is for Results: 74
+
+This is for Results: 87
+
+This is for Results: 48
+
+This is for Results: 61
+
+This is for Results: 74
+
+This is for Results: 87
+
+MAIN: my Rank going to slave is: 8
+
+SLAVE: my Rank is: 8
+
+My processor is: 8 and left of me is: 7 and im recieving (right) from 6
+My processor is: 8 and left of me is: 7 and im recieving (right) from 6
+My processor is: 8 and above me is: 5 and im recieving (down) from 2
+My processor is: 8 and above me is: 5 and im recieving (down) from 2
+This is for Results: 100
+
+This is for Results: 113
+
+This is for Results: 126
+
+This is for Results: 139
+
+This is for Results: 100
+
+This is for Results: 113
+
+This is for Results: 126
+
+This is for Results: 139
+
+This is for Results: 100
+
+This is for Results: 113
+
+This is for Results: 126
+
+This is for Results: 139
+
+This is for Results: 100
+
+This is for Results: 113
+
+This is for Results: 126
+
+This is for Results: 139
+
+My processor is: 5 and left of me is: 4 and im recieving (right) from 3
+My processor is: 5 and above me is: 2 and im recieving (down) from 8
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+My processor is: 6 and left of me is: 8 and im recieving (right) from 7
+My processor is: 6 and above me is: 3 and im recieving (down) from 0
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+My processor is: 7 and left of me is: 6 and im recieving (right) from 8
+My processor is: 7 and above me is: 4 and im recieving (down) from 1
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+:x
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+My processor is: 8 and left of me is: 7 and im recieving (right) from 6
+My processor is: 8 and above me is: 5 and im recieving (down) from 2
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+My processor is: 5 and left of me is: 4 and im recieving (right) from 3
+My processor is: 5 and above me is: 2 and im recieving (down) from 8
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+My processor is: 6 and left of me is: 8 and im recieving (right) from 7
+My processor is: 6 and above me is: 3 and im recieving (down) from 0
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+This is for Results: 139
+
+My processor is: 7 and left of me is: 6 and im recieving (right) from 8
+My processor is: 7 and above me is: 4 and im recieving (down) from 1
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+This is for Results: 143
+
+My processor is: 8 and left of me is: 7 and im recieving (right) from 6
+My processor is: 8 and above me is: 5 and im recieving (down) from 2
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+This is for Results: 135
+
+My rank is: 
+My rank is: 
+My rank is: 
+My rank is: 
+
+
+
+ARG COUNT IS: 4
+
+
+
+
+ARG 2 IS: matrixA.txt
+
+
+
+
+ARG 3 IS: matrixB.txt
+
+My result for A is: 12
+My result for B is: 12
+My result for A is: 4
+My result for B is: 148
+My result for A is: 8
+My result for B is: 152
+My result for A is: 12
+My result for B is: 156
+My result for A is: 1
+My result for B is: 145
+My result for A is: 5
+My result for B is: 149
+My result for A is: 9
+My result for B is: 153
+My result for A is: 13
+My result for B is: 157
+My result for A is: 2
+My result for B is: 146
+My result for A is: 6
+My result for B is: 150
+My result for A is: 10
+My result for B is: 154
+My result for A is: 14
+My result for B is: 158
+My result for A is: 3
+My result for B is: 147
+My result for A is: 7
+My result for B is: 151
+My result for A is: 11
+My result for B is: 155
+My result for A is: 15
+My result for B is: 159
+MAIN: my Rank going to slave is: 4
+
+SLAVE: my Rank is: 4
+
+My processor is: 4 and left of me is: 3 and im recieving (right) from 5
+My processor is: 4 and above me is: 1 and im recieving (down) from 7
+This is for Results: 56
+
+This is for Results: 69
+
+This is for Results: 82
+
+This is for Results: 95
+
+This is for Results: 56
+MAIN: my Rank going to slave is: 1
+
+SLAVE: my Rank is: 1
+
+My processor is: 1 and above me is: 7 and im recieving (down) from 4
+This is for Results: 4
+
+This is for Results: 17
+
+This is for Results: 30
+
+This is for Results: 43
+
+This is for Results: 4
+
+This is for Results: 17
+
+This is for Results: 30
+
+This is for Results: 43
+
+This is for Results: 4
+
+This is for Results: 17
+
+This is for Results: 30
+
+This is for Results: 43
+
+This is for Results: 4
+
+This is for Results: 17
+
+This is for Results: 30
+
+This is for Results: 43
+
+MAIN: my Rank going to slave is: 3
+
+SLAVE: my Rank is: 3
+
+My processor is: 3 and left of me is: 5 and im recieving (right) from 4
+This is for Results: 52
+
+This is for Results: 65
+
+This is for Results: 78
+
+This is for Results: 91
+
+This is for Results: 52
+
+This is for Results: 65
+
+This is for Results: 78
+
+This is for Results: 91
+
+This is for Results: 52
+
+This is for Results: 65
+
+This is for Results: 78
+
+This is for Results: 91
+
+This is for Results: 52
+
+This is for Results: 65
+
+This is for Results: 78
+
+This is for Results: 91
+
+
+This is for Results: 69
+
+This is for Results: 82
+
+This is for Results: 95
+
+This is for Results: 56
+
+This is for Results: 69
+
+This is for Results: 82
+
+This is for Results: 95
+
+This is for Results: 56
+
+This is for Results: 69
+
+This is for Results: 82
+
+This is for Results: 95
+
+MAIN: my Rank going to slave is: 2
+
+SLAVE: my Rank is: 2
+
+My processor is: 2 and above me is: 8 and im recieving (down) from 5
+My processor is: 2 and above me is: 8 and im recieving (down) from 5
+This is for Results: 8
+
+This is for Results: 21
+
+This is for Results: 34
+
+This is for Results: 47
+
+This is for Results: 8
+
+This is for Results: 21
+
+This is for Results: 34
+
+This is for Results: 47
+
+This is for Results: 8
+
+This is for Results: 21
+
+This is for Results: 34
+
+This is for Results: 47
+
+This is for Results: 8
+
+This is for Results: 21
+
+This is for Results: 34
+
+This is for Results: 47
+
+My processor is: 0 and left of me is: 2 and im recieving (right) from 1
+My processor is: 0 and above me is: 6 and im recieving (down) from 3
+My result for A is: 43
+My result for B is: 231
+My result for A is: 43
+My result for B is: 231
+My result for A is: 43
+My result for B is: 231
+My result for A is: 43
+My result for B is: 231
+My result for A is: 43
+My processor is: 1 and left of me is: 0 and im recieving (right) from 2
+My processor is: 1 and above me is: 7 and im recieving (down) from 4
+This is for Results: 47
+
+This is for Results: 47
+
+This is for Results: 47
+
+This is for Results: 47
+
+This is for Results: 47
+
+This is for Results: 47
+
+This is for Results: 47
+
+This is for Results: 47
+
+This is for Results: 47
+
+This is for Results: 47
+
+This is for Results: 47
+
+This is for Results: 47
+
+This is for Results: 47
+
+This is for Results: 47
+
+This is for Results: 47
+
+This is for Results: 47
+
+My processor is: 2 and left of me is: 1 and im recieving (right) from 0
+My processor is: 2 and above me is: 8 and im recieving (down) from 5
+This is for Results: 15
+My processor is: 4 and left of me is: 3 and im recieving (right) from 5
+My processor is: 4 and above me is: 1 and im recieving (down) from 7
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+My result for B is: 231
+My result for A is: 43
+My result for B is: 231
+My result for A is: 43
+My result for B is: 231
+My result for A is: 43
+My result for B is: 231
+My result for A is: 43
+My result for B is: 231
+My result for A is: 43
+My result for B is: 231
+My result for A is: 43
+My result for B is: 231
+My result for A is: 43
+My result for B is: 231
+My result for A is: 43
+My result for B is: 231
+My result for A is: 43
+My result for B is: 231
+My result for A is: 43
+My result for B is: 231
+My result for A is: 43
+My result for B is: 231
+My processor is: 3 and left of me is: 5 and im recieving (right) from 4
+My processor is: 3 and above me is: 0 and im recieving (down) from 6
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+This is for Results: 95
+
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+My processor is: 0 and left of me is: 2 and im recieving (right) from 1
+My processor is: 0 and above me is: 6 and im recieving (down) from 3
+My result for A is: 47
+My result for B is: 279
+My result for A is: 47
+My result for B is: 279
+My result for A is: 47
+My result for B is: 279
+My result for A is: 47
+My result for B is: 279
+My processor is: 2 and left of me is: 1 and im recieving (right) from 0
+My processor is: 2 and above me is: 8 and im recieving (down) from 5
+This is for Results: 43
+My processor is: 3 and left of me is: 5 and im recieving (right) from 4
+My processor is: 3 and above me is: 0 and im recieving (down) from 6
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+This is for Results: 87
+
+My result for A is: 47
+My result for B is: 279
+My result for A is: 47
+My result for B is: 279
+My result for A is: 47
+My result for B is: 279
+My result for A is: 47
+My result for B is: 279
+My result for A is: 47
+My result for B is: 279
+My result for A is: 47
+My result for B is: 279
+My result for A is: 47
+My result for B is: 279
+My result for A is: 47
+My result for B is: 279
+My result for A is: 47
+My result for B is: 279
+My result for A is: 47
+My result for B is: 279
+My result for A is: 47
+My result for B is: 279
+My result for A is: 47
+My result for B is: 279
+My processor is: 1 and left of me is: 0 and im recieving (right) from 2
+My processor is: 1 and above me is: 7 and im recieving (down) from 4
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+This is for Results: 15
+
+My processor is: 4 and left of me is: 3 and im recieving (right) from 5
+My processor is: 4 and above me is: 1 and im recieving (down) from 7
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+This is for Results: 91
+
+
+This is for Results: 43
+
+This is for Results: 43
+
+This is for Results: 43
+
+This is for Results: 43
+
+This is for Results: 43
+
+This is for Results: 43
+
+This is for Results: 43
+
+This is for Results: 43
+
+This is for Results: 43
+
+This is for Results: 43
+
+This is for Results: 43
+
+This is for Results: 43
+
+This is for Results: 43
+
+This is for Results: 43
+
+This is for Results: 43
+
+My processor is: 0 and left of me is: 2 and im recieving (right) from 1
+My processor is: 0 and above me is: 6 and im recieving (down) from 3
+
+
+My rank is: 0And I am printing my results
+
+ 95840 97568 97712 97856
+ 96146 96390 96502 96614
+ 96596 96988 97116 97244
+ 97046 97586 97730 97874
+My processor is: 1 and left of me is: 0 and im recieving (right) from 2
+My processor is: 1 and above me is: 7 and im recieving (down) from 4
+
+
+My rank is: 1And I am printing my results
+
+ 81864 82920 83976 85032
+ 82654 83758 84862 85966
+ 83444 84596 85748 86900
+ 84234 85434 86634 87834
+My processor is: 2 and left of me is: 1 and im recieving (right) from 0
+My processor is: 2 and above me is: 8 and im recieving (down) from 5
+
+
+My rank is: 2And I am printing my results
+
+ 78576 79824 81072 82320
+ 79574 80870 82166 83462
+ 80572 81916 83260 84604
+ 81570 82962 84354 85746
+My processor is: 3 and left of me is: 5 and im recieving (right) from 4
+My processor is: 3 and above me is: 0 and im recieving (down) from 6
+
+
+My rank is: 3And I am printing my results
+
+ 215592 218952 222312 225672
+ 216366 219774 223182 226590
+ 217140 220596 224052 227508
+ 217914 221418 224922 228426
+My processor is: 4 and left of me is: 3 and im recieving (right) from 5
+My processor is: 4 and above me is: 1 and im recieving (down) from 7
+
+
+My rank is: 4And I am printing my results
+
+ 223344 226896 230448 234000
+ 224326 227926 231526 235126
+ 225308 228956 232604 236252
+ 226290 229986 233682 237378
+My processor is: 5 and left of me is: 4 and im recieving (right) from 3
+My processor is: 5 and above me is: 2 and im recieving (down) from 8
+
+
+My rank is: 5And I am printing my results
+
+ 236640 239808 242976 246144
+ 237254 240470 243686 246902
+ 237868 241132 244396 247660
+ 238482 241794 245106 248418
+My processor is: 6 and left of me is: 8 and im recieving (right) from 7
+My processor is: 6 and above me is: 3 and im recieving (down) from 0
+
+
+My rank is: 6And I am printing my results
+
+ 332208 338064 343920 349776
+ 333174 339078 344982 350886
+ 334140 340092 346044 351996
+ 335106 341106 347106 353106
+My processor is: 7 and left of me is: 6 and im recieving (right) from 8
+My processor is: 7 and above me is: 4 and im recieving (down) from 1
+
+
+My rank is: 7And I am printing my results
+
+ 360768 366240 371712 377184
+ 361366 366886 372406 377926
+ 361964 367532 373100 378668
+ 362562 368178 373794 379410
+My processor is: 8 and left of me is: 7 and im recieving (right) from 6
+My processor is: 8 and above me is: 5 and im recieving (down) from 2
+
+
+My rank is: 8And I am printing my results
+
+ 362472 368136 373800 379464
+ 363278 368990 374702 380414
+ 364084 369844 375604 381364
+ 364890 370698 376506 382314
