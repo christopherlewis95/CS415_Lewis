@@ -394,6 +394,7 @@ fprintf(masterFp, "Putting into 1D\n");
     // Do final shift (Shift Amount is made by task id % sqrtNumP)
         shiftLeft( arrayA, subMatrixSize, myRank, numProcessors );
         shiftUp( arrayB, subMatrixSize, myRank, numProcessors );
+        MPI_Barrier(MPI_COMM_WORLD);
 //////////////////////////////////////////////////////////////////////////////////////////////
     }
 
@@ -665,6 +666,8 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     // Do final shift (Shift Amount is made by task id % sqrtNumP)
         shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
         shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
+
+        MPI_Barrier(MPI_COMM_WORLD);
 //////////////////////////////////////////////////////////////////////////////////////////////
 
     }
