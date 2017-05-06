@@ -590,7 +590,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     {
         for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
             {
-                offsetTimesY = J * offset;
+                offsetTimesY = j * offset;
 
 				cout << "This is for Results: " << arrayA[ offsetTimesY + j] << endl << endl;
 
