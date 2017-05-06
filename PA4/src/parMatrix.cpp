@@ -344,8 +344,13 @@ fprintf(masterFp, "Converting to 2D\n");
 
                 //Add offset * y to the lenggth
                 myA[i][j] = arrayA[ offsetTimesJ + j]; ////////// May need to sway I and J
+                cout << "My result for A is: " << myA[i][j] << endl;
+
+
+
                 myB[i][j] = arrayB[ offsetTimesJ + j]; //////////
 
+                cout << "My result for B is: " << myB[i][j] << endl;
             }
     }
 
