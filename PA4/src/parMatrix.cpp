@@ -637,7 +637,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     }
     
     
-    cout << "SLAVE myA\n";
+    cout << "SLAVE " << myRank <<  " myA\n";
     for( int i = 0; i < (int)sqrt(subMatrixSize); i++ )
         {
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++ )
@@ -647,7 +647,7 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         cout << "\n";
        }
 
-    cout << " SLAVE myB\n";
+    cout << " SLAVE  " << myRank <<  " myB\n";
     for( int i = 0; i < (int)sqrt(subMatrixSize); i++ )
         {
             for( int j = 0; j < (int)sqrt(subMatrixSize); j++ )
