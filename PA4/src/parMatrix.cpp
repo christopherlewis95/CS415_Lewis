@@ -331,7 +331,6 @@ int offsetTimesJ;
     // Do final shift (Shift Amount is made by task id % sqrtNumP)
         shiftLeft( arrayA, subMatrixSize, myRank, numProcessors );
         shiftUp( arrayB, subMatrixSize, myRank, numProcessors );
-        MPI_Barrier(MPI_COMM_WORLD);
 //////////////////////////////////////////////////////////////////////////////////////////////
     }
 
