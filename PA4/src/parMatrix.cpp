@@ -677,19 +677,22 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
         //cout << endl;
     }
     
+    // int offset = (int)sqrt(subMatrixSize);
+    // int offsetTimesY; 
+    // offsetTimesY = i * offset;
 
-    
     fprintf(fp, "Putting into 1D\n");
     // Put into 1D array for passing
     for( int i = 0; i < subMatrixSize/(int)sqrt(subMatrixSize); i++)
     {
         for( int j = 0; j < subMatrixSize/(int)sqrt(subMatrixSize); j++)
             {
-                for( int k = 0; k < subMatrixSize; k++ )
-                    {
-                        arrayA[k] = myA[i][j];
-                        arrayB[k] = myB[i][j];
-                    }
+            offsetTimesY = i * offset;
+
+
+            arrayA[offsetTimesY + j] = myA[i][j];
+            arrayB[offsetTimesY + j] = myB[i][j];
+
             }
     }
 
