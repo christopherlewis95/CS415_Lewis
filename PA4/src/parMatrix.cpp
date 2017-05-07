@@ -102,7 +102,7 @@ int main( int argc, char **argv ) {
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
     
     FILE *masterFp;
-    masterFp = fopen("main.txt", "a+");
+  //  masterFp = fopen("main.txt", "a+");
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if( rank == 0 ) // Master
@@ -113,8 +113,6 @@ int main( int argc, char **argv ) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     else 
     { 
-        // Slave I plulled down this curly cause that might have cause issues... you never know with todays society
-
         slave(rank);
     }
     //
@@ -130,7 +128,8 @@ void master(char **argv, int argc )
     {
     
     FILE *masterFp;
-    masterFp = fopen("master.txt", "a+");
+    // masterFp = fopen("timing.txt", "a+");
+    clock_t startProgram, endProgram;
     int myRank, numProcessors;
     MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
@@ -262,6 +261,7 @@ void master(char **argv, int argc )
 
     MPI_Barrier(MPI_COMM_WORLD);
 
+    startProgram = clock();
 
 
 ////////////////////////
@@ -338,6 +338,13 @@ int offsetTimesJ;
 
 MPI_Barrier(MPI_COMM_WORLD);
     
+endProgram = clock();
+
+
+    cout << sizeN << " " << ((float)(endProgram-startProgram)/CLOCKS_PER_SEC) << endl;
+
+
+
 ///////////////
     // DELETE THESE SAVAGE BEASTS
 
@@ -370,7 +377,7 @@ void slave( int taskId )
 
     
     FILE *fp;
-    fp = fopen("slave.txt", "a+");
+   // fp = fopen("slave.txt", "a+");
     
     int myRank;
 
@@ -657,7 +664,7 @@ void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN, int argc, cha
     
 
 
-    if( argc < 3 )
+    if( argc < 5 )
     {
     for( int index = 0; index < (sizeN * sizeN); index++ )
         {
