@@ -894,6 +894,7 @@ void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN, int argc, cha
     fin.clear();
     fin.open(argv[2]);
     int number;
+    fin >> number;
 
     for( int index = 0; index < (sizeN * sizeN); index++ )
         {
@@ -910,6 +911,7 @@ void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN, int argc, cha
 
     fin.clear();
     fin.open(argv[3]);
+    fin >> number;
 
     for( int index = 0; index < (sizeN * sizeN); index++ )
         {
