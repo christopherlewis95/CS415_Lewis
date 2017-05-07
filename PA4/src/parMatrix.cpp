@@ -413,8 +413,8 @@ fprintf(masterFp, "Putting into 1D\n");
             {
             offsetTimesJ = i * offset;
 
-                        arrayA[offsetTimesY + j] = myA[i][j];
-                        arrayB[offsetTimesY + j] = myB[i][j];
+                        arrayA[offsetTimesJ + j] = myA[i][j];
+                        arrayB[offsetTimesJ + j] = myB[i][j];
             }
     }
 
