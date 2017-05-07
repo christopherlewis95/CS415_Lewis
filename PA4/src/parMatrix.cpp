@@ -411,7 +411,7 @@ fprintf(masterFp, "Putting into 1D\n");
     {
         for( int j = 0; j < subMatrixSize/(int)sqrt(subMatrixSize); j++)
             {
-            offsetTimesY = i * offset;
+            offsetTimesJ = i * offset;
 
                         arrayA[offsetTimesY + j] = myA[i][j];
                         arrayB[offsetTimesY + j] = myB[i][j];
