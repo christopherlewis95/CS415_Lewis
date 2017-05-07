@@ -93,8 +93,6 @@ void initShift(int myrank, int numCores, int left, int up, int right, int down, 
 // main function
 int main( int argc, char **argv ) {
     /*
-    printf("Arguements in the code: %d\n", argc);
-    printf("This is to ensure alot of headache to be solved\n");
     */
 // /
     int rank;
@@ -105,12 +103,7 @@ int main( int argc, char **argv ) {
     
     FILE *masterFp;
     masterFp = fopen("main.txt", "a+");
-    cout << "My rank is: " << endl;  
 
-
-   
-
-    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if( rank == 0 ) // Master
     { 
@@ -121,7 +114,7 @@ int main( int argc, char **argv ) {
     else 
     { 
         // Slave I plulled down this curly cause that might have cause issues... you never know with todays society
-        printf("MAIN: my Rank going to slave is: %d\n\n", rank);
+
         slave(rank);
     }
     //
@@ -141,10 +134,9 @@ void master(char **argv, int argc )
     int myRank, numProcessors;
     MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
     MPI_Comm_size( MPI_COMM_WORLD, &numProcessors );
-    fprintf(masterFp, "My rank is: %d\n", myRank);
+
     
     
-    fprintf(masterFp, "Init Vars\n");
     // Initialize Variables
     int sizeN = atoi(argv[1]);
     int sumMatrixDimension = sizeN/(int)sqrt(numProcessors);
@@ -160,7 +152,7 @@ void master(char **argv, int argc )
 
     // Init Size and populate array with rand Numbers
 
-    fprintf(masterFp, "Init Arrays\n");
+
         int *arrayA = new int [sizeN*sizeN];
         int *arrayB = new int [sizeN*sizeN];
         int *arrayC = new int [sizeN*sizeN];
@@ -171,13 +163,10 @@ void master(char **argv, int argc )
         int *myArrayA = new int [subMatrixSize];
         int *myArrayB = new int [subMatrixSize];
 
-
-fprintf(masterFp, "Gen Humbers\n");
     genNumbers( arrayA, arrayB, arrayC, sizeN, argc, argv);
-fprintf(masterFp, "Nums Gnerated\n");
+
     
 
-    fprintf(masterFp, "Going through data\n");
     // go though the rows with offset
     for(int verticalOffset = 0 ; verticalOffset < (int)sqrt(numProcessors); verticalOffset++)
         {
@@ -224,36 +213,15 @@ fprintf(masterFp, "Nums Gnerated\n");
             //actually send to other processes
             else if(processNum > MASTER){
                 
-                fprintf(masterFp, "Data being sent to PROCESS NUM: %d\n\n", processNum);
-                fprintf(masterFp, "Sending Data\n");
-                // MPI_Send(&arr[counter], split, MPI_INT, i, MY_MPI_DATA_TAG, MPI_COMM_WORLD); 
-
-                fprintf(masterFp, "Array A:\n\n");
-                for( int i = 0; i < subMatrixSize; i++ )
-                    {
-
-                        fprintf(masterFp, "%d ", sendArrayA[i] );
-
-                    }
-                    fprintf(masterFp, "\n\n");
 
                 MPI_Send(sendArrayA, subMatrixSize, MPI_INT, processNum, M_A_DATA, MPI_COMM_WORLD);
                 // MPI_Barrier(MPI_COMM_WORLD);
 
-                fprintf(masterFp, "Array B:\n\n");
-                for( int i = 0; i < subMatrixSize; i++ )
-                    {
-
-                        fprintf(masterFp, "%d ", sendArrayB[i] );
-
-                    }
-                    fprintf(masterFp, "\n\n");
-
 
                 MPI_Send(sendArrayB, subMatrixSize, MPI_INT, processNum, M_B_DATA, MPI_COMM_WORLD);
-                fprintf(masterFp, "Data has been sent to PROCESS NUM: %d\n\n", processNum);
+        
                // MPI_Barrier(MPI_COMM_WORLD);
-                fprintf(masterFp, "Sending Data Done\n");
+        
                 
             }
             
@@ -262,8 +230,6 @@ fprintf(masterFp, "Nums Gnerated\n");
        // MPI_Barrier(MPI_COMM_WORLD);
     
     }
-
-fprintf(masterFp, "Went through data\n");
 
 // ADD A BARRIER 
 
@@ -276,9 +242,7 @@ fprintf(masterFp, "Went through data\n");
 ////////////////////////////////////////////////////
 
     int twoDimSplit = (int)(subMatrixSize/(int)sqrt(subMatrixSize));
-    fprintf(masterFp, "THE SPLIT IS: %d\n\n", twoDimSplit);
 
-    fprintf(masterFp, "Initing 2D arrays\n");
 
     int **myA = new int *[twoDimSplit];
     int **myB = new int *[twoDimSplit];
@@ -292,32 +256,12 @@ fprintf(masterFp, "Went through data\n");
     }
 
 
-    fprintf(masterFp, "GenData for myC\n");
 
     genZeroes(myC, (int)(subMatrixSize/(int)sqrt(subMatrixSize)) );
 
 
     MPI_Barrier(MPI_COMM_WORLD);
 
-
-
-
-    cout << "Array A" <<  endl;
-     for(int i = 0; i < subMatrixSize; i++){
-
-     cout << myArrayA[i] << " ";
-
-     }
-        cout << endl;
-
-   cout << "Array B" <<  endl;
-     for(int i = 0; i < subMatrixSize; i++){
-
-        cout << myArrayB[i] << " ";
-
-
-     }
-    cout << endl;
 
 
 ////////////////////////
@@ -334,8 +278,6 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
 int offset = subMatrixSize/(int)sqrt(subMatrixSize);
 int offsetTimesJ;
 
-
-fprintf(masterFp, "Converting to 2D\n");
     for( int i = 0; i < subMatrixSize/(int)sqrt(subMatrixSize); i++)
     {
         for( int j = 0; j < subMatrixSize/(int)sqrt(subMatrixSize); j++)
@@ -344,52 +286,20 @@ fprintf(masterFp, "Converting to 2D\n");
 
                 //Add offset * y to the lenggth
                 myA[i][j] = arrayA[ offsetTimesJ + j]; ////////// May need to sway I and J
-                cout << "My result for A is: " << myA[i][j] << endl;
+        
 
 
 
                 myB[i][j] = arrayB[ offsetTimesJ + j]; //////////
 
-                cout << "My result for B is: " << myB[i][j] << endl;
+        
             }
     }
-
-fprintf(masterFp, "Matrix Mult \n");
     // Optimize Vars Later
     // MULT NUMBER
 
 
-
-
-    
-    cout << "MASTER: myA\n";
-    for( int i = 0; i < (int)sqrt(subMatrixSize); i++ )
-        {
-            for( int j = 0; j < (int)sqrt(subMatrixSize); j++ )
-            {
-            cout << myA[i][j] << " ";
-            }
-        cout << "\n";
-       }
-
-    cout << "MASTER: myB\n";
-    for( int i = 0; i < (int)sqrt(subMatrixSize); i++ )
-        {
-            for( int j = 0; j < (int)sqrt(subMatrixSize); j++ )
-            {
-            cout << myB[i][j] << " ";
-            }
-        cout << "\n";
-       }
-
-
-
-
-
-
-
     int loopLength = (int)sqrt(subMatrixSize);
-    fprintf(masterFp, "Loop length is: %d\n", loopLength);
 
 
     for (int i = 0; i < loopLength; i++)
@@ -404,8 +314,6 @@ fprintf(masterFp, "Matrix Mult \n");
     }
     //////
 
-
-fprintf(masterFp, "Putting into 1D\n");
     // Put into 1D array for passing
     for( int i = 0; i < subMatrixSize/(int)sqrt(subMatrixSize); i++)
     {
@@ -419,7 +327,6 @@ fprintf(masterFp, "Putting into 1D\n");
     }
 
 
-    fprintf(masterFp, "Doing Final Shift\n");
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Do final shift (Shift Amount is made by task id % sqrtNumP)
         shiftLeft( arrayA, subMatrixSize, myRank, numProcessors );
@@ -431,36 +338,7 @@ fprintf(masterFp, "Putting into 1D\n");
 
 
 MPI_Barrier(MPI_COMM_WORLD);
-
-    FILE *outMaster;
-
-
-
-
-    outMaster = fopen("DataResults.txt","a+");
-    fprintf(outMaster, "My Results for MAT processor: %d\n\n", myRank);
-
-    for( int count = 0; count < numProcessors; count++ )
-    {
-
-        if( count == myRank )
-        {
-    cout << endl << endl << "My rank is: " << myRank << "And I am printing my results" << endl << endl;
-
-         for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
-            {
-            for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
-                {
-                    cout << " " << myC[i][j];
-                }
-            cout << endl;
-            }
-        }
-    MPI_Barrier(MPI_COMM_WORLD);
-    }
     
-    
-
 ///////////////
     // DELETE THESE SAVAGE BEASTS
 
@@ -498,8 +376,6 @@ void slave( int taskId )
     int myRank;
 
     MPI_Comm_rank( MPI_COMM_WORLD, &myRank );
-    printf("SLAVE: my Rank is: %d\n\n", myRank);
-    fprintf(fp,"SLAVE: my Rank is: %d\n\n", myRank);
     
 //////////////////////////////
     
@@ -520,10 +396,9 @@ void slave( int taskId )
 
     int *arrayA = new int [subMatrixSize];
 
-    fprintf(fp, "Recieving A\n");
      MPI_Recv( arrayA, subMatrixSize, MPI_INT, 0, M_A_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
    
-     fprintf(fp, "Recieved A\n");
+
 
     
 
@@ -536,34 +411,11 @@ void slave( int taskId )
 
 
    
-     fprintf(fp, "Recieving B\n");
+
      MPI_Recv( arrayB, subMatrixSize, MPI_INT, MASTER, M_B_DATA, MPI_COMM_WORLD, MPI_STATUS_IGNORE );
     // MPI_Barrier(MPI_COMM_WORLD);
-
-     fprintf(fp, "Recieved B\n");
-
-
-    cout << "SLAVE: Array A" <<  endl;
-     for(int i = 0; i < subMatrixSize; i++){
-
-     cout << arrayA[i] << " ";
-
-     }
-        cout << endl;
-
-   cout << "SLAVE: Array B" <<  endl;
-     for(int i = 0; i < subMatrixSize; i++){
-
-        cout << arrayB[i] << " ";
-
-
-     }
-    cout << endl;
-
-     
     //    INIT 2D ARAYS
 
-    fprintf(fp, "Before MAlloc part 1\n");
 
 
     int SmallBoxDimension = ((int)sqrt(subMatrixSize));
@@ -572,9 +424,7 @@ void slave( int taskId )
     int **myB = new int *[SmallBoxDimension];
     int **myC = new int *[SmallBoxDimension];
     
-    fprintf(fp, "After malloc part 1\n");
 
-    fprintf(fp, "Before MAlloc part 2\n");
     for( int i = 0; i < SmallBoxDimension; i++ )
     {
     myA[i] = new int [SmallBoxDimension];
@@ -582,13 +432,10 @@ void slave( int taskId )
     myC[i] = new int [SmallBoxDimension];
     }
 
-    fprintf(fp, "After malloc part 2\n");
 
     
-    fprintf(fp, "Generating C\n");
     genZeroes(myC, (int)sqrt(subMatrixSize) );
 
-    fprintf(fp, "Generated C\n");
 
 //
     
@@ -609,7 +456,6 @@ initShift( myRank, numProcessors, left, up, right, down, subMatrixSize, (int)sqr
 
 //    Loop for the rest of the multiplication
 
-    fprintf(fp, "Looping for multiplication\n");
 for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     {
         
@@ -618,14 +464,13 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
     int offset = (int)sqrt(subMatrixSize);
     int offsetTimesY; 
     
-    fprintf(fp, "converting to 2D\n");
     for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
     {
         for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
             {
                 offsetTimesY = i * offset;
 
-                cout << "This is for Results: " << arrayA[ offsetTimesY + j] << endl << endl;
+        
 
 
                 //Add offset * y to the lenggth
@@ -635,33 +480,11 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
             }
     }
     
-    
-    cout << "SLAVE " << myRank <<  " myA\n";
-    for( int i = 0; i < (int)sqrt(subMatrixSize); i++ )
-        {
-            for( int j = 0; j < (int)sqrt(subMatrixSize); j++ )
-            {
-            cout << myA[i][j] << " ";
-            }
-        cout << "\n";
-       }
-
-    cout << " SLAVE  " << myRank <<  " myB\n";
-    for( int i = 0; i < (int)sqrt(subMatrixSize); i++ )
-        {
-            for( int j = 0; j < (int)sqrt(subMatrixSize); j++ )
-            {
-            cout << myB[i][j] << " ";
-            }
-        cout << "\n";
-       }
     // Optimize Vars Later
     // MULTIPLY THE NUMBERS
 
     int loopLength = (int)sqrt(subMatrixSize);
-    fprintf(fp, "Loop length is: %d\n", loopLength);
 
-    fprintf(fp, "Multiplying\n");
     
     for (int i = 0; i < loopLength; i++)
     {
@@ -670,17 +493,16 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
             for (int k = 0; k < loopLength; k++)
             {
                 myC[i][j] = myC[i][j] + myA[i][k] * myB[k][j];
-               // cout << myC[i][j];
+               /
             }
         }
-        //cout << endl;
+        
     }
     
     // int offset = (int)sqrt(subMatrixSize);
     // int offsetTimesY; 
     // offsetTimesY = i * offset;
 
-    fprintf(fp, "Putting into 1D\n");
     // Put into 1D array for passing
     for( int i = 0; i < subMatrixSize/(int)sqrt(subMatrixSize); i++)
     {
@@ -695,49 +517,16 @@ for( loopAmnt = 0; loopAmnt < (int)sqrt(numProcessors); loopAmnt++ )
             }
     }
 
-    fprintf(fp, "Doing Final Shift\n");
     
 //////////////////////////////////////////////////////////////////////////////////////////////
     // Do final shift (Shift Amount is made by task id % sqrtNumP)
         shiftLeft( arrayA, subMatrixSize, taskId, numProcessors );
         shiftUp( arrayB, subMatrixSize, taskId, numProcessors );
-
-        MPI_Barrier(MPI_COMM_WORLD);
 //////////////////////////////////////////////////////////////////////////////////////////////
 
     }
 
-
-
 MPI_Barrier(MPI_COMM_WORLD);
-
-    FILE *outSlave;
-
-
-
-
-    outSlave = fopen("Output.txt","a+");
-    fprintf(outSlave, "My Results for MAT processor: %d\n\n", myRank);
-
-    for( int count = 0; count < numProcessors; count++ )
-    {
-    
-        if( count == myRank )
-        {
-
-    cout << endl << endl << "My rank is: " << myRank << "And I am printing my results" << endl << endl; 
-
-         for( int i = 0; i < (int)sqrt(subMatrixSize); i++)
-            {
-            for( int j = 0; j < (int)sqrt(subMatrixSize); j++)
-                {
-                    cout << " " << myC[i][j];
-                }
-            cout << endl;
-            }
-        }
-    MPI_Barrier(MPI_COMM_WORLD);
-    }
 
     
     }
@@ -770,7 +559,6 @@ void shiftLeft( int *matA, int size, int myProcessor, int numProcessors )
     destProcessor = getIdLeft( myProcessor, numProcessors );
     recvProcessor = getIdRight( myProcessor, numProcessors );
 
-    printf("My processor is: %d and left of me is: %d and im recieving (right) from %d\n", myProcessor, destProcessor, recvProcessor );
 
     
     MPI_Sendrecv_replace(matA, size, MPI_INT, destProcessor, M_A_DATA, recvProcessor, M_A_DATA, MPI_COMM_WORLD, &status);
@@ -787,7 +575,6 @@ void shiftUp( int *matB, int size, int myProcessor, int numProcessors )
     recvProcessor = getIdDown( myProcessor, numProcessors );
 
 
-    printf("My processor is: %d and above me is: %d and im recieving (down) from %d\n", myProcessor, destProcessor, recvProcessor );
 
     
     MPI_Sendrecv_replace(matB, size, MPI_INT, destProcessor, M_B_DATA, recvProcessor, M_B_DATA, MPI_COMM_WORLD, &status);
@@ -868,11 +655,8 @@ void genNumbers( int *arrayA, int *arrayB, int *arrayC, int sizeN, int argc, cha
     {
 
     ifstream fin;
-    cout << endl << endl << endl << "ARG COUNT IS: " << argc << endl << endl;
     
-    cout << endl << endl << endl << "ARG 2 IS: " << argv[2] << endl << endl;
 
-    cout << endl << endl << endl << "ARG 3 IS: " << argv[3] << endl << endl;    
 
     if( argc < 3 )
     {
