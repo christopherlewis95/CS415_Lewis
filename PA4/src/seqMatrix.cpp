@@ -51,7 +51,7 @@ int main(int argc, char** argv)
             }
         }
         endProgram = clock();
-        fprintf(fp, "%d \t %f\n", sizeN, ((float)(endProgram-startProgram)/CLOCKS_PER_SEC));
+        fprintf(fp, "%d %f\n", sizeN, ((float)(endProgram-startProgram)/CLOCKS_PER_SEC));
         
         delete[] arrayA;
         delete[] arrayB;
