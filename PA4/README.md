@@ -15,17 +15,21 @@ ssh username@h1.cse.unr.edu
 ## Compilation Options
 There is only one option for this project and it is to use a makefile. Use the makefile provided in PA4/
 
-# IMPORTANT
-Code does not run perfectly. MPI_sendrcv_replace does not work. In the comments mention a fix if you know how to.
-
 # Running
 You may simple run the program with a few commands from the PA4 home directory.
 ```bash
 $ mkdir build (if not made)
 $ cp makefile build/
-$ cp src/parMatrix.sh (Shell script is only set to 300 * 300 Matrix)
+$ cp src/par<#Cores>Matrix.sh build/ (Number of cores is 4, 9, or 16)
+$ cp src/parMatrixIO.sh build/
+$ cp runAll.sh build/ 
 $ cd build
 $ make
-$ sbatch parMatrix.sh
+$ vim runAll.sh
+   Change: sbatch <Script of your choice>.sh $a
+   press escape
+   type - :w
+   type - :x
+$ ./runAll
 
 ```
