@@ -1,4 +1,4 @@
-# PA2 Mandelbrot
+# PA3 Bucket Sort
 
 # REPORT IS UNDER PA2/PA2Report.pdf
 # Dependencies, Building, and Running
